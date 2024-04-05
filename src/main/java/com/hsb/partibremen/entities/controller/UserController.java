@@ -1,8 +1,8 @@
-package com.hsb.partibremen.controller;
+package com.hsb.partibremen.entities.controller;
 
-import com.hsb.partibremen.model.User;
-import com.hsb.partibremen.model.UserDto;
-import com.hsb.partibremen.util.BaseController;
+import com.hsb.partibremen.entities.model.user.User;
+import com.hsb.partibremen.entities.model.user.UserDto;
+import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()

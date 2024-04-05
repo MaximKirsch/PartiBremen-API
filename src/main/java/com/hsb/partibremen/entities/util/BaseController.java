@@ -1,4 +1,4 @@
-package com.hsb.partibremen.util;
+package com.hsb.partibremen.entities.util;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

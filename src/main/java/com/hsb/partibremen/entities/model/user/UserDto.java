@@ -1,4 +1,4 @@
-package com.hsb.partibremen.model;
+package com.hsb.partibremen.entities.model.user;
 
 public class UserDto {
     public String name;
