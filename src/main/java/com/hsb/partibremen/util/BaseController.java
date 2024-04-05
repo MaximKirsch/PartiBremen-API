@@ -1,28 +1,34 @@
 package com.hsb.partibremen.util;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 public abstract class BaseController {
 
-    //Will be @Post
-    public void create(){
-
+    //Will be @PostMapping
+    public BaseEntity create(){
+        return null;
     }
-    //Will be @Get
+    //Will be @GetMapping
     public String findAll(){
         return "200 ok";
     }
 
-    //Will be @Get
+    //Will be @GetMapping
     public String findOne(){
         return "200 ok";
     }
 
-    //Will be @Patch
+    //Will be @PutMapping
     public void update(){
 
     }
 
-    //Will be @Delete
+    //Will be @DeleteMapping
     public void delete(){
 
     }
+
+    @GetMapping("/user/{id}")
+    public abstract String findOne(@PathVariable String id);
 }
