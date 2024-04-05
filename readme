@@ -1,0 +1,3 @@
+Swagger is found on http://localhost:8080/swagger-ui/index.html#/
+
+Controllers have to be marked with annotation @RestController
