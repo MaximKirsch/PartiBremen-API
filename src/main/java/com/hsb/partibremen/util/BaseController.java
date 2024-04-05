@@ -7,13 +7,13 @@ public abstract class BaseController {
 
     }
     //Will be @Get
-    public void findAll(){
-
+    public String findAll(){
+        return "200 ok";
     }
 
     //Will be @Get
-    public void findOne(){
-
+    public String findOne(){
+        return "200 ok";
     }
 
     //Will be @Patch
