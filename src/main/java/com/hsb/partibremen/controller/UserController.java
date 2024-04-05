@@ -11,7 +11,8 @@ public class UserController extends BaseController {
     @PostMapping("user")
     public User create(@RequestBody UserDto userDto){
         User user = new User();
-        // user.blabla = userDto.blabla
+        user.name = userDto.name;
+        user.password = userDto.password;
         return user;
     }
 
