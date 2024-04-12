@@ -14,8 +14,12 @@ public class UserController extends BaseController {
     @PostMapping("user")
     public User create(@RequestBody UserDto userDto){
         User user = new User();
-        user.name = userDto.name;
-        user.password = userDto.password;
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setDob(userDto.getDob());
+        user.setVerified(userDto.isVerified());
         userService.userList.add(user);
         return user;
     }
