@@ -8,6 +8,7 @@ public class PartibremenApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PartibremenApplication.class, args);
+		
 	}
 
 }
