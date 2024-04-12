@@ -21,4 +21,17 @@ public class UserService extends BaseService {
         }
         return null;
     }
+
+    public User login(String emailAdress, String password){
+        for (User user : this.userList){
+            if(user.getEmail().equals(emailAdress) && user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    public void register(User user) {
+        this.userList.add(user);
+    }
 }

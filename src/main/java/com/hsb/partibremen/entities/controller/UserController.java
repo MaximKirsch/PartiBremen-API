@@ -33,4 +33,9 @@ public class UserController extends BaseController {
     public User findOne(@PathVariable String id){
         return this.userService.findOne(id);
     }
+
+    @GetMapping("/user/login/{emailAdress}/{password}")
+    public User login(@PathVariable String emailAdress, @PathVariable String password) {
+        return this.userService.login(emailAdress, password);
+    }
 }
