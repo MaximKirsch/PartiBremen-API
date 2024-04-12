@@ -36,4 +36,4 @@ jobs:
           context: .
           file: ../../Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/123
+          tags: partibremen/api:latest
