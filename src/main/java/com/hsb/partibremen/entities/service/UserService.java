@@ -31,7 +31,5 @@ public class UserService extends BaseService {
         return null;
     }
     
-    public void register(User user) {
-        this.userList.add(user);
-    }
+
 }
