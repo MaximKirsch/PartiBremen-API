@@ -27,8 +27,8 @@ public class ServeyService extends BaseService {
     public void bewerten(String id, VoteType type, UUID userid) {
         Servey servey = findOne(id);
         if (servey != null) {
-            //Throws at me a error but function with no problem i don´t know whats wron. Delete that comment if it shows at you no problem
-            servey.addVote(new Voting(userid, type);
+            //fixed it for you :) also it's "survey" (you forgot the second bracket in the if statement body)
+            servey.addVote(new Voting(userid, type));
         }
     }
 
