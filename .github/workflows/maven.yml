@@ -44,6 +44,7 @@ jobs:
       -
         name: deploydev
         run:
+          -mkdir -p ~/.ssh/
           -ssh-keyscan -H ${{ secrets.HOSTNAME }} >> ~/.ssh/known_hosts
           -ssh -T -i $PROD_SSH_KEY_PRIVATE $SSH_USER@$SSH_HOSTNAME
           "
