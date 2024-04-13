@@ -42,10 +42,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-            # Make sure the @v0.9.0 matches the current version of the action
-            - uses: webfactory/ssh-agent@v0.9.0
-            with:
-              ssh-private-key: ${{ secrets.SSH_AUTH_KEY }}
+           # Make sure the @v0.9.0 matches the current version of the action
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+            ssh-private-key: ${{ secrets.SSH_AUTH_KEY }}
+
       -
         name: prepare ssh
         run:
