@@ -28,7 +28,7 @@ public class ServeyService extends BaseService {
         Servey servey = findOne(id);
         if (servey != null) {
             //Throws at me a error but function with no problem i don´t know whats wron. Delete that comment if it shows at you no problem
-            servey.addVote(new Voting(userid, type);
+            servey.addVote(new Voting(userid, type));
         }
     }
 
