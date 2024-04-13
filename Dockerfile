@@ -15,4 +15,4 @@ WORKDIR /app/
 
 COPY --from=build /app/target/partibremen*.jar .
 
-CMD ["java", "-jar", "PartibremenApplication.jar"]
+CMD ["java", "-jar", "*.jar"]
