@@ -42,9 +42,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: deploydev
+        name: prepare ssh
         run:
           -mkdir -p ~/.ssh/
+          -mkdir -p ~/.ssh/known_hosts
+      -
+        name: deploydev
+        run:
           -ssh-keyscan -H ${{ secrets.HOSTNAME }} >> ~/.ssh/known_hosts
           -ssh -T -i $PROD_SSH_KEY_PRIVATE $SSH_USER@$SSH_HOSTNAME
           "
