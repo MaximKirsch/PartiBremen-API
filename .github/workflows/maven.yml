@@ -46,13 +46,18 @@ jobs:
         run:
           mkdir -p ~/.ssh/
       -
-        name: deploydev
+        name: keyscan
         run:
           ssh-keyscan -H ${{ secrets.HOSTNAME }} >> ~/.ssh/known_hosts
+      - name: login server
+        run:
           ssh -T -i $PROD_SSH_KEY_PRIVATE $SSH_USER@$SSH_HOSTNAME
-          "
+      - name: docker login
+        run:
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} ${{ secrets.REGISTRY_URL }}
-          && docker service update --image partibremendockerhubrepo:latest --with-registry-auth parti_backend
-          "
+      - name: update service
+        run:
+          docker service update --image partibremendockerhubrepo:latest --with-registry-auth parti_backend
+
 
 
