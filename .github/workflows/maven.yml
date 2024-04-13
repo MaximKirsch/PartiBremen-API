@@ -57,7 +57,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.HOSTNAME }} >> ~/.ssh/known_hosts
       -
         name: login server
-        run:
+        run: |
           ssh -T ${{ secrets.SSH_USER }}@${{ secrets.HOSTNAME }}
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} ${{ secrets.REGISTRY_URL }}
           docker service update --image partibremendockerhubrepo:latest --with-registry-auth parti_backend
