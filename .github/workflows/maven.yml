@@ -59,8 +59,7 @@ jobs:
         name: login server
         run: |
           ssh -T ${{ secrets.SSH_USER }}@${{ secrets.HOSTNAME }}
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} ${{ secrets.REGISTRY_URL }}
-          && docker service update --image partibremendockerhubrepo:latest --with-registry-auth parti_backend
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} ${{ secrets.REGISTRY_URL }} && docker service update --image partibremendockerhubrepo:latest --with-registry-auth parti_backend
 
 
 
