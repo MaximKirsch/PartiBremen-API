@@ -38,6 +38,7 @@ jobs:
           push: true
           tags: maximkirsch/partibremendockerhubrepo:latest
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       -
