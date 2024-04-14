@@ -9,7 +9,7 @@ import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseEntity;
 
-public class Servey extends BaseEntity {
+public class Survey extends BaseEntity {
     
     //@Collumn
     private String titel;
