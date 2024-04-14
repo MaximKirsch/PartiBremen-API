@@ -6,7 +6,7 @@ import com.hsb.partibremen.entities.util.BaseService;
 public class Report extends BaseEntity {
 
     private String kommentar;
-    private String title;
+    private String title; //.
 
     public String getKommentar() {
         return kommentar;

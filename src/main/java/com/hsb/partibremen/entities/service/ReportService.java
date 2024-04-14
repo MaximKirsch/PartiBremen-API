@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ReportService extends BaseService {
 
-    public ArrayList<Report> reportList = new ArrayList<>();
+    public ArrayList<Report> reportList = new ArrayList<>(); //.
 
     public ArrayList<Report> findAll(){
         return this.reportList;

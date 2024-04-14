@@ -2,7 +2,7 @@ package com.hsb.partibremen.entities.model.report;
 
 public class ReportDto{
     private String kommentar;
-    private String title;
+    private String title; //.
 
     public String getKommentar() {
         return kommentar;

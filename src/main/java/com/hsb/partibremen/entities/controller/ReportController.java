@@ -2,7 +2,6 @@ package com.hsb.partibremen.entities.controller;
 
 import com.hsb.partibremen.entities.model.report.Report;
 import com.hsb.partibremen.entities.model.report.ReportDto;
-import com.hsb.partibremen.entities.model.servey.Servey;
 import com.hsb.partibremen.entities.service.ReportService;
 import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.web.bind.annotation.*;
