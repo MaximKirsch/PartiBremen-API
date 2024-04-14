@@ -21,22 +21,12 @@ public class Survey extends BaseEntity {
     private Date expiresAt;
 
     //@Collumn
-    private UUID userId;
+    private String userId;
 
-    //@Collumn
-    private ArrayList<Voting> voteList = new ArrayList<>();
-
-    
-    public ArrayList<Voting> getVoteList() {
-        return voteList;
-    }
-    public void addVote(Voting vote) {
-        this.voteList.add(vote);
-    }
-    public UUID getUserId() {
+    public String getUserId() {
         return userId;
     }
-    public void setUserId(UUID id) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
     public Date getExpiresAt() {

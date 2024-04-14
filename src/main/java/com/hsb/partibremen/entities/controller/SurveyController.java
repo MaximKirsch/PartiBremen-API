@@ -13,6 +13,10 @@ import com.hsb.partibremen.entities.service.SurveyService;
 
 import com.hsb.partibremen.entities.util.BaseController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
+
+
 @RestController()
 
 public class SurveyController extends BaseController {
@@ -41,11 +45,13 @@ public class SurveyController extends BaseController {
         return this.ServeyService.findOne(id);
     }
 
+    @DeleteMapping("/servey/{id}/delete")
+    public void deleteSurvey(@PathVariable String id) {
+        this.ServeyService.deleteSurvey(id);
+    }
+
     // ToDO: Add absolvieren (Medium noch nicht vorhanden)
 
-    // ToDo: Add bewerten (Bewertung gibt es als eigenes Objekt)
-    @PostMapping("/servey/{id}/bewerten{type}/{userid}")
-    public void bewerten(@PathVariable String id, @PathVariable VoteType type, @PathVariable UUID userid) {
-        this.ServeyService.bewerten(id, type, userid);
-    }
+    
+
 }

@@ -11,6 +11,12 @@ import com.hsb.partibremen.entities.util.BaseService;
 public class SurveyService extends BaseService {
     public ArrayList<Survey> serveyList = new ArrayList<>();
 
+    public void deleteSurvey(String id) {
+        Survey surveyToDelete = findOne(id);
+        if(surveyToDelete != null) {
+            serveyList.remove(surveyToDelete);
+        }
+    }
     public ArrayList<Survey> findAll(){
         return this.serveyList;
     }
@@ -24,12 +30,13 @@ public class SurveyService extends BaseService {
         return null;
     }
 
-    public void bewerten(String id, VoteType type, UUID userid) {
-        Survey servey = findOne(id);
-        if (servey != null) {
-            servey.addVote(new Voting(userid, type));
-        }
-    }
+   
+
+    
+
+    
+
+    
 
 }
 

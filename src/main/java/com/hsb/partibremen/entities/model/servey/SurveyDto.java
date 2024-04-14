@@ -9,11 +9,11 @@ public class SurveyDto {
     private String titel;
     private String beschreibung;
     private Date expiresAt;
-    private UUID userId;
-    public UUID getUserId() {
+    private String userId;
+    public String getUserId() {
         return userId;
     }
-    public void setUserId(UUID userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
     public String getTitel() {
