@@ -1,14 +1,10 @@
 package com.hsb.partibremen.entities.model.question;
 
 import com.hsb.partibremen.entities.enums.QuestionType;
-import com.hsb.partibremen.entities.util.BaseEntity;
 
-public class Question extends BaseEntity{
-    //@Collumn
+public class QuestionDto {
     private String surveyId;
-    //@Collumn
     private String fragestellung;
-    //@Collumn
     private QuestionType type;
     public String getSurveyId() {
         return surveyId;
