@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.hsb.partibremen.entities.model.user.User;
 
-public class ServeyDto {
+public class SurveyDto {
     private String titel;
     private String beschreibung;
     private Date expiresAt;

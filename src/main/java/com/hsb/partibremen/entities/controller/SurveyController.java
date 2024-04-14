@@ -5,22 +5,22 @@ import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
 import com.hsb.partibremen.entities.enums.VoteType;
-import com.hsb.partibremen.entities.model.servey.Servey;
-import com.hsb.partibremen.entities.model.servey.ServeyDto;
+import com.hsb.partibremen.entities.model.servey.Survey;
+import com.hsb.partibremen.entities.model.servey.SurveyDto;
 import com.hsb.partibremen.entities.model.voting.Voting;
-import com.hsb.partibremen.entities.service.ServeyService;
+import com.hsb.partibremen.entities.service.SurveyService;
 
 
 import com.hsb.partibremen.entities.util.BaseController;
 
 @RestController()
 
-public class ServeyController extends BaseController {
-    public ServeyService ServeyService = new ServeyService();
+public class SurveyController extends BaseController {
+    public SurveyService ServeyService = new SurveyService();
 
     @PostMapping("servey")
-    public Servey create(@RequestBody ServeyDto serveyDto) {
-        Servey servey = new Servey();
+    public Survey create(@RequestBody SurveyDto serveyDto) {
+        Survey servey = new Survey();
 
         servey.setTitel(serveyDto.getTitel());
         servey.setBeschreibung(serveyDto.getBeschreibung());
@@ -32,12 +32,12 @@ public class ServeyController extends BaseController {
     }
 
     @GetMapping("/servey")
-    public ArrayList<Servey> findAll() {
+    public ArrayList<Survey> findAll() {
         return this.ServeyService.findAll();
     }
 
     @GetMapping("/servey/{id}")
-    public Servey findOne(@PathVariable String id) {
+    public Survey findOne(@PathVariable String id) {
         return this.ServeyService.findOne(id);
     }
 
