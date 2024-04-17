@@ -15,5 +15,4 @@ WORKDIR /app/
 
 COPY --from=build /app/target/partibremen*.jar .
 
-EXPOSE 8080
 CMD ["java", "-jar", "partibremen-application.jar"]

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  db:
+    env_file: .env
+    image: mysql:8
+    environment:
+      # Use this setting only for local development. On the server api and db are both in UTC timezone.
+      TZ: CET
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - '3315:3306'
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    ports:
+      - '8090:80'
+    environment:
+      UPLOAD_LIMIT : 32M
+
+volumes:
+  db:
+
+
+
