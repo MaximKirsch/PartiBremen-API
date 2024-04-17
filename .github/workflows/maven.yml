@@ -36,7 +36,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: maximkirsch/partibremendockerhubrepo:latest
+          tags: maximkirsch/partibremendockerhubrepo:api
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
       -
         name: login server
         run:
-          ssh -T ${{ secrets.SSH_USER }}@${{ secrets.HOSTNAME }} "docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} ${{ secrets.REGISTRY_URL }} && docker service update --image maximkirsch/partibremendockerhubrepo:latest --with-registry-auth parti_backend"
+          ssh -T ${{ secrets.SSH_USER }}@${{ secrets.HOSTNAME }} "docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} ${{ secrets.REGISTRY_URL }} && docker service update --image maximkirsch/partibremendockerhubrepo:api --with-registry-auth partibremen_api"
 
 
 
