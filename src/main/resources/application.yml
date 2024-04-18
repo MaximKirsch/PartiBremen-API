@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: partibremen
+    datasource:
+        password: ${MYSQL_PASSWORD}
+        url: jdbc:mysql:${MYSQL_URL}
+        username: ${MYSQL_USER}
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL8Dialect

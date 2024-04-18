@@ -1,3 +1,6 @@
 Swagger is found on http://localhost:8080/swagger-ui/index.html#/
 
 Controllers have to be marked with annotation @RestController
+
+docker swarm init
+docker stack deploy --prune -c docker-compose.yml partibremen

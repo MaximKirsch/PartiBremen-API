@@ -11,12 +11,12 @@ services:
     volumes:
       - db:/var/lib/mysql
     ports:
-      - '3315:3306'
+      - '3316:3306'
 
   phpmyadmin:
     image: phpmyadmin:5
     ports:
-      - '8090:80'
+      - '8085:80'
     environment:
       UPLOAD_LIMIT : 32M
 
