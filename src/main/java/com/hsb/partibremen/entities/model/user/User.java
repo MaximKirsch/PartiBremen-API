@@ -1,22 +1,26 @@
 package com.hsb.partibremen.entities.model.user;
 
+import com.hsb.partibremen.entities.util.BaseEntity;
+import jakarta.persistence.*;
+
 import java.sql.Date;
 
-import com.hsb.partibremen.entities.util.BaseEntity;
-
+@Entity
+@Table(name = "user")
 public class User extends BaseEntity {
 
-    //@Column
+    @Column
+
     private String name;
-    //@Column
+    @Column
     private String surname;
-    //@Column
+    @Column
     private Date dob;
-    //@Column
+    @Column
     private String email;
-    //@Column
+    @Column
     private String password;
-    //@Column
+    @Column
     private boolean verified;
     public String getName() {
         return name;

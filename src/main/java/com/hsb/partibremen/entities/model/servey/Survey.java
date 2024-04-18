@@ -8,10 +8,13 @@ import java.util.UUID;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseEntity;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "survey")
 public class Survey extends BaseEntity {
     
-    //@Collumn
+    @Column
     private String titel;
 
     //@Collumn
