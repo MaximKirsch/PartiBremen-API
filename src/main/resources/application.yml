@@ -1,5 +1,9 @@
+server:
+    forward-headers-strategy: framework
+
 springdoc:
   swagger-ui:
+
       oauth:
         client-secret: swagger
         app-name: swagger
