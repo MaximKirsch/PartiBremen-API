@@ -3,7 +3,7 @@ spring:
         name: partibremen
     datasource:
         password: ${MYSQL_PASSWORD}
-        url: jdbc:mysql:${MYSQL_URL}
+        url: jdbc:mysql:${MYSQL_URL}/partibremen
         username: ${MYSQL_USER}
     jpa:
         hibernate:
