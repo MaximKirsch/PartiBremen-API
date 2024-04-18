@@ -4,6 +4,7 @@ import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.util.BaseService;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class UserService extends BaseService {
@@ -22,6 +23,17 @@ public class UserService extends BaseService {
         return null;
     }
 
+    public void delete(String id) {
+        Iterator<User> iterator = userList.iterator();
+        while (iterator.hasNext()) {
+            User user = iterator.next();
+            if (user.id.toString().equals(id)) {
+                iterator.remove();
+                break;
+            }
+        }
+    }
+
     public User login(String emailAdress, String password){
         for (User user : this.userList){
             if(user.getEmail().equals(emailAdress) && user.getPassword().equals(password)){
@@ -31,7 +43,5 @@ public class UserService extends BaseService {
         return null;
     }
     
-    public void register(User user) {
-        this.userList.add(user);
-    }
+
 }

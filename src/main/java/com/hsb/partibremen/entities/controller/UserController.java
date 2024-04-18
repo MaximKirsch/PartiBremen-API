@@ -38,4 +38,24 @@ public class UserController extends BaseController {
     public User login(@PathVariable String emailAdress, @PathVariable String password) {
         return this.userService.login(emailAdress, password);
     }
+
+
+    @PutMapping("/user/{id}")
+    public User update(@PathVariable String id, @RequestBody UserDto userDto) {
+        User user = userService.findOne(id);
+        if (user != null) {
+            user.setName(userDto.getName());
+            user.setSurname(userDto.getSurname());
+            user.setEmail(userDto.getEmail());
+            user.setPassword(userDto.getPassword());
+            user.setDob(userDto.getDob());
+            user.setVerified(userDto.isVerified());
+        }
+        return user;
+    }
+
+    @DeleteMapping("/user/{id}")
+    public void delete(@PathVariable String id) {
+        userService.delete(id);
+    }
 }
