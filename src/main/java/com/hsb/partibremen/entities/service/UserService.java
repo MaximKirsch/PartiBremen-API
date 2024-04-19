@@ -1,45 +1,32 @@
 package com.hsb.partibremen.entities.service;
 
 import com.hsb.partibremen.entities.model.user.User;
+import com.hsb.partibremen.entities.repo.UserRepo;
 import com.hsb.partibremen.entities.util.BaseService;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
+@Service
 public class UserService extends BaseService {
-    public ArrayList<User> userList = new ArrayList<>();
+    public UserRepo userRepo;
 
-    public ArrayList<User> findAll(){
-        return this.userList;
+    public void createUser(User user){
+        userRepo.save(user);
+    }
+    public List<User> findAll(){
+        return userRepo.findAll();
     }
 
-    public User findOne(String id){
-        for (User user : this.userList){
-            if(user.id.toString().equals(id)){
-                return user;
-            }
-        }
-        return null;
+    public Optional<User> findOne(String id){
+        return userRepo.findById(UUID.fromString(id));
     }
 
     public void delete(String id) {
-        Iterator<User> iterator = userList.iterator();
-        while (iterator.hasNext()) {
-            User user = iterator.next();
-            if (user.id.toString().equals(id)) {
-                iterator.remove();
-                break;
-            }
-        }
+        userRepo.deleteById(UUID.fromString(id));
     }
 
     public User login(String emailAdress, String password){
-        for (User user : this.userList){
-            if(user.getEmail().equals(emailAdress) && user.getPassword().equals(password)){
-                return user;
-            }
-        }
         return null;
     }
     

@@ -7,6 +7,8 @@ import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController()
 public class UserController extends BaseController {
@@ -20,17 +22,17 @@ public class UserController extends BaseController {
         user.setPassword(userDto.getPassword());
         user.setDob(userDto.getDob());
         user.setVerified(userDto.isVerified());
-        userService.userList.add(user);
+        this.userService.createUser(user);
         return user;
     }
 
     @GetMapping("/user")
-    public ArrayList<User> findAll() {
+    public List<User> findAll() {
        return this.userService.findAll();
     }
 
     @GetMapping("/user/{id}")
-    public User findOne(@PathVariable String id){
+    public Optional<User> findOne(@PathVariable String id){
         return this.userService.findOne(id);
     }
 
@@ -41,17 +43,8 @@ public class UserController extends BaseController {
 
 
     @PutMapping("/user/{id}")
-    public User update(@PathVariable String id, @RequestBody UserDto userDto) {
-        User user = userService.findOne(id);
-        if (user != null) {
-            user.setName(userDto.getName());
-            user.setSurname(userDto.getSurname());
-            user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
-            user.setDob(userDto.getDob());
-            user.setVerified(userDto.isVerified());
-        }
-        return user;
+    public Optional<User> update(@PathVariable String id, @RequestBody UserDto userDto) {
+       return userService.findOne(id);
     }
 
     @DeleteMapping("/user/{id}")
