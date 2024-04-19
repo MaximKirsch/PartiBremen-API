@@ -19,7 +19,7 @@ spring:
         name: partibremen
     datasource:
         password: ${MYSQL_PASSWORD}
-        url: jdbc:mysql:${MYSQL_URL}/partibremen
+        url: jdbc:mysql://localhost:3316/parti?useSSl=false/partibremen
         username: ${MYSQL_USER}
     jpa:
         hibernate:
