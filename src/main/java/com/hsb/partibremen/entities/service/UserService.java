@@ -3,12 +3,14 @@ package com.hsb.partibremen.entities.service;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.repo.UserRepo;
 import com.hsb.partibremen.entities.util.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class UserService extends BaseService {
+    @Autowired
     public UserRepo userRepo;
 
     public void createUser(User user){
