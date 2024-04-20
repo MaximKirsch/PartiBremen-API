@@ -14,18 +14,18 @@ springdoc:
       enabled: true
 
 
-spring:
-    application:
-        name: partibremen
-    datasource:
-        password: ${MYSQL_PASSWORD}
-        url: jdbc:mysql://localhost:3316/parti?useSSl=false/partibremen
-        username: ${MYSQL_USER}
-    jpa:
-        hibernate:
-            ddl-auto: update
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.MySQL8Dialect
-                format_sql: true
-        show-sql: true
+#spring:
+#    application:
+#        name: partibremen
+#    datasource:
+#        password: ${MYSQL_PASSWORD}
+#        url: jdbc:mysql://localhost:3316/parti?useSSl=false/partibremen
+#        username: ${MYSQL_USER}
+#    jpa:
+#        hibernate:
+#            ddl-auto: update
+#        properties:
+#            hibernate:
+#                dialect: org.hibernate.dialect.MySQL8Dialect
+#                format_sql: true
+#        show-sql: true
