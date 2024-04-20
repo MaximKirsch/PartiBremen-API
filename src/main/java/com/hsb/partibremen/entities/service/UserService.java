@@ -2,25 +2,29 @@ package com.hsb.partibremen.entities.service;
 
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.repo.UserRepo;
-import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 @Service
-public class UserService extends BaseService {
+public class UserService {
     @Autowired
-    public UserRepo userRepo;
+    private UserRepo userRepo;
 
-    public void createUser(User user){
+    public void createUser(User user) {
         userRepo.save(user);
     }
-    public List<User> findAll(){
+
+    public List<User> findAll() {
         return userRepo.findAll();
     }
 
-    public Optional<User> findOne(String id){
+    public Optional<User> findOne(String id) {
         return userRepo.findById(UUID.fromString(id));
     }
 
@@ -28,9 +32,8 @@ public class UserService extends BaseService {
         userRepo.deleteById(UUID.fromString(id));
     }
 
-    public User login(String emailAdress, String password){
-        return null;
-    }
-    
 
+    public User login(String email, String password) {
+        return userRepo.findByEmailAndPassword(email, password);
+    }
 }
