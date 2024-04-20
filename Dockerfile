@@ -12,6 +12,7 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app/
 
+COPY .env /app/target/.env
 
 COPY --from=build /app/target/partibremen*.jar .
 
