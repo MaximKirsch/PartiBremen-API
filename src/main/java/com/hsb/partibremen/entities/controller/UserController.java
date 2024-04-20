@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> findOne(@PathVariable String id) {
+    public Optional<User> findOne(@RequestParam String id) {
         return userService.findOne(id);
     }
 
@@ -43,12 +43,12 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public Optional<User> update(@PathVariable String id, @RequestBody UserDto userDto) {
+    public Optional<User> update(@RequestParam String id, @RequestBody UserDto userDto) {
         return userService.findOne(id);
     }
 
     @DeleteMapping("/user/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@RequestParam String id) {
         userService.delete(id);
     }
 }
