@@ -12,7 +12,7 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app/
 
-COPY application.yml /app/target/
+COPY application.yml /app/target/application.yml
 
 COPY --from=build /app/target/partibremen*.jar .
 
