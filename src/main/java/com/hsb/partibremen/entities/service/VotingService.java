@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.hsb.partibremen.entities.enums.VoteType;
-import com.hsb.partibremen.entities.model.servey.Survey;
+//import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseService;
 
 public class VotingService extends BaseService {
+    /*
     public ArrayList<Voting> votingList = new ArrayList<>();
 
     public SurveyService SurveyService = new SurveyService();
@@ -55,5 +56,7 @@ public class VotingService extends BaseService {
             }
             return count;
         }
-    }   
+    }
+
+     */
 }

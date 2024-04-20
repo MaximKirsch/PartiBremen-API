@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RestController()
 
 public class VotingController extends BaseController {
+    /*
     public VotingService VotingService = new VotingService();
 
     @PostMapping("voting")
@@ -51,4 +52,6 @@ public class VotingController extends BaseController {
     public void deleteVote(@PathVariable String surveyId, @PathVariable String userId){
         this.VotingService.deleteVote(surveyId, userId);
     }
+    */
+
 }

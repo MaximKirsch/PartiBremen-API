@@ -3,7 +3,7 @@ package com.hsb.partibremen.entities.model.servey;
 import java.sql.Date;
 import java.util.UUID;
 
-import com.hsb.partibremen.entities.model.user.User;
+//import com.hsb.partibremen.entities.model.user.User;
 
 public class SurveyDto {
     private String titel;

@@ -4,16 +4,17 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.UUID;
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
+//@MappedSuperclass
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class BaseEntity {
-    @Id
-    @Column
+   // @Id
+    //@Column
     public UUID id = UUID.randomUUID();
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
+   // @Column
+    //@Temporal(TemporalType.TIMESTAMP)
     public Date createdAt = new Date();
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
+   // @Column
+    //Temporal(TemporalType.TIMESTAMP)
     public Date updatedAt = new Date();
 }

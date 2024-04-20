@@ -1,3 +1,4 @@
+/*
 package com.hsb.partibremen.entities.model.servey;
 
 import java.sql.Date;
@@ -51,4 +52,6 @@ public class Survey extends BaseEntity {
         return titel;
     }
 }
+
+ */
 
