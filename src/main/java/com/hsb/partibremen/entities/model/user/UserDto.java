@@ -1,8 +1,11 @@
 package com.hsb.partibremen.entities.model.user;
 
 import java.sql.Date;
+import java.util.UUID;
 
 public class UserDto {
+    
+
     
     private String name;
     private String surname;
@@ -11,6 +14,9 @@ public class UserDto {
     private String password;
     private boolean verified;
 
+
+
+ 
     public String getName() {
         return name;
     }

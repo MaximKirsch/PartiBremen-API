@@ -8,47 +8,40 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("/user/create")
     public User create(@RequestBody UserDto userDto) {
-        User user = new User();
-        user.setName(userDto.getName());
-        user.setSurname(userDto.getSurname());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setDob(userDto.getDob());
-        user.setVerified(userDto.isVerified());
-        userService.createUser(user);
-        return user;
+        return userService.createUser(userDto);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/user/find-all")
     public List<User> findAll() {
         return userService.findAll();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/findById")
     public Optional<User> findOne(@RequestParam String id) {
-        return userService.findOne(id);
+    return userService.findOne(id);
+}
+
+    @PostMapping("/user/update")
+    public Optional<User> update(@RequestBody UserDto userDto, @RequestParam String id) {
+        return userService.updateUser(userDto, id);
+    }
+
+    @DeleteMapping("/user/delete")
+    public void delete(@RequestParam String id) {
+        userService.delete(id);
     }
 
     @PostMapping("/user/login")
     public User login(@RequestParam String email, @RequestParam String password) {
         return userService.login(email, password);
-    }
-
-    @PutMapping("/user/{id}")
-    public Optional<User> update(@RequestParam String id, @RequestBody UserDto userDto) {
-        return userService.findOne(id);
-    }
-
-    @DeleteMapping("/user/{id}")
-    public void delete(@RequestParam String id) {
-        userService.delete(id);
     }
 }
