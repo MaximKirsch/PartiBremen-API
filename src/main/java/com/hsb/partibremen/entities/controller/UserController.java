@@ -1,4 +1,3 @@
-/*
 package com.hsb.partibremen.entities.controller;
 
 import com.hsb.partibremen.entities.model.user.User;
@@ -47,4 +46,4 @@ public class UserController {
     }
 }
 
- */
+

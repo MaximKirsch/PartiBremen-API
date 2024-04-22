@@ -3,6 +3,7 @@ package com.hsb.partibremen.entities.model.petition;
 import java.sql.Date;
 
 import com.hsb.partibremen.entities.util.BaseEntity;
+import jakarta.persistence.Column;
 
 public class Petition extends BaseEntity {
     //@Column

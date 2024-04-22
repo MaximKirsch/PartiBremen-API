@@ -1,4 +1,3 @@
-/*
 package com.hsb.partibremen.entities.service;
 
 import java.util.ArrayList;
@@ -41,4 +40,3 @@ public class SurveyService extends BaseService {
 
 }
 
-*/

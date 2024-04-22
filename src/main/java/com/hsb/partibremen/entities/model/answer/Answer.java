@@ -1,11 +1,12 @@
 package com.hsb.partibremen.entities.model.answer;
 
 import com.hsb.partibremen.entities.util.BaseEntity;
+import jakarta.persistence.Column;
 
 public class Answer  extends BaseEntity {
-    //@Column
+    @Column
     private String Titel;
-    //@Column
+    @Column
     private String UserAnswer;
 
     

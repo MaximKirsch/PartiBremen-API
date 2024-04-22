@@ -1,4 +1,3 @@
-/*
 package com.hsb.partibremen.entities.controller;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -57,4 +56,4 @@ public class SurveyController extends BaseController {
 
 }
 
- */
+

@@ -1,4 +1,4 @@
-/*
+
 package com.hsb.partibremen.entities.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,4 +9,4 @@ interface BaseRepo<T, ID> extends JpaRepository<T, ID> {
 
 }
 
- */
+

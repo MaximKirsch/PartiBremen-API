@@ -6,13 +6,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-//@Entity
-//@Table(name = "report")
+@Entity
+@Table(name = "report")
 public class Report extends BaseEntity {
 
-    //@Column
+    @Column
     private String kommentar;
-    //@Column
+    @Column
     private String title; //.
 
     public String getKommentar() {

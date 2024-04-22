@@ -1,4 +1,3 @@
-/*
 package com.hsb.partibremen.entities.service;
 
 import com.hsb.partibremen.entities.model.user.User;
@@ -62,4 +61,3 @@ public class UserService {
     }
 }
 
- */
