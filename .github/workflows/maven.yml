@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
       -
         name: Update db url
-        run: sed -i 's/<db_url>/jdbc:mysql://${{ MYSQL_HOST }}:3306/parti?useSSl=false/' src/main/resources/application.yml
+        run: sed -i 's/<db_url>/jdbc:mysql://${{ secrets.MYSQL_HOST }}:3306/parti?useSSl=false/' src/main/resources/application.yml
       -
         name: Update db username
         run: sed -i 's/<db_username>/${{ secrets.MYSQL_USERNAME }}/' src/main/resources/application.yml
