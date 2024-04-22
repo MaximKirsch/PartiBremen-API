@@ -36,9 +36,9 @@ jobs:
           context: .
           file: ./Dockerfile
           secret-envs: |
-            "MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}"
-            "MYSQL_USER: asdasd"
-            "MYSQL_HOST: asdasd"
+            "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}"
+            "MYSQL_USER=asdasd"
+            "MYSQL_HOST=asdasd"
           push: true
           tags: maximkirsch/partibremendockerhubrepo:api
   deploy:
