@@ -35,6 +35,10 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          secrets: |
+              "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}"
+              "MYSQL_USERNAME=asdasd"
+              "MYSQL_HOST=asdasd"
           secret-envs: |
             "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}"
             "MYSQL_USERNAME=asdasd"
