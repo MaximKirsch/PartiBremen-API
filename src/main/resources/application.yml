@@ -17,9 +17,9 @@ spring:
     application:
         name: partibremen
     datasource:
-        password: ${MYSQL_PASSWORD}
+        password: 123
         url: jdbc:mysql://localhost:3316/parti?useSSl=false/partibremen
-        username: ${MYSQL_USER}
+        username: 123
     jpa:
         hibernate:
             ddl-auto: update
