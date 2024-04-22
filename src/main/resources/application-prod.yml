@@ -1,0 +1,31 @@
+server:
+    forward-headers-strategy: framework
+
+springdoc:
+  swagger-ui:
+
+      oauth:
+        client-secret: swagger
+        app-name: swagger
+        client-id: swagger
+      persist-authorization: true
+      display-request-duration: true
+      doc-expansion: true
+      enabled: true
+
+
+spring:
+    application:
+        name: partibremen
+    datasource:
+        password: ${secrets.MYSQL_PASSWORD}
+        url: jdbc:mysql://${secrets.MYSQL_HOST}:3306/parti?useSSl=false
+        username: ${secrets.MYSQL_USERNAME}
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL8Dialect
+                format_sql: true
+        show-sql: true

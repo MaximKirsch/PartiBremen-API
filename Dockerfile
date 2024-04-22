@@ -12,8 +12,6 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app/
 
-COPY application.yml /app/target/application.yml
-
 COPY --from=build /app/target/partibremen*.jar .
 
-CMD ["java", "-jar", "partibremen-application.jar"]
+CMD ["java", "-Dspring.profiles.active=prod", "-jar", "partibremen-application.jar"]
