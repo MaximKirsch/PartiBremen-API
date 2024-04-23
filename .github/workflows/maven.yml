@@ -21,6 +21,15 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
       -
+        name: Update db url
+        run: sed -i 's/<db_host>/${{ secrets.MYSQL_HOST }}/' src/main/resources/application-prod.yml
+      -
+        name: Update db username
+        run: sed -i 's/<db_username>/${{ secrets.MYSQL_USERNAME }}/' src/main/resources/application-prod.yml
+      -
+        name: Update db password
+        run: sed -i 's/<db_password>/${{ secrets.MYSQL_PASSWORD }}/' src/main/resources/application-prod.yml
+      -
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
