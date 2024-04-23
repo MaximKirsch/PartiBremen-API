@@ -7,7 +7,9 @@ import com.hsb.partibremen.entities.enums.VoteType;
 import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class VotingService extends BaseService {
     public ArrayList<Voting> votingList = new ArrayList<>();
 

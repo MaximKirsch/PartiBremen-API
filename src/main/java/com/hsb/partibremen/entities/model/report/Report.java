@@ -1,9 +1,11 @@
 package com.hsb.partibremen.entities.model.report;
 
+import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import com.hsb.partibremen.entities.util.BaseService;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,7 +15,9 @@ public class Report extends BaseEntity {
     @Column
     private String kommentar;
     @Column
-    private String title; //.
+    private String title;
+    @ManyToOne
+    private User user;
 
     public String getKommentar() {
         return kommentar;
@@ -30,4 +34,8 @@ public class Report extends BaseEntity {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user;}
 }

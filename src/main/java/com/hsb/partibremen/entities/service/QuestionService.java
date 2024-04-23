@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import com.hsb.partibremen.entities.model.question.Question;
 import com.hsb.partibremen.entities.util.BaseService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class QuestionService extends BaseService {
     public ArrayList<Question> questionList = new ArrayList<>();
 

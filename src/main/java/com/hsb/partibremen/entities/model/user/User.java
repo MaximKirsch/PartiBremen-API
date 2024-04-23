@@ -21,6 +21,8 @@ public class User extends BaseEntity {
     private String password;
     @Column
     private boolean verified;
+
+
     public String getName() {
         return name;
     }
