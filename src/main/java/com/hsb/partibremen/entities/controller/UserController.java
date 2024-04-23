@@ -30,7 +30,7 @@ public class UserController {
     return userService.findOne(id);
 }
 
-    @PostMapping("/user/update")
+    @PutMapping("/user/update")
     public Optional<User> update(@RequestBody UserDto userDto, @RequestParam String id) {
         return userService.updateUser(userDto, id);
     }
