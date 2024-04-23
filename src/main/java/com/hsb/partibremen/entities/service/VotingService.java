@@ -27,11 +27,28 @@ public class VotingService extends BaseService {
         voting.setSurveyId(votingDto.getSurveyId());
         voting.setUserId(votingDto.getUserId());
         voting.setVoteType(votingDto.getVoteType());
-        System.out.println("___________________"+votingDto.getUserId());
+        System.out.println("SurveyID: "+votingDto.getSurveyId());
+        System.out.println("userID: "+votingDto.getUserId());
+        System.out.println("voteType: "+votingDto.getVoteType());
         return votingRepo.save(voting);
     }
-    public void bewerten(String surveyId, VoteType type, String userId) {
 
+    public void bewerten(String surveyId, VoteType type, String userId) {
+        Optional<Voting> existingVote = findVote(surveyId, userId);
+        if (existingVote.isPresent() && existingVote.get().getVoteType() != type) {
+            Voting vote = existingVote.get();
+            vote.setVoteType(type);
+            votingRepo.save(vote);
+        }else{
+            Voting voting = new Voting();
+            voting.setSurveyId(surveyId);
+            voting.setUserId(userId);
+            voting.setVoteType(type);
+            System.out.println("SurveyID: "+surveyId);
+            System.out.println("userID: "+userId);
+            System.out.println("voteType: "+type);
+            votingRepo.save(voting);
+        }
     }
 
     public void deleteVote(String surveyID, String userId){

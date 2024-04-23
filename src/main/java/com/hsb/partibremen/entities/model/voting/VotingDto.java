@@ -5,10 +5,11 @@ import java.util.UUID;
 import com.hsb.partibremen.entities.enums.VoteType;
 
 public class VotingDto {
-    private String userId;
+
+    private String userId ;
     private VoteType voteType;
     private String surveyId;
-    
+
     public String getUserId() {
         return userId;
     }
