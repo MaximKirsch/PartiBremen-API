@@ -1,59 +1,52 @@
 package com.hsb.partibremen.entities.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
 
 import com.hsb.partibremen.entities.enums.VoteType;
 import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.model.voting.Voting;
+import com.hsb.partibremen.entities.model.voting.VotingDto;
+import com.hsb.partibremen.entities.repo.VotingRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 
+@Service
 public class VotingService extends BaseService {
-    public ArrayList<Voting> votingList = new ArrayList<>();
+    @Autowired
+    private VotingRepo votingRepo;
 
-    public SurveyService SurveyService = new SurveyService();
+    public Voting createVoting(VotingDto votingDto) {
+        Voting voting = new Voting();
+        voting.setSurveyId(votingDto.getSurveyId());
+        voting.setUserId(votingDto.getUserId());
+        voting.setVoteType(votingDto.getVoteType());
+        System.out.println("___________________"+votingDto.getUserId());
+        return votingRepo.save(voting);
+    }
     public void bewerten(String surveyId, VoteType type, String userId) {
-        Survey servey = SurveyService.findOne(surveyId);
-        if (servey != null) {
-            Voting existingVote = findVote(surveyId, userId);
-            if (existingVote == null)
-                votingList.add(new Voting(userId, type, userId));
-            else if( existingVote.getVoteType() != type){
-                existingVote.setVoteType(type);
-                deleteVote(surveyId, userId);
-                votingList.add(existingVote);
-            }
-        }
+
     }
 
     public void deleteVote(String surveyID, String userId){
-        Voting voteToDelete = findVote(surveyID, userId);
-        if(voteToDelete != null){
-            votingList.remove(voteToDelete);
+        Voting optVote = findVote(surveyID, userId).orElse(null);
+        if(optVote != null){
+            votingRepo.delete(optVote);
         }
     }
 
-    public Voting findVote(String surveyId, String userId) {
-        for (Voting vote : votingList) {
-            if (vote.getUserId().equals(userId) && vote.getSurveyId().equals(surveyId)) {
-                return vote;
-            }
-        }
-        return null;
+    public Optional<Voting> findVote(String surveyId, String userId) {
+        return votingRepo.findBySurveyIdAndUserId(surveyId,userId);
     }
 
     public int countVotes(String surveyId, VoteType type){
-        Survey servey = SurveyService.findOne(surveyId);
-        if(servey == null) return 0;
-        else {
-            int count = 0;
-            for(Voting vote : votingList){
-                if(vote.getVoteType() == type && vote.getSurveyId().equals(surveyId)){
-                    count++;
-                }
-            
-            }
-            return count;
-        }
+        List<Voting> list = votingRepo.findAllBySurveyIdAndVoteType(surveyId, type);
+        return list.size();
     }   
 }

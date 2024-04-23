@@ -1,7 +1,10 @@
 package com.hsb.partibremen.entities.controller;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.hsb.partibremen.entities.enums.VoteType;
@@ -20,34 +23,28 @@ import io.swagger.v3.oas.annotations.Operation;
 @RestController()
 
 public class SurveyController extends BaseController {
-    public SurveyService ServeyService = new SurveyService();
+    @Autowired
+    public SurveyService surveyService;
 
-    @PostMapping("servey")
+    @PostMapping("servey/create")
     public Survey create(@RequestBody SurveyDto serveyDto) {
-        Survey servey = new Survey();
-
-        servey.setTitel(serveyDto.getTitel());
-        servey.setBeschreibung(serveyDto.getBeschreibung());
-        servey.setExpiresAt(serveyDto.getExpiresAt());
-        servey.setUserId(serveyDto.getUserId());
-        ServeyService.serveyList.add(servey);
-        return servey;
+        return surveyService.create(serveyDto);
 
     }
 
-    @GetMapping("/servey")
-    public ArrayList<Survey> findAll() {
-        return this.ServeyService.findAll();
+    @GetMapping("/servey/find-all")
+    public List<Survey> findAll() {
+        return surveyService.findAll();
     }
 
-    @GetMapping("/servey/{id}")
-    public Survey findOne(@PathVariable String id) {
-        return this.ServeyService.findOne(id);
+    @GetMapping("/servey/findById")
+    public Optional<Survey> findOne(@RequestParam String id) {
+        return surveyService.findOne(id);
     }
 
-    @DeleteMapping("/servey/{id}/delete")
-    public void deleteSurvey(@PathVariable String id) {
-        this.ServeyService.deleteSurvey(id);
+    @DeleteMapping("/servey/delete")
+    public void deleteSurvey(@RequestParam String id) {
+        surveyService.deleteSurvey(id);
     }
 
     // ToDO: Add absolvieren (Medium noch nicht vorhanden)

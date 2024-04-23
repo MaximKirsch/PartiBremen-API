@@ -5,21 +5,20 @@ import java.util.UUID;
 import com.hsb.partibremen.entities.enums.VoteType;
 import com.hsb.partibremen.entities.util.BaseEntity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "voting")
 public class Voting extends BaseEntity {
-    //@Collumn
+    @Column
     private String userId;
-    //@Collumn
+    @Column
     private VoteType voteType;
-    //@Collumn
+    @Column
     private String surveyId;
     
-    public Voting(String userId, VoteType voteType, String surveyId) {
-        this.userId = userId;
-        this.voteType = voteType;
-        this.surveyId = surveyId;
-    }
-    public Voting(){
-    }
 
     public String getSurveyId() {
         return surveyId;

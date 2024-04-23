@@ -17,13 +17,13 @@ public class Survey extends BaseEntity {
     @Column
     private String titel;
 
-    //@Collumn
+    @Column
     private String beschreibung;
 
-    //@Collumn
+    @Column
     private Date expiresAt;
 
-    //@Collumn
+    @Column
     private String userId;
 
     public String getUserId() {
