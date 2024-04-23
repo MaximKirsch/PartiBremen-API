@@ -35,17 +35,17 @@ public class SurveyController extends BaseController {
 
     }
 
-    @GetMapping("/servey")
+    @GetMapping("/survey")
     public ArrayList<Survey> findAll() {
         return this.ServeyService.findAll();
     }
 
-    @GetMapping("/servey/{id}")
+    @GetMapping("/survey/{id}")
     public Survey findOne(@PathVariable String id) {
         return this.ServeyService.findOne(id);
     }
 
-    @DeleteMapping("/servey/{id}/delete")
+    @DeleteMapping("/survey/{id}/delete")
     public void deleteSurvey(@PathVariable String id) {
         this.ServeyService.deleteSurvey(id);
     }
