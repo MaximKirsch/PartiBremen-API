@@ -8,8 +8,9 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class BaseEntity {
     @Id
+    @GeneratedValue
     @Column
-    public UUID id = UUID.randomUUID();
+    public UUID id;
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     public Date createdAt = new Date();

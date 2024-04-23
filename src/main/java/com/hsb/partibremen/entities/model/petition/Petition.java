@@ -3,15 +3,20 @@ package com.hsb.partibremen.entities.model.petition;
 import java.sql.Date;
 
 import com.hsb.partibremen.entities.util.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "petition")
 public class Petition extends BaseEntity {
-    //@Column
+    @Column
     private String titel;
-    //@Column
+    @Column
     private String description;
-    //@Column
+    @Column
     private Date expireAt;
-    //@Column
+    @Column
     private int goal;
 
 

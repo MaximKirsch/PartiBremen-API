@@ -1,20 +1,27 @@
 package com.hsb.partibremen.entities.model.question;
 
 import com.hsb.partibremen.entities.enums.QuestionType;
+import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.util.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "question")
 public class Question extends BaseEntity{
-    //@Collumn
-    private String surveyId;
-    //@Collumn
+    @ManyToOne
+    private Survey survey;
+    @Column
     private String fragestellung;
-    //@Collumn
+    @Column
     private QuestionType type;
-    public String getSurveyId() {
-        return surveyId;
+    public Survey getSurvey() {
+        return survey;
     }
-    public void setSurveyId(String surveyId) {
-        this.surveyId = surveyId;
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
     }
     public String getFragestellung() {
         return fragestellung;

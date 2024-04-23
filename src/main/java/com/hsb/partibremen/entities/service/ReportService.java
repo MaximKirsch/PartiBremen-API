@@ -2,9 +2,10 @@ package com.hsb.partibremen.entities.service;
 
 import com.hsb.partibremen.entities.model.report.Report;
 import com.hsb.partibremen.entities.util.BaseService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-
+@Service
 public class ReportService extends BaseService {
 
     public ArrayList<Report> reportList = new ArrayList<>(); //.

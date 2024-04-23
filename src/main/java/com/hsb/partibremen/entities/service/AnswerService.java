@@ -1,35 +1,52 @@
 package com.hsb.partibremen.entities.service;
 
 import com.hsb.partibremen.entities.model.answer.Answer;
+import com.hsb.partibremen.entities.model.answer.AnswerDto;
+import com.hsb.partibremen.entities.repo.AnswerRepo;
 import com.hsb.partibremen.entities.util.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
+@Service
 public class AnswerService extends BaseService {
-    public ArrayList<Answer> answerList = new ArrayList<>();
+    @Autowired
+    private AnswerRepo answerRepo;
 
-    public ArrayList<Answer> findAll() {
-        return this.answerList;
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private QuestionService questionService;
+
+    public Answer create(AnswerDto answerDto) {
+        Answer answer = new Answer();
+        answer.setTitel(answerDto.getTitel());
+        answer.setUserAnswer(answerDto.getUserAnswer());
+
+        if(!(questionService.findOne(answerDto.getQuestionId())).isPresent()){
+            throw new RuntimeException();
+        }
+        answer.setQuestion((questionService.findOne(answerDto.getQuestionId())).get());
+
+        if(!(userService.findOne(answerDto.getUserId())).isPresent()){
+            throw new RuntimeException();
+        }
+        answer.setAnswerer((userService.findOne(answerDto.getUserId())).get());
+
+        return answerRepo.save(answer);
     }
 
-    public Answer findOne(String id) {
-        for (Answer answer : this.answerList) {
-            if (answer.id.toString().equals(id)) {
-                return answer;
-            }
-        }
-        return null;
+    public List<Answer> findAll() {
+        return answerRepo.findAll();
+    }
+
+    public Optional<Answer> findOne(String id) {
+        return answerRepo.findById(UUID.fromString(id));
     }
 
     public void delete(String id) {
-        Iterator<Answer> iterator = answerList.iterator();
-        while (iterator.hasNext()) {
-            Answer answer = iterator.next();
-            if (answer.id.toString().equals(id)) {
-                iterator.remove();
-                break;
-            }
-        }
+        answerRepo.deleteById(UUID.fromString(id));
     }
 }

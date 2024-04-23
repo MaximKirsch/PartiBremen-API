@@ -1,7 +1,11 @@
 package com.hsb.partibremen.entities.controller;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
+import com.hsb.partibremen.entities.service.SurveyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,32 +17,28 @@ import com.hsb.partibremen.entities.model.question.QuestionDto;
 import com.hsb.partibremen.entities.service.QuestionService;
 import com.hsb.partibremen.entities.util.BaseController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController()
-
-
 public class QuestionController extends BaseController {
-    private QuestionService questionService = new QuestionService();
+  @Autowired
+  private QuestionService questionService;
 
   @PostMapping("/question")
   public Question createQuestion(@RequestBody QuestionDto questionDto) {
-    Question question = new Question();
-    question.setFragestellung(questionDto.getFragestellung());
-    question.setType(questionDto.getType());
-    question.setSurveyId(question.getSurveyId());
-    questionService.questionList.add(question);
-    return question;
-    
+    System.out.println(questionDto.surveyId);
+    System.out.println(questionDto.getFragestellung());
+    System.out.println(UUID.fromString(questionDto.surveyId));
+    return questionService.create(questionDto);
     }
 
     @GetMapping("/question")
-    public ArrayList<Question> getAllQusetions() {
+    public List<Question> getAllQusetions() {
         return questionService.findAll();
     }
 
     @GetMapping("/question/{id}")
-    public Question getOneQuestion(@PathVariable String id) {
+    public Optional<Question> getOneQuestion(@PathVariable String id) {
         return questionService.findOne(id);
     }
 

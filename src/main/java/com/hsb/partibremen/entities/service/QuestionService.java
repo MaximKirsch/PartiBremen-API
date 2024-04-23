@@ -1,29 +1,44 @@
 package com.hsb.partibremen.entities.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import com.hsb.partibremen.entities.model.question.Question;
+import com.hsb.partibremen.entities.model.question.QuestionDto;
+import com.hsb.partibremen.entities.repo.QuestionRepo;
 import com.hsb.partibremen.entities.util.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class QuestionService extends BaseService {
-    public ArrayList<Question> questionList = new ArrayList<>();
+    @Autowired
+    public QuestionRepo questionRepo;
+    @Autowired
+    private SurveyService surveyService;
 
-    public ArrayList<Question> findAll(){
-        return this.questionList;
-    }
-    public Question findOne(String id) {
-        for (Question question : this.questionList) {
-            if (question.id.toString().equals(id)) {
-                return question;
-            }
+    public Question create(QuestionDto questionDto) {
+        Question question = new Question();
+        question.setFragestellung(questionDto.getFragestellung());
+        question.setType(questionDto.getType());
+
+        if(!(this.surveyService.findOne(questionDto.getSurveyId())).isPresent()){
+            throw new RuntimeException();
         }
-        return null;
+        question.setSurvey((this.surveyService.findOne(questionDto.getSurveyId())).get());
+
+        return this.questionRepo.save(question);
+    }
+    public List<Question> findAll(){
+        return this.questionRepo.findAll();
+    }
+    public Optional<Question> findOne(String id) {
+        return questionRepo.findById(UUID.fromString(id));
     }
 
     public void delete(String id) {
-        Question questionToDelete = findOne(id);
-        if(questionToDelete != null)
-            questionList.remove(questionToDelete);
+        questionRepo.deleteById(UUID.fromString(id));
     }
 
 }

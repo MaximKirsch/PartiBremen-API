@@ -1,22 +1,12 @@
 package com.hsb.partibremen.entities.controller;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import com.hsb.partibremen.entities.enums.VoteType;
 import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.model.servey.SurveyDto;
-import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.service.SurveyService;
-
-
 import com.hsb.partibremen.entities.util.BaseController;
-
-import io.swagger.v3.oas.annotations.Operation;
 
 
 
