@@ -42,7 +42,7 @@ public class QuestionController extends BaseController {
         return questionService.findOne(id);
     }
 
-    @DeleteMapping("/question/{id}/delete")
+    @DeleteMapping("/question/{id}")
     public void deleteQuestion(@PathVariable String id) {
         questionService.delete(id);
     }

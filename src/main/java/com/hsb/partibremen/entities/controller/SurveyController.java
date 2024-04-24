@@ -16,24 +16,24 @@ public class SurveyController extends BaseController {
     @Autowired
     public SurveyService surveyService;
 
-    @PostMapping("servey/create")
+    @PostMapping("/survey")
     public Survey create(@RequestBody SurveyDto serveyDto) {
         return surveyService.create(serveyDto);
 
     }
 
-    @GetMapping("/servey/find-all")
+    @GetMapping("/survey")
     public List<Survey> findAll() {
         return surveyService.findAll();
     }
 
-    @GetMapping("/servey/findById")
-    public Optional<Survey> findOne(@RequestParam String id) {
+    @GetMapping("/survey/{id}")
+    public Optional<Survey> findOne(@PathVariable String id) {
         return surveyService.findOne(id);
     }
 
-    @DeleteMapping("/servey/delete")
-    public void deleteSurvey(@RequestParam String id) {
+    @DeleteMapping("/survey/{id}")
+    public void deleteSurvey(@PathVariable String id) {
         surveyService.deleteSurvey(id);
     }
 

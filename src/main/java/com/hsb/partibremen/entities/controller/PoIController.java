@@ -18,22 +18,22 @@ public class PoIController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/answer")
+    @PostMapping("/poi")
     public PoI create(@RequestBody PoIDto poIDto) {
         return poIService.create(poIDto);
     }
 
-    @GetMapping("/answer")
+    @GetMapping("/poi")
     public List<PoI> findAll() {
         return poIService.findAll();
     }
 
-    @GetMapping("/answer/{id}")
+    @GetMapping("/poi/{id}")
     public Optional<PoI> findOne(@PathVariable String id) {
         return poIService.findOne(id);
     }
 
-    @PutMapping("/answer/{id}")
+    @PutMapping("/poi/{id}")
     public Optional<PoI> update(@PathVariable String id, @RequestBody PoIDto poiDto) {
         Optional<PoI> optionalAnswer = poIService.findOne(id);
         if(optionalAnswer.isPresent()){
@@ -49,7 +49,7 @@ public class PoIController extends BaseController {
         return optionalAnswer;
     }
 
-    @DeleteMapping("/answer/{id}")
+    @DeleteMapping("/poi/{id}")
     public void delete(@PathVariable String id) {
         poIService.delete(id);
     }

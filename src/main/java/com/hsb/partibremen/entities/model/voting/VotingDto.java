@@ -5,16 +5,15 @@ import java.util.UUID;
 import com.hsb.partibremen.entities.enums.VoteType;
 
 public class VotingDto {
-
-    private String userId ;
     private VoteType voteType;
-    private String surveyId;
+    private String voterId ;
+    private String votedSurveyId;
 
-    public String getUserId() {
-        return userId;
+    public String getVoterId() {
+        return voterId;
     }
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setVoterId(String voterId) {
+        this.voterId = voterId;
     }
     public VoteType getVoteType() {
         return voteType;
@@ -22,10 +21,10 @@ public class VotingDto {
     public void setVoteType(VoteType voteType) {
         this.voteType = voteType;
     }
-    public String getSurveyId() {
-        return surveyId;
+    public String getVotedSurveyId() {
+        return votedSurveyId;
     }
-    public void setSurveyId(String surveyId) {
-        this.surveyId = surveyId;
+    public void setVotedSurveyId(String votedSurveyId) {
+        this.votedSurveyId = votedSurveyId;
     }
 }

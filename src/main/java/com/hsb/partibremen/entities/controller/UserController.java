@@ -15,28 +15,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user/create")
+    @PostMapping("/user")
     public User create(@RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
 
-    @GetMapping("/user/find-all")
+    @GetMapping("/user")
     public List<User> findAll() {
         return userService.findAll();
     }
 
-    @GetMapping("/user/findById")
-    public Optional<User> findOne(@RequestParam String id) {
+    @GetMapping("/user/{id}")
+    public Optional<User> findOne(@PathVariable String id) {
     return userService.findOne(id);
 }
 
-    @PutMapping("/user/update")
-    public Optional<User> update(@RequestBody UserDto userDto, @RequestParam String id) {
+    @PutMapping("/user/{id}")
+    public Optional<User> update(@RequestBody UserDto userDto, @PathVariable String id) {
         return userService.updateUser(userDto, id);
     }
 
-    @DeleteMapping("/user/delete")
-    public void delete(@RequestParam String id) {
+    @DeleteMapping("/user/{id}")
+    public void delete(@PathVariable String id) {
         userService.delete(id);
     }
 

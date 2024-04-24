@@ -21,49 +21,37 @@ import com.hsb.partibremen.entities.util.BaseService;
 public class VotingService extends BaseService {
     @Autowired
     private VotingRepo votingRepo;
+    @Autowired
+    private SurveyService surveyService;
+    @Autowired
+    private UserService userService;
 
-    public Voting createVoting(VotingDto votingDto) {
+    public Voting create(VotingDto votingDto) {
         Voting voting = new Voting();
-        voting.setSurveyId(votingDto.getSurveyId());
-        voting.setUserId(votingDto.getUserId());
         voting.setVoteType(votingDto.getVoteType());
-        System.out.println("SurveyID: "+votingDto.getSurveyId());
-        System.out.println("userID: "+votingDto.getUserId());
-        System.out.println("voteType: "+votingDto.getVoteType());
+
+        if(!this.userService.findOne(votingDto.getVoterId()).isPresent()){
+            throw new RuntimeException();
+        }
+        voting.setVoter(this.userService.findOne(votingDto.getVoterId()).get());
+
+        if(!this.surveyService.findOne(votingDto.getVotedSurveyId()).isPresent()){
+            throw new RuntimeException();
+        }
+        voting.setVotedSurvey(this.surveyService.findOne(votingDto.getVotedSurveyId()).get());
+
         return votingRepo.save(voting);
     }
 
-    public void bewerten(String surveyId, VoteType type, String userId) {
-        Optional<Voting> existingVote = findVote(surveyId, userId);
-        if (existingVote.isPresent() && existingVote.get().getVoteType() != type) {
-            Voting vote = existingVote.get();
-            vote.setVoteType(type);
-            votingRepo.save(vote);
-        }else{
-            Voting voting = new Voting();
-            voting.setSurveyId(surveyId);
-            voting.setUserId(userId);
-            voting.setVoteType(type);
-            System.out.println("SurveyID: "+surveyId);
-            System.out.println("userID: "+userId);
-            System.out.println("voteType: "+type);
-            votingRepo.save(voting);
-        }
+    public List<Voting> findAll() {
+        return this.votingRepo.findAll();
     }
 
-    public void deleteVote(String surveyID, String userId){
-        Voting optVote = findVote(surveyID, userId).orElse(null);
-        if(optVote != null){
-            votingRepo.delete(optVote);
-        }
+    public Optional<Voting> findOne(String id) {
+        return this.votingRepo.findById(UUID.fromString(id));
     }
 
-    public Optional<Voting> findVote(String surveyId, String userId) {
-        return votingRepo.findBySurveyIdAndUserId(surveyId,userId);
+    public void delete(String id){
+        this.votingRepo.deleteById(UUID.fromString(id));
     }
-
-    public int countVotes(String surveyId, VoteType type){
-        List<Voting> list = votingRepo.findAllBySurveyIdAndVoteType(surveyId, type);
-        return list.size();
-    }   
 }
