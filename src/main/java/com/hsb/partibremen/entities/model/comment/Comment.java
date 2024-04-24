@@ -1,6 +1,7 @@
 package com.hsb.partibremen.entities.model.comment;
 
 import com.hsb.partibremen.entities.model.poi.PoI;
+import com.hsb.partibremen.entities.model.report.Report;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseEntity;
@@ -26,6 +27,9 @@ public class Comment extends BaseEntity {
     @OneToMany
     private List<Comment> comments;
 
+    @OneToMany
+    private List<Report> reports;
+
     public String getComment(){
         return this.comment;
     }
@@ -49,6 +53,10 @@ public class Comment extends BaseEntity {
     }
     public List<Comment> getComments(){
         return this.comments;
+    }
+
+    public List<Report> getReports(){
+        return this.reports;
     }
 
 }

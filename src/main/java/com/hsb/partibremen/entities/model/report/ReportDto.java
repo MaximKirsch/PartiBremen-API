@@ -9,6 +9,7 @@ public class ReportDto{
     private String reportedUserId;
 
     private String reportedPoiId;
+    private String reportedCommentId;
 
     public String getReporterId() {
         return reporterId;
@@ -25,7 +26,13 @@ public class ReportDto{
     public void setReportedUserId(String reportedUserId) {
         this.reportedUserId = reportedUserId;
     }
+    public String getReportedCommentId() {
+        return reportedCommentId;
+    }
 
+    public void setReportedCommentId(String reportedCommentId) {
+        this.reportedCommentId = reportedCommentId;
+    }
     public String getReportedPoiId() {
         return reportedPoiId;
     }

@@ -19,6 +19,8 @@ public class ReportService extends BaseService {
     public UserService userService;
     @Autowired
     public PoIService poIService;
+    @Autowired
+    public CommentService commentService;
 
     public Report create(ReportDto reportDto) {
         Report report = new Report();
@@ -43,6 +45,10 @@ public class ReportService extends BaseService {
 
         if(this.poIService.findOne(reportDto.getReportedPoiId()).isPresent()){
             report.setReportedPoi(this.poIService.findOne(reportDto.getReportedPoiId()).get());
+        }
+
+        if(this.commentService.findOne(reportDto.getReportedCommentId()).isPresent()){
+            report.setReportedComment(this.commentService.findOne(reportDto.getReportedCommentId()).get());
         }
         return this.reportRepo.save(report);
     }
