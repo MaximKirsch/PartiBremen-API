@@ -1,13 +1,13 @@
 package com.hsb.partibremen.entities.model.poi;
-
-import com.hsb.partibremen.entities.model.question.Question;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.report.Report;
 import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -20,13 +20,20 @@ public class PoI extends BaseEntity {
     @Column
     private Boolean active;
     @ManyToOne
+    @JsonBackReference
     private User creator;
-    @OneToMany
+    @OneToMany(mappedBy = "reportedPoi")
+    @JsonManagedReference
     private List<Report> reports;
-    @OneToMany
+    @OneToMany(mappedBy = "poi")
+    @JsonManagedReference
     private List<Survey> surveys;
-    @OneToMany
+    @OneToMany(mappedBy = "votedPoi")
+    @JsonManagedReference
     private List<Voting> votings;
+    @OneToMany(mappedBy = "poI")
+    @JsonManagedReference
+    private List<Comment> comments;
 
     
     public String getTitel() {
@@ -63,4 +70,6 @@ public class PoI extends BaseEntity {
     public List<Report> getReports() { return this.reports; }
 
     public List<Voting> getVoting() { return this.votings; }
+
+    public List<Comment> getComments() {return this.comments; }
 }
