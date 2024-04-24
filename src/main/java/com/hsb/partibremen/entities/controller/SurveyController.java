@@ -37,8 +37,6 @@ public class SurveyController extends BaseController {
         surveyService.deleteSurvey(id);
     }
 
-    // ToDO: Add absolvieren (Medium noch nicht vorhanden)
-
     
 
 }
