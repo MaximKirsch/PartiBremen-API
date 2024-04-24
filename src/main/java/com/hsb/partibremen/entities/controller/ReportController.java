@@ -6,7 +6,8 @@ import com.hsb.partibremen.entities.service.ReportService;
 import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ReportController extends BaseController {
@@ -15,24 +16,22 @@ public class ReportController extends BaseController {
 
     @PostMapping("report")
     public Report create(@RequestBody ReportDto reportDto) {
-        Report report = new Report();
-
-        report.setKommentar(reportDto.getKommentar());
-        report.setTitle(reportDto.getTitle());
-        reportService.reportList.add(report);
-        return report;
+        return reportService.create(reportDto);
 
     }
 
     @GetMapping("/report")
-    public ArrayList<Report> findAll() {
+    public List<Report> findAll() {
         return this.reportService.findAll();
     }
 
     @GetMapping("/report/{id}")
-    public Report findOne(@PathVariable String id) {
+    public Optional<Report> findOne(@PathVariable String id) {
         return this.reportService.findOne(id);
     }
+
+    @DeleteMapping("/report/{id}")
+    public void delete(@PathVariable String id) { this.reportService.delete(id);}
 
 
 }
