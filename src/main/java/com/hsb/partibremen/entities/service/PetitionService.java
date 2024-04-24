@@ -1,39 +1,45 @@
 package com.hsb.partibremen.entities.service;
 import com.hsb.partibremen.entities.model.petition.Petition;
+import com.hsb.partibremen.entities.model.petition.PetitionDto;
+import com.hsb.partibremen.entities.repo.PetitionRepo;
 import com.hsb.partibremen.entities.util.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
-import java.util.Iterator;
+import java.util.*;
 
 
 @Service
 public class PetitionService extends BaseService {
+    @Autowired
+    public PetitionRepo petitionRepo;
+    @Autowired
+    public PoIService poiService;
 
-    public ArrayList<Petition> petionsList = new ArrayList<>();
+    public Petition create(PetitionDto petitionDto) {
+        Petition petition = new Petition();
+        petition.setTitel(petitionDto.getTitel());
+        petition.setDescription(petitionDto.getDescription());
+        petition.setExpireAt(petitionDto.getExpireAt());
+        petition.setGoal(petitionDto.getGoal());
 
-    public ArrayList<Petition> findAll(){
-        return this.petionsList;
+        if(!this.poiService.findOne(petitionDto.getPoiId()).isPresent()){
+            throw new RuntimeException();
+        }
+        petition.setPoI(this.poiService.findOne(petitionDto.getPoiId()).get());
+
+        return this.petitionRepo.save(petition);
     }
 
-    public Petition findOne(String id) {
-        for (Petition petition : this.petionsList) {
-            if (petition.id.toString().equals(id)) {
-                return petition;
-            }
-        }
-        return null;
+    public List<Petition> findAll(){
+        return this.petitionRepo.findAll();
+    }
+
+    public Optional<Petition> findOne(String id) {
+        return this.petitionRepo.findById(UUID.fromString(id));
     }
 
     public void delete(String id) {
-        Iterator<Petition> iterator = petionsList.iterator();
-        while (iterator.hasNext()) {
-            Petition petition = iterator.next();
-            if (petition.id.toString().equals(id)) {
-                iterator.remove();
-                break;
-            }
-        }
+        this.petitionRepo.deleteById(UUID.fromString(id));
     }
 }

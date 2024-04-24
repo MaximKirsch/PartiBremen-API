@@ -1,8 +1,10 @@
 package com.hsb.partibremen.entities.model.poi;
 
 import com.hsb.partibremen.entities.model.question.Question;
+import com.hsb.partibremen.entities.model.report.Report;
 import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.model.user.User;
+import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
 
@@ -19,9 +21,12 @@ public class PoI extends BaseEntity {
     private Boolean active;
     @ManyToOne
     private User creator;
-
+    @OneToMany
+    private List<Report> reports;
     @OneToMany
     private List<Survey> surveys;
+    @OneToMany
+    private List<Voting> votings;
 
     
     public String getTitel() {
@@ -54,4 +59,8 @@ public class PoI extends BaseEntity {
     }
 
     public List<Survey> getSurveys() { return this.surveys; }
+
+    public List<Report> getReports() { return this.reports; }
+
+    public List<Voting> getVoting() { return this.votings; }
 }

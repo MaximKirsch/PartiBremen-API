@@ -2,9 +2,11 @@ package com.hsb.partibremen.entities.model.petition;
 
 import java.sql.Date;
 
+import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +20,8 @@ public class Petition extends BaseEntity {
     private Date expireAt;
     @Column
     private int goal;
+    @ManyToOne
+    private PoI poI;
 
 
     public String getTitel() {
@@ -44,6 +48,11 @@ public class Petition extends BaseEntity {
     public void setGoal(int goal) {
         this.goal = goal;
     }
-    
-    
+    public PoI getPoI(){
+        return this.poI;
+    }
+    public void setPoI(PoI poI) {
+        this.poI = poI;
+    }
+
 }

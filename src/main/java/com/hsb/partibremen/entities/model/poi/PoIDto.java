@@ -4,11 +4,9 @@ public class PoIDto {
 
 
     private String titel;
-    private String userAnswer;
-
-    private String questionId;
-
-    private String userId;
+    private String description;
+    private Boolean active;
+    private String creatorId;
 
     
     public String getTitel() {
@@ -17,24 +15,24 @@ public class PoIDto {
     public void setTitel(String titel) {
         this.titel = titel;
     }
-    public String getUserAnswer() {
-        return this.userAnswer;
+    public String getDescription() {
+        return this.description;
     }
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getUserId() {
-        return userId;
+    public Boolean getActive() {
+        return active;
     }
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
-    public String getQuestionId() {
-        return this.questionId;
+    public String getCreatorId() {
+        return this.creatorId;
     }
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId;
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
     }
     
 }

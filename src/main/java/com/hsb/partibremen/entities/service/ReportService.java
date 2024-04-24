@@ -17,28 +17,33 @@ public class ReportService extends BaseService {
     public ReportRepo reportRepo;
     @Autowired
     public UserService userService;
+    @Autowired
+    public PoIService poIService;
 
     public Report create(ReportDto reportDto) {
         Report report = new Report();
         report.setTitle(reportDto.getTitle());
         report.setKommentar(reportDto.getKommentar());
+
         if(!this.userService.findOne(reportDto.getReporterId()).isPresent()) {
             throw new RuntimeException();
         }
         report.setReporter(this.userService.findOne(reportDto.getReporterId()).get());
-        if ((!this.userService.findOne(reportDto.getReportedUserId()).isPresent()
-              //  && !this.poiService.findOne(reportDto.getReportedPoiId()).isPresent)
-                // || (this.userService.findOne(reportDto.getReportedUserId()).isPresent() &&
-        //this.poiService.findOne(reportDto.getReportedPoiId()).isPresent))
-        )) {
+
+        if ((!this.userService.findOne(reportDto.getReportedUserId()).isPresent() && !this.poIService.findOne(reportDto.getReportedPoiId()).isPresent())
+                 ||
+                (this.userService.findOne(reportDto.getReportedUserId()).isPresent() && this.poIService.findOne(reportDto.getReportedPoiId()).isPresent())
+        ) {
             throw new RuntimeException();
         }
+
         if(this.userService.findOne(reportDto.getReportedUserId()).isPresent()){
             report.setReportedUser(this.userService.findOne(reportDto.getReportedUserId()).get());
         }
-        //if(this.poiService.findOne(reportDto.getReportedPoiId()).isPresent()){
-        //    report.setReportedPoi(this.poiService.findOne(reportDto.getReportedPoiId()).get());
-        //}
+
+        if(this.poIService.findOne(reportDto.getReportedPoiId()).isPresent()){
+            report.setReportedPoi(this.poIService.findOne(reportDto.getReportedPoiId()).get());
+        }
         return this.reportRepo.save(report);
     }
 

@@ -1,5 +1,6 @@
 package com.hsb.partibremen.entities.model.report;
 
+import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import com.hsb.partibremen.entities.util.BaseService;
@@ -19,8 +20,8 @@ public class Report extends BaseEntity {
     @OneToOne
     private User reportedUser;
 
-    //@OneToOne
-    //private POI reportedPoi;
+    @ManyToOne
+    private PoI reportedPoi;
 
 
     public User getReporter() {
@@ -37,15 +38,15 @@ public class Report extends BaseEntity {
     public void setReportedUser(User reportedUser) {
         this.reportedUser = reportedUser;
     }
-    /*
-    public POI getReportedPoi() {
+
+    public PoI getReportedPoi() {
         return this.reportedPoi;
     }
 
-    public void setReportedPoi(POI reportedPoi) {
+    public void setReportedPoi(PoI reportedPoi) {
         this.reportedPoi = reportedPoi;
     }
-     */
+
 
     public String getKommentar() {
         return kommentar;

@@ -8,6 +8,8 @@ public class PetitionDto {
     private Date expireAt;
     private int goal;
 
+    private String poiId;
+
 
     public String getTitel() {
         return titel;
@@ -32,6 +34,13 @@ public class PetitionDto {
     }
     public void setGoal(int goal) {
         this.goal = goal;
-    } 
+    }
+
+    public String getPoiId() {
+        return poiId;
+    }
+    public void setPoiId(String poiId) {
+        this.poiId = poiId;
+    }
     
 }
