@@ -1,12 +1,8 @@
 package com.hsb.partibremen.entities.model.servey;
-
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.UUID;
-
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.user.User;
-import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
 
@@ -16,21 +12,22 @@ public class Survey extends BaseEntity {
     
     @Column
     private String titel;
-
     @Column
     private String beschreibung;
-
     @Column
     private Date expiresAt;
+    @ManyToOne
+    @JsonBackReference
+    private User creator;
+    @ManyToOne
+    @JsonBackReference
+    private PoI poi;
 
-    @Column
-    private String userId;
-
-    public String getUserId() {
-        return userId;
+    public User getCreator() {
+        return this.creator;
     }
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
     public Date getExpiresAt() {
         return expiresAt;

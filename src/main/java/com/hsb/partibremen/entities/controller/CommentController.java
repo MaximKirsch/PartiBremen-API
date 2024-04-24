@@ -1,10 +1,6 @@
 package com.hsb.partibremen.entities.controller;
-
-import com.hsb.partibremen.entities.model.answer.Answer;
-import com.hsb.partibremen.entities.model.answer.AnswerDto;
 import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.comment.CommentDto;
-import com.hsb.partibremen.entities.service.AnswerService;
 import com.hsb.partibremen.entities.service.CommentService;
 import com.hsb.partibremen.entities.service.PoIService;
 import com.hsb.partibremen.entities.service.UserService;
@@ -44,7 +40,7 @@ public class CommentController extends BaseController {
         Optional<Comment> optionalComment = commentService.findOne(id);
         if(optionalComment.isPresent()){
             Comment comment = optionalComment.get();
-            comment.setComment(commentDto.getComment());
+            comment.setActualcomment(commentDto.getActualComment());
 
             if(!(userService.findOne(commentDto.getCommenterId())).isPresent()){
                 throw new RuntimeException();

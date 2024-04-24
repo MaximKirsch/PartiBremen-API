@@ -1,10 +1,6 @@
 package com.hsb.partibremen.entities.service;
-
-import com.hsb.partibremen.entities.model.answer.Answer;
-import com.hsb.partibremen.entities.model.answer.AnswerDto;
 import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.comment.CommentDto;
-import com.hsb.partibremen.entities.repo.AnswerRepo;
 import com.hsb.partibremen.entities.repo.CommentRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import static org.springframework.util.ClassUtils.isPresent;
 
 @Service
 public class CommentService extends BaseService {
@@ -29,7 +23,7 @@ public class CommentService extends BaseService {
 
     public Comment create(CommentDto commentDto) {
         Comment comment = new Comment();
-        comment.setComment(commentDto.getComment());
+        comment.setActualcomment(commentDto.getActualComment());
 
         if(!(userService.findOne(commentDto.getCommenterId())).isPresent()){
             throw new RuntimeException();

@@ -1,18 +1,18 @@
 package com.hsb.partibremen.entities.model.comment;
 
 public class CommentDto {
-    private String comment;
+    private String actualComment;
 
     private String commenterId;
 
     private String poiId;
 
 
-    public String getComment() {
-        return comment;
+    public String getActualComment() {
+        return actualComment;
     }
-    public void setComment(String titel) {
-        this.comment = comment;
+    public void setActualComment(String actualComment) {
+        this.actualComment = actualComment;
     }
     public String getCommenterId() {
         return commenterId;

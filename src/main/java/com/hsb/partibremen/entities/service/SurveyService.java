@@ -1,20 +1,15 @@
 package com.hsb.partibremen.entities.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
+import com.hsb.partibremen.entities.model.servey.Survey;
+import com.hsb.partibremen.entities.model.servey.SurveyDto;
+import com.hsb.partibremen.entities.repo.SurveyRepo;
+import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hsb.partibremen.entities.enums.VoteType;
-import com.hsb.partibremen.entities.model.servey.Survey;
-import com.hsb.partibremen.entities.model.servey.SurveyDto;
-import com.hsb.partibremen.entities.model.user.User;
-import com.hsb.partibremen.entities.model.voting.Voting;
-import com.hsb.partibremen.entities.repo.SurveyRepo;
-import com.hsb.partibremen.entities.util.BaseService;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class SurveyService extends BaseService {
@@ -27,10 +22,12 @@ public class SurveyService extends BaseService {
         survey.setTitel(surveyDto.getTitel());
         survey.setBeschreibung(surveyDto.getBeschreibung());
         survey.setExpiresAt(surveyDto.getExpiresAt());
-        if(!this.userService.findOne(surveyDto.getUserId()).isPresent()) {
+
+        if(!userService.findOne(surveyDto.getUserId()).isPresent()){
             throw new RuntimeException();
         }
-        survey.setUserId(surveyDto.getUserId());
+        survey.setCreator(userService.findOne(surveyDto.getUserId()).get());
+
         return surveyRepo.save(survey);
     }
 

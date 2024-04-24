@@ -1,5 +1,7 @@
 package com.hsb.partibremen.entities.model.comment;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.report.Report;
 import com.hsb.partibremen.entities.model.user.User;
@@ -13,28 +15,37 @@ import java.util.List;
 @Table(name = "comment")
 public class Comment extends BaseEntity {
     @Column
-    private String comment;
+    private String actualComment;
 
     @ManyToOne
+    @JsonBackReference
+    private Comment commentComment;
+
+    @ManyToOne
+    @JsonBackReference
     private User commenter;
 
     @ManyToOne
+    @JsonBackReference
     private PoI poI;
 
-    @OneToMany
+    @OneToMany(mappedBy = "votedComment")
+    @JsonManagedReference
     private List<Voting> votings;
 
-    @OneToMany
+    @OneToMany(mappedBy = "commentComment")
+    @JsonManagedReference
     private List<Comment> comments;
 
-    @OneToMany
+    @OneToMany(mappedBy = "reportedComment")
+    @JsonManagedReference
     private List<Report> reports;
 
-    public String getComment(){
-        return this.comment;
+    public String getActualcomment(){
+        return this.actualComment;
     }
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setActualcomment(String actualComment) {
+        this.actualComment = actualComment;
     }
     public User getCommenter(){
         return this.commenter;

@@ -14,8 +14,7 @@ import java.util.UUID;
 @Service
 public class PoIService extends BaseService {
     @Autowired
-    private PoIRepo poiRepo;
-
+    public PoIRepo poiRepo;
     @Autowired
     private UserService userService;
 
