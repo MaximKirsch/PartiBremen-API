@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.hsb.partibremen.entities.enums.VoteType;
 import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.model.servey.SurveyDto;
+import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.repo.SurveyRepo;
 import com.hsb.partibremen.entities.util.BaseService;
@@ -19,11 +20,16 @@ import com.hsb.partibremen.entities.util.BaseService;
 public class SurveyService extends BaseService {
     @Autowired
     private SurveyRepo surveyRepo;
+    @Autowired
+    private UserService userService;
     public Survey create(SurveyDto surveyDto) {
         Survey survey = new Survey();
         survey.setTitel(surveyDto.getTitel());
         survey.setBeschreibung(surveyDto.getBeschreibung());
         survey.setExpiresAt(surveyDto.getExpiresAt());
+        if(!this.userService.findOne(surveyDto.getUserId()).isPresent()) {
+            throw new RuntimeException();
+        }
         survey.setUserId(surveyDto.getUserId());
         return surveyRepo.save(survey);
     }
