@@ -16,7 +16,6 @@ import com.hsb.partibremen.entities.util.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController()
-
 public class VotingController extends BaseController {
     @Autowired
     private VotingService votingService;
@@ -27,6 +26,7 @@ public class VotingController extends BaseController {
 
     }
 
+    @GetMapping("/voting")
     public List<Voting> findAll() {
         return votingService.findAll();
     }
