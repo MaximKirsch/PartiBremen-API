@@ -4,17 +4,13 @@ import java.sql.Date;
 import java.util.UUID;
 
 public class UserDto {
-    
 
-    
     private String name;
     private String surname;
     private Date dob;
     private String email;
     private String password;
     private boolean verified;
-
-
 
  
     public String getName() {

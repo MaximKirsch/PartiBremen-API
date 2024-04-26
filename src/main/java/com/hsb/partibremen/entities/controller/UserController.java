@@ -1,5 +1,6 @@
 package com.hsb.partibremen.entities.controller;
 
+import com.hsb.partibremen.entities.model.user.AutherRequestDto;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.user.UserDto;
 import com.hsb.partibremen.entities.service.UserService;
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    public User login(@RequestParam String email, @RequestParam String password) {
-        return userService.login(email, password);
+    public User login(@RequestBody AutherRequestDto authRequestDto) {
+        return userService.login(authRequestDto.getEmail(), authRequestDto.getPassword());
     }
 }
