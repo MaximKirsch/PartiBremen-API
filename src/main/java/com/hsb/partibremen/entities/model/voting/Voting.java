@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hsb.partibremen.entities.enums.VoteType;
 import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.poi.PoI;
-import com.hsb.partibremen.entities.model.servey.Survey;
+import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.util.BaseEntity;
 

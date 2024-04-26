@@ -11,7 +11,6 @@ import java.util.Optional;
 
 
 import com.hsb.partibremen.entities.enums.VoteType;
-import com.hsb.partibremen.entities.model.servey.Survey;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.model.voting.VotingDto;
 import com.hsb.partibremen.entities.repo.VotingRepo;

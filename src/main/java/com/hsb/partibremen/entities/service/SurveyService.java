@@ -1,6 +1,6 @@
 package com.hsb.partibremen.entities.service;
 
-import com.hsb.partibremen.entities.model.servey.Survey;
+import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.model.survey.SurveyDto;
 import com.hsb.partibremen.entities.repo.SurveyRepo;
 import com.hsb.partibremen.entities.util.BaseService;

@@ -3,7 +3,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.report.Report;
-import com.hsb.partibremen.entities.model.servey.Survey;
+import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseEntity;

@@ -1,4 +1,4 @@
-package com.hsb.partibremen.entities.model.servey;
+package com.hsb.partibremen.entities.model.survey;
 import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hsb.partibremen.entities.model.poi.PoI;

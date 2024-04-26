@@ -1,7 +1,7 @@
 package com.hsb.partibremen.entities.model.question;
 
 import com.hsb.partibremen.entities.enums.QuestionType;
-import com.hsb.partibremen.entities.model.servey.Survey;
+import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
