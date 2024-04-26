@@ -4,7 +4,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.hsb.partibremen.entities.model.servey.Survey;
-import com.hsb.partibremen.entities.model.servey.SurveyDto;
+import com.hsb.partibremen.entities.model.survey.SurveyDto;
 import com.hsb.partibremen.entities.service.SurveyService;
 import com.hsb.partibremen.entities.util.BaseController;
 

@@ -2,7 +2,7 @@ package com.hsb.partibremen.entities.model.report;
 
 public class ReportDto{
     private String kommentar;
-    private String title; //.
+    private String title;
 
     private String reporterId;
 
@@ -12,7 +12,7 @@ public class ReportDto{
     private String reportedCommentId;
 
     public String getReporterId() {
-        return reporterId;
+        return this.reporterId;
     }
 
     public void setReporterId(String reporterId) {
@@ -20,21 +20,21 @@ public class ReportDto{
     }
 
     public String getReportedUserId() {
-        return reportedUserId;
+        return this.reportedUserId;
     }
 
     public void setReportedUserId(String reportedUserId) {
         this.reportedUserId = reportedUserId;
     }
     public String getReportedCommentId() {
-        return reportedCommentId;
+        return this.reportedCommentId;
     }
 
     public void setReportedCommentId(String reportedCommentId) {
         this.reportedCommentId = reportedCommentId;
     }
     public String getReportedPoiId() {
-        return reportedPoiId;
+        return this.reportedPoiId;
     }
 
     public void setReportedPoiId(String reportedPoiId) {
@@ -42,7 +42,7 @@ public class ReportDto{
     }
 
     public String getKommentar() {
-        return kommentar;
+        return this.kommentar;
     }
 
     public void setKommentar(String kommentar) {
@@ -50,7 +50,7 @@ public class ReportDto{
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {

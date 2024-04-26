@@ -4,6 +4,7 @@ import com.hsb.partibremen.entities.model.report.Report;
 import com.hsb.partibremen.entities.model.report.ReportDto;
 import com.hsb.partibremen.entities.service.ReportService;
 import com.hsb.partibremen.entities.util.BaseController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,10 +13,16 @@ import java.util.Optional;
 @RestController
 public class ReportController extends BaseController {
 
-    public ReportService reportService = new ReportService();
+    @Autowired
+    public ReportService reportService;
 
     @PostMapping("report")
     public Report create(@RequestBody ReportDto reportDto) {
+        System.out.println(reportDto.getReportedCommentId());
+        System.out.println(reportDto.getReporterId());
+        System.out.println(reportDto.getReportedPoiId());
+        System.out.println(reportDto.getTitle());
+
         return reportService.create(reportDto);
 
     }

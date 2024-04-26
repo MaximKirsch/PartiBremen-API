@@ -32,23 +32,20 @@ public class ReportService extends BaseService {
         }
         report.setReporter(this.userService.findOne(reportDto.getReporterId()).get());
 
-        if ((!this.userService.findOne(reportDto.getReportedUserId()).isPresent() && !this.poIService.findOne(reportDto.getReportedPoiId()).isPresent())
-                 ||
-                (this.userService.findOne(reportDto.getReportedUserId()).isPresent() && this.poIService.findOne(reportDto.getReportedPoiId()).isPresent())
-        ) {
+        if (reportDto.getReportedPoiId() != null && reportDto.getReportedUserId() != null && reportDto.getReportedCommentId() != null){
             throw new RuntimeException();
         }
 
-        if(this.userService.findOne(reportDto.getReportedUserId()).isPresent()){
-            report.setReportedUser(this.userService.findOne(reportDto.getReportedUserId()).get());
+        if(reportDto.getReportedUserId() != null){
+            report.setReportedUser(this.userService.findOne(reportDto.getReportedUserId() != null ? reportDto.getReportedUserId() : "").get());
         }
 
-        if(this.poIService.findOne(reportDto.getReportedPoiId()).isPresent()){
-            report.setReportedPoi(this.poIService.findOne(reportDto.getReportedPoiId()).get());
+        if(reportDto.getReportedPoiId() != null){
+            report.setReportedPoi(this.poIService.findOne(reportDto.getReportedPoiId() != null ? reportDto.getReportedPoiId() : "").get());
         }
 
-        if(this.commentService.findOne(reportDto.getReportedCommentId()).isPresent()){
-            report.setReportedComment(this.commentService.findOne(reportDto.getReportedCommentId()).get());
+        if(reportDto.getReportedCommentId() != null){
+            report.setReportedComment(this.commentService.findOne(reportDto.getReportedCommentId() != null ? reportDto.getReportedCommentId() : "").get());
         }
         return this.reportRepo.save(report);
     }
