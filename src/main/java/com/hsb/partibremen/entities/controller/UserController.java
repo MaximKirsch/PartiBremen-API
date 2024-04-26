@@ -43,6 +43,6 @@ public class UserController {
 
     @PostMapping("/user/login")
     public User login(@RequestBody AutherRequestDto authRequestDto) {
-        return userService.login(authRequestDto.getUsername(), authRequestDto.getPassword());
+        return userService.login(authRequestDto.getEmail(), authRequestDto.getPassword());
     }
 }
