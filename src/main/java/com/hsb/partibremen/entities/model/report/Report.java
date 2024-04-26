@@ -17,7 +17,7 @@ public class Report extends BaseEntity {
     private String title;
     @ManyToOne
     private User reporter;
-    @OneToOne
+    @ManyToOne
     private User reportedUser;
     @ManyToOne
     private PoI reportedPoi;

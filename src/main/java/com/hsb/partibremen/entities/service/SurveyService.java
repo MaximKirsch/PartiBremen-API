@@ -1,7 +1,7 @@
 package com.hsb.partibremen.entities.service;
 
 import com.hsb.partibremen.entities.model.servey.Survey;
-import com.hsb.partibremen.entities.model.servey.SurveyDto;
+import com.hsb.partibremen.entities.model.survey.SurveyDto;
 import com.hsb.partibremen.entities.repo.SurveyRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;

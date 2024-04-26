@@ -1,9 +1,6 @@
-package com.hsb.partibremen.entities.model.servey;
+package com.hsb.partibremen.entities.model.survey;
 
 import java.sql.Date;
-import java.util.UUID;
-
-import com.hsb.partibremen.entities.model.user.User;
 
 public class SurveyDto {
     private String titel;
