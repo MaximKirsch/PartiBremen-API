@@ -21,6 +21,9 @@ public class UserService {
         User user = new User();
         user.setName(userDto.getName());
         user.setSurname(userDto.getSurname());
+        if(userRepo.findByEmail(userDto.getEmail()) != null) {
+            throw new RuntimeException();
+        }
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
         user.setDob(userDto.getDob());
@@ -42,6 +45,9 @@ public class UserService {
             User user = optionalUser.get();
             user.setName(userDto.getName());
             user.setSurname(userDto.getSurname());
+            if(userRepo.findByEmail(userDto.getEmail()) != null) {
+                throw new RuntimeException();
+            }
             user.setEmail(userDto.getEmail());
             user.setPassword(userDto.getPassword());
             user.setDob(userDto.getDob());

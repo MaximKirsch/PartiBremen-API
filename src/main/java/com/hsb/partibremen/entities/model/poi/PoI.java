@@ -36,6 +36,7 @@ public class PoI extends BaseEntity {
     private List<Comment> comments;
 
     
+    
     public String getTitel() {
         return Titel;
     }
@@ -46,14 +47,14 @@ public class PoI extends BaseEntity {
         return description;
     }
     public void setDescription(String description) {
-        description = description;
+        this.description = description;
     }
 
     public User getCreator(){
         return this.creator;
     }
 
-    public void setAnswerer(User creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
 
@@ -72,4 +73,18 @@ public class PoI extends BaseEntity {
     public List<Voting> getVoting() { return this.votings; }
 
     public List<Comment> getComments() {return this.comments; }
+
+    
+    public void setReports(List<Report> reports) {
+        this.reports = reports;
+    }
+    public void setSurveys(List<Survey> surveys) {
+        this.surveys = surveys;
+    }
+    public void setVotings(List<Voting> votings) {
+        this.votings = votings;
+    }
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
