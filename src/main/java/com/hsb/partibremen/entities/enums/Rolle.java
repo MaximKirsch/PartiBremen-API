@@ -1,6 +1,6 @@
 package com.hsb.partibremen.entities.enums;
 
-public enum Role {
+public enum Rolle {
     DEFAULT("DEFAULT", 0),
     USER("User", 1),
     CREATOR("Creator", 2),
@@ -11,7 +11,7 @@ public enum Role {
     private String bezeichung;
     private int id;
 
-    Role(String bezeichnung, int id){
+    Rolle(String bezeichnung, int id){
         this.bezeichung = bezeichnung;
         this.id = id;
     }
