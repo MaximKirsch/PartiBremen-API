@@ -27,7 +27,7 @@ public class User extends BaseEntity {
     private Rolle role;
     @Column
     private boolean active;
-    public boolean isActive() {
+    public boolean getActive() {
         return active;
     }
     public void setActive(boolean active) {
