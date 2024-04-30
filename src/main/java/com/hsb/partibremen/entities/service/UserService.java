@@ -29,7 +29,7 @@ public class UserService {
         user.setDob(userDto.getDob());
         user.setVerified(userDto.isVerified());
         user.setRole(userDto.getRole());
-        user.setActive(userDto.isActive());
+        user.setActive(false);
         return userRepo.save(user);
     }
 
@@ -65,6 +65,22 @@ public class UserService {
 
 
     public User login(String email, String password) {
-        return userRepo.findByEmailAndPassword(email, password);
+        User optionalUser = userRepo.findByEmailAndPassword(email, password);
+        if( optionalUser != null){
+            optionalUser.setActive(true);
+            userRepo.save(optionalUser);
+            return userRepo.findByEmailAndPassword(email, password);
+        }
+        throw new RuntimeException("Invalid Login Data");
+    }
+
+    public User logout(String userId) {
+        Optional<User> optionalUser = findOne(userId);
+        if(optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setActive(false);
+            return userRepo.save(user);
+        }
+        throw new RuntimeException("User not found");
     }
 }

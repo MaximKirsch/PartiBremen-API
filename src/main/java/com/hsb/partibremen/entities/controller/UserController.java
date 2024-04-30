@@ -29,7 +29,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public Optional<User> findOne(@PathVariable String id) {
     return userService.findOne(id);
-}
+    }
 
     @PutMapping("/user/{id}")
     public Optional<User> update(@RequestBody UserDto userDto, @PathVariable String id) {
@@ -44,5 +44,10 @@ public class UserController {
     @PostMapping("/user/login")
     public User login(@RequestBody AutherRequestDto authRequestDto) {
         return userService.login(authRequestDto.getEmail(), authRequestDto.getPassword());
+    }
+    
+    @PostMapping("/user/logout/{id}")
+    public User logout(@PathVariable String id) {
+        return userService.logout(id);
     }
 }

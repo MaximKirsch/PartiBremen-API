@@ -16,15 +16,7 @@ public class UserDto {
     private String password;
     private boolean verified;
     private Rolle role;
-    private boolean active;
 
- 
-    public boolean isActive() {
-        return active;
-    }
-    public void setActive(boolean active) {
-        this.active = active;
-    }
     public Rolle getRole() {
         return role;
     }
