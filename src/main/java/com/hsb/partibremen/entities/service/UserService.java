@@ -54,6 +54,7 @@ public class UserService {
             user.setPassword(userDto.getPassword());
             user.setDob(userDto.getDob());
             user.setVerified(userDto.isVerified());
+            user.setRole(userDto.getRole());
             userRepo.save(user);
         }
         return optionalUser;
