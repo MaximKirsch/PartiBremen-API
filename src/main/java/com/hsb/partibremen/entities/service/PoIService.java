@@ -27,6 +27,8 @@ public class PoIService extends BaseService {
         poi.setTitel(poiDto.getTitel());
         poi.setDescription(poiDto.getDescription());
         poi.setActive(poiDto.getActive());
+        poi.setLatitude(poiDto.getLatitude());
+        poi.setLongitude(poiDto.getLongitude());
         if(!(userService.findOne(poiDto.getCreatorId())).isPresent()){
             throw new RuntimeException();
         }

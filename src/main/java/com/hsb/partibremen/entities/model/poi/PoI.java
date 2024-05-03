@@ -19,6 +19,10 @@ public class PoI extends BaseEntity {
     private String description;
     @Column
     private Boolean active;
+    @Column
+    private String latitude;
+    @Column
+    private String longitude;
     @ManyToOne
     @JsonBackReference
     private User creator;
@@ -35,7 +39,18 @@ public class PoI extends BaseEntity {
     @JsonManagedReference
     private List<Comment> comments;
 
-    
+    public String getLtitude() {
+        return latitude;
+    }
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+    public String getLongitude() {
+        return longitude;
+    }
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
     
     public String getTitel() {
         return Titel;
