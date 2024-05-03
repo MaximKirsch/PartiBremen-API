@@ -7,9 +7,13 @@ import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PoIService extends BaseService {
@@ -26,13 +30,24 @@ public class PoIService extends BaseService {
         if(!(userService.findOne(poiDto.getCreatorId())).isPresent()){
             throw new RuntimeException();
         }
-        poi.setAnswerer((userService.findOne(poiDto.getCreatorId())).get());
+        poi.setCreator((userService.findOne(poiDto.getCreatorId())).get());
 
         return poiRepo.save(poi);
     }
 
     public List<PoI> findAll() {
         return poiRepo.findAll();
+    }
+
+    public List<PoI> findOnlyPoIs() {
+        List<PoI> allPois = this.findAll();
+        for(PoI pois : allPois){
+            pois.setComments(null);
+            pois.setReports(null);
+            pois.setSurveys(null);
+            pois.setVotings(null);
+        }
+        return allPois;
     }
 
     public Optional<PoI> findOne(String id) {

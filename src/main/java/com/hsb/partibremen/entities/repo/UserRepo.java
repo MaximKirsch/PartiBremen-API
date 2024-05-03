@@ -12,6 +12,6 @@ import java.util.UUID;
 public interface UserRepo extends BaseRepo<User, UUID> {
 
    User findByEmailAndPassword(String email, String password);
-    
+   User findByEmail(String email);
 
 }

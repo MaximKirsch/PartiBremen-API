@@ -3,6 +3,10 @@ package com.hsb.partibremen.entities.model.user;
 import java.sql.Date;
 import java.util.UUID;
 
+import javax.management.relation.Role;
+
+import com.hsb.partibremen.entities.enums.Rolle;
+
 public class UserDto {
 
     private String name;
@@ -11,8 +15,14 @@ public class UserDto {
     private String email;
     private String password;
     private boolean verified;
+    private Rolle role;
 
- 
+    public Rolle getRole() {
+        return role;
+    }
+    public void setRole(Rolle role) {
+        this.role = role;
+    }
     public String getName() {
         return name;
     }

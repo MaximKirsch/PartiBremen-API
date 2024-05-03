@@ -8,7 +8,9 @@ import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,6 +35,11 @@ public class PoIController extends BaseController {
         return poIService.findOne(id);
     }
 
+    @GetMapping("/poi/Only")
+    public List<PoI> findOnlyPoIs() {
+        return poIService.findOnlyPoIs();
+    }
+
     @PutMapping("/poi/{id}")
     public Optional<PoI> update(@PathVariable String id, @RequestBody PoIDto poiDto) {
         Optional<PoI> optionalAnswer = poIService.findOne(id);
@@ -44,7 +51,7 @@ public class PoIController extends BaseController {
             if(!(userService.findOne(poiDto.getCreatorId())).isPresent()){
                 throw new RuntimeException();
             }
-            poi.setAnswerer((userService.findOne(poiDto.getCreatorId())).get());
+            poi.setCreator((userService.findOne(poiDto.getCreatorId())).get());
         }
         return optionalAnswer;
     }

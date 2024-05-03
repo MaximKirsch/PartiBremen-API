@@ -1,9 +1,11 @@
 package com.hsb.partibremen.entities.model.user;
 
+import com.hsb.partibremen.entities.enums.Rolle;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+
 
 @Entity
 @Table(name = "user")
@@ -21,6 +23,22 @@ public class User extends BaseEntity {
     private String password;
     @Column
     private boolean verified;
+    @Column
+    private Rolle role;
+    @Column
+    private boolean active;
+    public boolean getActive() {
+        return active;
+    }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    public Rolle getRole() {
+        return role;
+    }
+    public void setRole(Rolle role) {
+        this.role = role;
+    }
     public String getName() {
         return name;
     }

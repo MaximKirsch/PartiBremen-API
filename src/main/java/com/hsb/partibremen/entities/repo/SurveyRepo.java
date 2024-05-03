@@ -1,6 +1,6 @@
 package com.hsb.partibremen.entities.repo;
 
-import com.hsb.partibremen.entities.model.servey.Survey;
+import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.model.user.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
