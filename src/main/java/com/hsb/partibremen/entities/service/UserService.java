@@ -1,5 +1,6 @@
 package com.hsb.partibremen.entities.service;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.user.UserDto;
 import com.hsb.partibremen.entities.repo.UserRepo;
@@ -25,7 +26,8 @@ public class UserService {
             throw new RuntimeException();
         }
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
+        String hashedPassword = BCrypt.withDefaults().hashToString(12, userDto.getPassword().toCharArray());
+        user.setPassword(hashedPassword);
         user.setDob(userDto.getDob());
         user.setVerified(userDto.isVerified());
         user.setRole(userDto.getRole());
@@ -51,7 +53,8 @@ public class UserService {
                 throw new RuntimeException();
             }
             user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
+            String hashedPassword = BCrypt.withDefaults().hashToString(12, userDto.getPassword().toCharArray());
+            user.setPassword(hashedPassword);
             user.setDob(userDto.getDob());
             user.setVerified(userDto.isVerified());
             user.setRole(userDto.getRole());
@@ -66,11 +69,12 @@ public class UserService {
 
 
     public User login(String email, String password) {
-        User optionalUser = userRepo.findByEmailAndPassword(email, password);
-        if( optionalUser != null){
+        User optionalUser = userRepo.findByEmail(email);
+        BCrypt.Result decryptedPassword = BCrypt.verifyer().verify(password.toCharArray(), optionalUser.getPassword());
+        if( optionalUser != null && decryptedPassword.verified){
             optionalUser.setActive(true);
-            userRepo.save(optionalUser);
-            return userRepo.findByEmailAndPassword(email, password);
+            //userRepo.save(optionalUser);
+            return optionalUser;
         }
         throw new RuntimeException("Invalid Login Data");
     }
