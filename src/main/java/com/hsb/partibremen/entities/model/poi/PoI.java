@@ -24,7 +24,6 @@ public class PoI extends BaseEntity {
     @Column
     private String longitude;
     @ManyToOne
-    @JsonBackReference
     private User creator;
     @OneToMany(mappedBy = "reportedPoi")
     @JsonManagedReference

@@ -32,8 +32,7 @@ public class PoIService extends BaseService {
         if(!(userService.findOne(poiDto.getCreatorId())).isPresent()){
             throw new RuntimeException();
         }
-        poi.setCreator((userService.findOne(poiDto.getCreatorId())).get());
-
+        poi.setCreator(userService.findOne(poiDto.getCreatorId()).get());
         return poiRepo.save(poi);
     }
 
