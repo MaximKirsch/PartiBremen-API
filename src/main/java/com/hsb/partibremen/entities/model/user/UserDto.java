@@ -1,6 +1,7 @@
 package com.hsb.partibremen.entities.model.user;
 
-import javax.management.relation.Role;
+import com.hsb.partibremen.entities.enums.Role;
+
 import java.sql.Date;
 
 public class UserDto {
