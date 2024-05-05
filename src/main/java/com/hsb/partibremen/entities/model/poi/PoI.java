@@ -38,7 +38,7 @@ public class PoI extends BaseEntity {
     @JsonManagedReference
     private List<Comment> comments;
 
-    public String getLtitude() {
+    public String getLatitude() {
         return latitude;
     }
     public void setLatitude(String latitude) {

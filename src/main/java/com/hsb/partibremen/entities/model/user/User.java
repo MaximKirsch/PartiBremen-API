@@ -1,6 +1,7 @@
 package com.hsb.partibremen.entities.model.user;
 
-import com.hsb.partibremen.entities.enums.Rolle;
+import com.hsb.partibremen.entities.enums.Role;
+import com.hsb.partibremen.entities.enums.Role;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
 
@@ -24,7 +25,7 @@ public class User extends BaseEntity {
     @Column
     private boolean verified;
     @Column
-    private Rolle role;
+    private Role role;
     @Column
     private boolean active;
     public boolean getActive() {
@@ -33,10 +34,10 @@ public class User extends BaseEntity {
     public void setActive(boolean active) {
         this.active = active;
     }
-    public Rolle getRole() {
+    public Role getRole() {
         return role;
     }
-    public void setRole(Rolle role) {
+    public void setRole(Role role) {
         this.role = role;
     }
     public String getName() {
