@@ -21,9 +21,11 @@ public class VotingService extends BaseService {
     @Autowired
     private VotingRepo votingRepo;
     @Autowired
-    private SurveyService surveyService;
-    @Autowired
     private UserService userService;
+    @Autowired
+    public PoIService poIService;
+    @Autowired
+    public CommentService commentService;
 
     public Voting create(VotingDto votingDto) {
         Voting voting = new Voting();
@@ -34,11 +36,16 @@ public class VotingService extends BaseService {
         }
         voting.setVoter(this.userService.findOne(votingDto.getVoterId()).get());
 
-        if(!this.surveyService.findOne(votingDto.getVotedSurveyId()).isPresent()){
+        if (votingDto.getPoiId() != null && votingDto.getCommentId() != null){
             throw new RuntimeException();
         }
-        voting.setVotedSurvey(this.surveyService.findOne(votingDto.getVotedSurveyId()).get());
 
+        if(votingDto.getPoiId() != null){
+            voting.setVotedPoi(this.poIService.findOne(votingDto.getPoiId() != null ? votingDto.getPoiId() : "").get());        
+        }
+        if(votingDto.getCommentId() != null){
+            voting.setVotedComment(this.commentService.findOne(votingDto.getCommentId() != null ? votingDto.getCommentId() : "").get());        
+        }
         return votingRepo.save(voting);
     }
 

@@ -20,9 +20,6 @@ public class Voting extends BaseEntity {
     private VoteType voteType;
     @ManyToOne
     @JsonBackReference
-    private Survey votedSurvey;
-    @ManyToOne
-    @JsonBackReference
     private Comment votedComment;
     @ManyToOne
     @JsonBackReference
@@ -32,14 +29,6 @@ public class Voting extends BaseEntity {
     private User voter;
 
     
-
-    public Survey getVotedSurvey() {
-        return votedSurvey;
-    }
-
-    public void setVotedSurvey(Survey votedSurvey) {
-        this.votedSurvey = votedSurvey;
-    }
 
     public User getVoter() {
         return voter;
@@ -52,5 +41,17 @@ public class Voting extends BaseEntity {
     }
     public void setVoteType(VoteType voteType) {
         this.voteType = voteType;
+    }
+    public Comment getVotedComment() {
+        return votedComment;
+    }
+    public void setVotedComment(Comment comment) {
+        this.votedComment = comment;
+    }
+    public PoI getVotedPoi() {
+        return votedPoi;
+    }
+    public void setVotedPoi(PoI votedPoi) {
+        this.votedPoi = votedPoi;
     }
 }
