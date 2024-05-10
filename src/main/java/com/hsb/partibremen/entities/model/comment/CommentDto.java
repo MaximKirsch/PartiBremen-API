@@ -7,7 +7,15 @@ public class CommentDto {
 
     private String poiId;
 
+    private String commentId;
 
+
+    public String getCommentId() {
+        return commentId;
+    }
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
+    }
     public String getActualComment() {
         return actualComment;
     }

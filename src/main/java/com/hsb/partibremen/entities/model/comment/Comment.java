@@ -22,7 +22,6 @@ public class Comment extends BaseEntity {
     private Comment commentComment;
 
     @ManyToOne
-    @JsonBackReference
     private User commenter;
 
     @ManyToOne
@@ -40,6 +39,13 @@ public class Comment extends BaseEntity {
     @OneToMany(mappedBy = "reportedComment")
     @JsonManagedReference
     private List<Report> reports;
+
+    public Comment getCommentComment() {
+        return commentComment;
+    }
+    public void setCommentComment(Comment commentComment) {
+        this.commentComment = commentComment;
+    }
 
     public String getActualcomment(){
         return this.actualComment;

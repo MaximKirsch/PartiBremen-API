@@ -42,18 +42,7 @@ public class PoIController extends BaseController {
 
     @PutMapping("/poi/{id}")
     public Optional<PoI> update(@PathVariable String id, @RequestBody PoIDto poiDto) {
-        Optional<PoI> optionalAnswer = poIService.findOne(id);
-        if(optionalAnswer.isPresent()){
-            PoI poi = optionalAnswer.get();
-            poi.setTitel(poiDto.getTitel());
-            poi.setDescription(poiDto.getDescription());
-            poi.setActive(poiDto.getActive());
-            if(!(userService.findOne(poiDto.getCreatorId())).isPresent()){
-                throw new RuntimeException();
-            }
-            poi.setCreator((userService.findOne(poiDto.getCreatorId())).get());
-        }
-        return optionalAnswer;
+        return poIService.update(id, poiDto);
     }
 
     @DeleteMapping("/poi/{id}")

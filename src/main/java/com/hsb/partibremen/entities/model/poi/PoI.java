@@ -1,5 +1,4 @@
 package com.hsb.partibremen.entities.model.poi;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.report.Report;
@@ -24,7 +23,6 @@ public class PoI extends BaseEntity {
     @Column
     private String longitude;
     @ManyToOne
-    @JsonBackReference
     private User creator;
     @OneToMany(mappedBy = "reportedPoi")
     @JsonManagedReference
@@ -39,7 +37,7 @@ public class PoI extends BaseEntity {
     @JsonManagedReference
     private List<Comment> comments;
 
-    public String getLtitude() {
+    public String getLatitude() {
         return latitude;
     }
     public void setLatitude(String latitude) {
@@ -85,7 +83,7 @@ public class PoI extends BaseEntity {
 
     public List<Report> getReports() { return this.reports; }
 
-    public List<Voting> getVoting() { return this.votings; }
+    public List<Voting> getVotings() { return this.votings; }
 
     public List<Comment> getComments() {return this.comments; }
 

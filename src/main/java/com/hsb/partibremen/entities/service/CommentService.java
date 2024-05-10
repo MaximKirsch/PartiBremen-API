@@ -30,11 +30,16 @@ public class CommentService extends BaseService {
         }
         comment.setCommenter((userService.findOne(commentDto.getCommenterId())).get());
 
-        if(!(poIService.findOne(commentDto.getPoiId())).isPresent()){
+        if (commentDto.getPoiId() != null && commentDto.getCommentId() != null){
             throw new RuntimeException();
         }
-        comment.setPoI((poIService.findOne(commentDto.getPoiId())).get());
 
+        if(commentDto.getPoiId() != null){
+            comment.setPoI(this.poIService.findOne(commentDto.getPoiId() != null ? commentDto.getPoiId() : "").get());        
+        }
+        if(commentDto.getCommentId() != null){
+            comment.setCommentComment(this.findOne(commentDto.getCommentId() != null ? commentDto.getCommentId() : "").get());        
+        }
         return commentRepo.save(comment);
     }
 
