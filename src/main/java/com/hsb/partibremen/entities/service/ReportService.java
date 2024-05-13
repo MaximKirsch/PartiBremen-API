@@ -1,5 +1,9 @@
 package com.hsb.partibremen.entities.service;
 
+import com.hsb.partibremen.entities.exceptions.CommentNotFoundException;
+import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
+import com.hsb.partibremen.entities.exceptions.ReportNotFoundException;
+import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.report.Report;
 import com.hsb.partibremen.entities.model.report.ReportDto;
 import com.hsb.partibremen.entities.repo.ReportRepo;
@@ -22,7 +26,7 @@ public class ReportService extends BaseService {
     @Autowired
     public CommentService commentService;
 
-    public Report create(ReportDto reportDto) {
+    public Report create(ReportDto reportDto) throws UserNotFoundException, PoINotFoundException, CommentNotFoundException {
         Report report = new Report();
         report.setTitle(reportDto.getTitle());
         report.setKommentar(reportDto.getKommentar());
@@ -54,8 +58,11 @@ public class ReportService extends BaseService {
         return this.reportRepo.findAll();
     }
 
-    public Optional<Report> findOne(String id){
-        return reportRepo.findById(UUID.fromString(id));
+    public Optional<Report> findOne(String id) throws ReportNotFoundException{
+        if(reportRepo.findById(UUID.fromString(id)) != null){
+            return reportRepo.findById(UUID.fromString(id));
+        }
+        throw new ReportNotFoundException();
     }
 
     public void delete(String id){

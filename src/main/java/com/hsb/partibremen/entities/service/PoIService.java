@@ -1,5 +1,7 @@
 package com.hsb.partibremen.entities.service;
 
+import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
+import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.poi.PoIDto;
 import com.hsb.partibremen.entities.model.user.User;
@@ -23,7 +25,7 @@ public class PoIService extends BaseService {
     @Autowired
     private UserService userService;
 
-    public PoI create(PoIDto poiDto) {
+    public PoI create(PoIDto poiDto) throws UserNotFoundException {
         PoI poi = new PoI();
         poi.setTitel(poiDto.getTitel());
         poi.setDescription(poiDto.getDescription());
@@ -37,7 +39,7 @@ public class PoIService extends BaseService {
         return poiRepo.save(poi);
     }
 
-    public Optional<PoI> update(String id, PoIDto poiDto) {
+    public Optional<PoI> update(String id, PoIDto poiDto) throws UserNotFoundException {
         Optional<PoI> optionalPoI = poiRepo.findById(UUID.fromString(id));
         if (optionalPoI.isPresent()) {
             PoI poi = optionalPoI.get();
@@ -70,8 +72,11 @@ public class PoIService extends BaseService {
         return allPois;
     }
 
-    public Optional<PoI> findOne(String id) {
-        return poiRepo.findById(UUID.fromString(id));
+    public Optional<PoI> findOne(String id) throws PoINotFoundException {
+        if(poiRepo.findById(UUID.fromString(id)) != null){
+            return poiRepo.findById(UUID.fromString(id));
+        }
+        throw new PoINotFoundException();
     }
 
     public void delete(String id) {

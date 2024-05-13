@@ -1,4 +1,7 @@
 package com.hsb.partibremen.entities.service;
+import com.hsb.partibremen.entities.exceptions.CommentNotFoundException;
+import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
+import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.comment.CommentDto;
 import com.hsb.partibremen.entities.repo.CommentRepo;
@@ -21,7 +24,7 @@ public class CommentService extends BaseService {
     @Autowired
     private PoIService poIService;
 
-    public Comment create(CommentDto commentDto) {
+    public Comment create(CommentDto commentDto) throws UserNotFoundException, PoINotFoundException, CommentNotFoundException {
         Comment comment = new Comment();
         comment.setActualcomment(commentDto.getActualComment());
 
@@ -47,8 +50,11 @@ public class CommentService extends BaseService {
         return commentRepo.findAll();
     }
 
-    public Optional<Comment> findOne(String id) {
-        return commentRepo.findById(UUID.fromString(id));
+    public Optional<Comment> findOne(String id) throws CommentNotFoundException {
+        if(commentRepo.findById(UUID.fromString(id)) != null){
+            return commentRepo.findById(UUID.fromString(id));
+        }
+        throw new CommentNotFoundException();
     }
 
     public void delete(String id) {

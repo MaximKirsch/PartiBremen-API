@@ -1,13 +1,17 @@
 package com.hsb.partibremen.entities.controller;
 import java.util.List;
 import java.util.Optional;
+
+import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
+import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.model.survey.SurveyDto;
 import com.hsb.partibremen.entities.service.SurveyService;
 import com.hsb.partibremen.entities.util.BaseController;
-
+import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController()
@@ -17,7 +21,7 @@ public class SurveyController extends BaseController {
     public SurveyService surveyService;
 
     @PostMapping("/survey")
-    public Survey create(@RequestBody SurveyDto serveyDto) {
+    public Survey create(@RequestBody SurveyDto serveyDto) throws UserNotFoundException {
         return surveyService.create(serveyDto);
 
     }
@@ -29,7 +33,12 @@ public class SurveyController extends BaseController {
 
     @GetMapping("/survey/{id}")
     public Optional<Survey> findOne(@PathVariable String id) {
-        return surveyService.findOne(id);
+        try {
+            return surveyService.findOne(id);
+        } catch (Exception ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Survey not found", ex);
+        }
     }
 
     @DeleteMapping("/survey/{id}")
