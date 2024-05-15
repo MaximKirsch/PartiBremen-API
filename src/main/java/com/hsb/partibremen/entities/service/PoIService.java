@@ -1,9 +1,6 @@
 package com.hsb.partibremen.entities.service;
-
-import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.poi.PoIDto;
-import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.repo.PoIRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +16,6 @@ public class PoIService extends BaseService {
     public PoIRepo poiRepo;
     @Autowired
     private UserService userService;
-    @Autowired
-    private CommentService commentService;
-    @Autowired
-    private VotingService votingService;
 
     public PoI create(PoIDto poiDto) {
         PoI poi = new PoI();
@@ -58,14 +51,6 @@ public class PoIService extends BaseService {
 
     public List<PoI> findAll() {
         return poiRepo.findAll();
-    }
-
-    public List<Comment> findPoiComments(String poiId) {
-        return this.commentService.commentRepo.findAllByPoI_id(UUID.fromString(poiId));
-    }
-
-    public List<Voting> findPoiVotings(String poiId) {
-        return this.votingService.votingRepo.findAllByVoted_poi_id(poiId);
     }
 
     public List<PoI> findOnlyPoIs() {

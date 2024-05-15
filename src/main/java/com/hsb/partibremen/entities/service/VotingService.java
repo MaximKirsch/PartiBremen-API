@@ -1,16 +1,9 @@
 package com.hsb.partibremen.entities.service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
-
-
-import com.hsb.partibremen.entities.enums.VoteType;
 import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.model.voting.VotingDto;
 import com.hsb.partibremen.entities.repo.VotingRepo;
@@ -59,5 +52,9 @@ public class VotingService extends BaseService {
 
     public void delete(String id){
         this.votingRepo.deleteById(UUID.fromString(id));
+    }
+
+    public List<Voting> findPoiVotings(String poiId) {
+        return this.votingRepo.findAllByVoted_poi_id(poiId);
     }
 }
