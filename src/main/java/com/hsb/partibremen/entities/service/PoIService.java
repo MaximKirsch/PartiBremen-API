@@ -61,7 +61,7 @@ public class PoIService extends BaseService {
     }
 
     public List<Comment> findPoiComments(String poiId) {
-        return this.commentService.commentRepo.findAllByPoi_id(poiId);
+        return this.commentService.commentRepo.findAllByPoI_id(UUID.fromString(poiId));
     }
 
     public List<Voting> findPoiVotings(String poiId) {

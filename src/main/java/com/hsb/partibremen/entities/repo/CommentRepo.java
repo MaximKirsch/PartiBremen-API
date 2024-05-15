@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Repository
 public interface CommentRepo extends BaseRepo<Comment, UUID> {
-    List<Comment> findAllByPoi_id(String poi_id);
+    List<Comment> findAllByPoI_id(UUID poI_id);
 }
 
 
