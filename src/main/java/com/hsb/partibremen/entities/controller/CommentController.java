@@ -35,7 +35,7 @@ public class CommentController extends BaseController {
         return commentService.findOne(id);
     }
 
-    @GetMapping("/poi/{poiId}/comments")
+    @GetMapping("/comment/{poiId}/fromPoI")
     public List<Comment> findPoiComments(@PathVariable String poiId) {
         return commentService.findPoiComments(poiId);
     }

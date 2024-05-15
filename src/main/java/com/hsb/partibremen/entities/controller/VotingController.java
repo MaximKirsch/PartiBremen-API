@@ -29,7 +29,7 @@ public class VotingController extends BaseController {
         return votingService.findOne(id);
     }
 
-    @GetMapping("/poi/{poiId}/votings")
+    @GetMapping("/voting/{poiId}/fromPoI")
     public List<Voting> findPoiVotings(@PathVariable String poiId) {
         return votingService.findPoiVotings(poiId);
     }
