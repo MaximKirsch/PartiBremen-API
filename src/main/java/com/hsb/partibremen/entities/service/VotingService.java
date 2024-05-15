@@ -55,6 +55,6 @@ public class VotingService extends BaseService {
     }
 
     public List<Voting> findPoiVotings(String poiId) {
-        return this.votingRepo.findAllByVoted_poi_id(poiId);
+        return this.votingRepo.findAllByVotedPoi_id(UUID.fromString(poiId));
     }
 }
