@@ -7,5 +7,5 @@ import java.util.UUID;
 
 @Repository
 public interface VotingRepo extends BaseRepo<Voting, UUID> {
-    List<Voting> findAllByVoted_poi_id(String voted_poi_id);
+    List<Voting> findAllByVotedPoi_id(UUID votedPoi_id);
 }
