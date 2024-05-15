@@ -1,20 +1,17 @@
 package com.hsb.partibremen.entities.service;
 
+import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.poi.PoIDto;
-import com.hsb.partibremen.entities.model.user.User;
+import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.repo.PoIRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class PoIService extends BaseService {
@@ -22,6 +19,10 @@ public class PoIService extends BaseService {
     public PoIRepo poiRepo;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private VotingService votingService;
 
     public PoI create(PoIDto poiDto) {
         PoI poi = new PoI();
@@ -57,6 +58,14 @@ public class PoIService extends BaseService {
 
     public List<PoI> findAll() {
         return poiRepo.findAll();
+    }
+
+    public List<Comment> findPoiComments(String poiId) {
+        return this.commentService.commentRepo.findAllByPoiId(poiId);
+    }
+
+    public List<Voting> findPoiVotings(String poiId) {
+        return this.votingService.votingRepo.findAllByPoiId(poiId);
     }
 
     public List<PoI> findOnlyPoIs() {

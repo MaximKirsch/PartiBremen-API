@@ -19,7 +19,7 @@ import com.hsb.partibremen.entities.util.BaseService;
 @Service
 public class VotingService extends BaseService {
     @Autowired
-    private VotingRepo votingRepo;
+    public VotingRepo votingRepo;
     @Autowired
     private UserService userService;
     @Autowired

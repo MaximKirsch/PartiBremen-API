@@ -1,16 +1,16 @@
 package com.hsb.partibremen.entities.controller;
 
+import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.poi.PoIDto;
+import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.service.PoIService;
 import com.hsb.partibremen.entities.service.UserService;
 import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -35,6 +35,15 @@ public class PoIController extends BaseController {
         return poIService.findOne(id);
     }
 
+    @GetMapping("/poi/{id}/comments")
+    public List<Comment> findPoiComments(@PathVariable String id) {
+        return poIService.findPoiComments(id);
+    }
+
+    @GetMapping("/poi/{id}/votings")
+    public List<Voting> findPoiVotings(@PathVariable String id) {
+        return poIService.findPoiVotings(id);
+    }
     @GetMapping("/poi/Only")
     public List<PoI> findOnlyPoIs() {
         return poIService.findOnlyPoIs();
