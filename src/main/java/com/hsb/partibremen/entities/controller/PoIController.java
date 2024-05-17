@@ -11,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.lang.reflect.Array;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -43,7 +41,6 @@ public class PoIController extends BaseController {
         }
 
     }
-
     @GetMapping("/poi/Only")
     public List<PoI> findOnlyPoIs() {
         return poIService.findOnlyPoIs();

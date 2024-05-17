@@ -46,6 +46,10 @@ public class CommentService extends BaseService {
         return commentRepo.save(comment);
     }
 
+    public List<Comment> findPoiComments(String poiId) {
+        return this.commentRepo.findAllByPoI_id(UUID.fromString(poiId));
+    }
+
     public List<Comment> findAll() {
         return commentRepo.findAll();
     }
