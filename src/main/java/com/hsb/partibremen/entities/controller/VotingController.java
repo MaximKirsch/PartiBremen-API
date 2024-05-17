@@ -3,9 +3,8 @@ package com.hsb.partibremen.entities.controller;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
-import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
-import com.hsb.partibremen.entities.exceptions.VotingNotFoundException;
+
+import com.hsb.partibremen.entities.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,7 @@ public class VotingController extends BaseController {
     private VotingService votingService;
 
     @PostMapping("voting")
-    public Voting create(@RequestBody VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException {
+    public Voting create(@RequestBody VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException, PoINotFoundException, CommentNotFoundException {
        return votingService.create(votingDto);
 
     }

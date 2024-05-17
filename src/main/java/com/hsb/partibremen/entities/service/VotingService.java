@@ -2,9 +2,8 @@ package com.hsb.partibremen.entities.service;
 
 import java.util.List;
 import java.util.UUID;
-import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
-import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
-import com.hsb.partibremen.entities.exceptions.VotingNotFoundException;
+
+import com.hsb.partibremen.entities.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -24,7 +23,7 @@ public class VotingService extends BaseService {
     @Autowired
     public CommentService commentService;
 
-    public Voting create(VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException {
+    public Voting create(VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException, PoINotFoundException, CommentNotFoundException {
         Voting voting = new Voting();
         voting.setVoteType(votingDto.getVoteType());
 
