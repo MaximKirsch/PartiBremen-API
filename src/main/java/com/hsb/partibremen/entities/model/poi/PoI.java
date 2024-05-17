@@ -9,8 +9,11 @@ import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import org.springframework.context.annotation.ComponentScan.Filter;
+
 @Entity
 @Table(name = "poi")
+
 public class PoI extends BaseEntity {
     @Column
     private String Titel;

@@ -56,7 +56,7 @@ public class PoIService extends BaseService {
     }
 
     public List<PoI> findAll() {
-        return poiRepo.findAll();
+        return poiRepo.findByIsDeleted(false);
     }
 
     public List<PoI> findOnlyPoIs() {

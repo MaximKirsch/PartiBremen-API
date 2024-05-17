@@ -17,4 +17,10 @@ public class BaseEntity {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     public Date updatedAt = new Date();
+    @Column
+    public boolean isDeleted = false;
+    
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 }

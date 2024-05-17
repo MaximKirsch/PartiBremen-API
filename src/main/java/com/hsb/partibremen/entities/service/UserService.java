@@ -36,7 +36,7 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return userRepo.findAll();
+        return userRepo.findByIsDeleted(false);
     }
 
     public Optional<User> findOne(String id) {
@@ -64,8 +64,16 @@ public class UserService {
     }
 
     public void delete(String id) {
-        userRepo.deleteById(UUID.fromString(id));
+        Optional<User> optionalUser = findOne(id);
+        if(optionalUser != null) {
+            User user = optionalUser.get();
+            user.setDeleted(true);
+            userRepo.save(user);
+        }
+        //throw new RuntimeException("User not found");
+        // userRepo.deleteById(UUID.fromString(id));
     }
+    
 
 
     public User login(String email, String password) {
@@ -73,7 +81,7 @@ public class UserService {
         BCrypt.Result decryptedPassword = BCrypt.verifyer().verify(password.toCharArray(), optionalUser.getPassword());
         if( optionalUser != null && decryptedPassword.verified){
             optionalUser.setActive(true);
-            //userRepo.save(optionalUser);
+            userRepo.save(optionalUser);
             return optionalUser;
         }
         throw new RuntimeException("Invalid Login Data");
