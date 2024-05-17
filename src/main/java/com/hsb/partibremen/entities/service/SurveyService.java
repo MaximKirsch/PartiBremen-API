@@ -1,5 +1,7 @@
 package com.hsb.partibremen.entities.service;
 
+import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
+import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.model.survey.SurveyDto;
 import com.hsb.partibremen.entities.repo.SurveyRepo;
@@ -17,7 +19,7 @@ public class SurveyService extends BaseService {
     private SurveyRepo surveyRepo;
     @Autowired
     private UserService userService;
-    public Survey create(SurveyDto surveyDto) {
+    public Survey create(SurveyDto surveyDto) throws UserNotFoundException {
         Survey survey = new Survey();
         survey.setTitel(surveyDto.getTitel());
         survey.setBeschreibung(surveyDto.getBeschreibung());
@@ -35,8 +37,11 @@ public class SurveyService extends BaseService {
         return surveyRepo.findAll();
     }
 
-    public Optional<Survey> findOne(String id){
-        return surveyRepo.findById(UUID.fromString(id));
+    public Optional<Survey> findOne(String id) throws SurveyNotFoundException {
+        if(surveyRepo.findById(UUID.fromString(id)) != null){
+            return surveyRepo.findById(UUID.fromString(id));
+        }
+        throw new SurveyNotFoundException();
     }
 
     public void deleteSurvey(String id) {
