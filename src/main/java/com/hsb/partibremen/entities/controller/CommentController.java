@@ -35,6 +35,11 @@ public class CommentController extends BaseController {
         return commentService.findOne(id);
     }
 
+    @GetMapping("/comment/{poiId}/fromPoI")
+    public List<Comment> findPoiComments(@PathVariable String poiId) {
+        return commentService.findPoiComments(poiId);
+    }
+
     @PutMapping("/comment/{id}")
     public Comment update(@PathVariable String id, @RequestBody CommentDto commentDto) {
         Optional<Comment> optionalComment = commentService.findOne(id);

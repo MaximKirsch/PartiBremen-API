@@ -1,20 +1,14 @@
 package com.hsb.partibremen.entities.service;
-
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.poi.PoIDto;
-import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.repo.PoIRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class PoIService extends BaseService {

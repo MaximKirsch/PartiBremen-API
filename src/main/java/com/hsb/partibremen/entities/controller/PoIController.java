@@ -1,5 +1,4 @@
 package com.hsb.partibremen.entities.controller;
-
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.poi.PoIDto;
 import com.hsb.partibremen.entities.service.PoIService;
@@ -8,9 +7,7 @@ import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -34,7 +31,6 @@ public class PoIController extends BaseController {
     public Optional<PoI> findOne(@PathVariable String id) {
         return poIService.findOne(id);
     }
-
     @GetMapping("/poi/Only")
     public List<PoI> findOnlyPoIs() {
         return poIService.findOnlyPoIs();
