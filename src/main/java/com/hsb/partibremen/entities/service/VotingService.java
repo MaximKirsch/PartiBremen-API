@@ -1,6 +1,9 @@
 package com.hsb.partibremen.entities.service;
+
 import java.util.List;
 import java.util.UUID;
+
+import com.hsb.partibremen.entities.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -20,7 +23,7 @@ public class VotingService extends BaseService {
     @Autowired
     public CommentService commentService;
 
-    public Voting create(VotingDto votingDto) {
+    public Voting create(VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException, PoINotFoundException, CommentNotFoundException {
         Voting voting = new Voting();
         voting.setVoteType(votingDto.getVoteType());
 
@@ -46,8 +49,11 @@ public class VotingService extends BaseService {
         return this.votingRepo.findAll();
     }
 
-    public Optional<Voting> findOne(String id) {
-        return this.votingRepo.findById(UUID.fromString(id));
+    public Optional<Voting> findOne(String id) throws VotingNotFoundException {
+        if(this.votingRepo.findById(UUID.fromString(id)) != null){
+            return this.votingRepo.findById(UUID.fromString(id));
+        }
+        throw new VotingNotFoundException();
     }
 
     public void delete(String id){
