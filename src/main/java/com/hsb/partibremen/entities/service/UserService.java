@@ -67,7 +67,7 @@ public class UserService {
         return optionalUser;
     }
 
-    public void delete(String id) {
+    public void delete(String id) throws UserNotFoundException{
         Optional<User> optionalUser = findOne(id);
         if(optionalUser != null) {
             User user = optionalUser.get();
