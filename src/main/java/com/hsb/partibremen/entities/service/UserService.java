@@ -1,6 +1,7 @@
 package com.hsb.partibremen.entities.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.model.user.UserDto;
 import com.hsb.partibremen.entities.repo.UserRepo;
@@ -39,8 +40,11 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public Optional<User> findOne(String id) {
-        return userRepo.findById(UUID.fromString(id));
+    public Optional<User> findOne(String id) throws UserNotFoundException {
+        if(userRepo.findById(UUID.fromString(id)) != null){
+            return userRepo.findById(UUID.fromString(id));
+        }
+        throw new UserNotFoundException();
     }
 
     public Optional<User> updateUser(UserDto userDto, String id) {
@@ -70,16 +74,19 @@ public class UserService {
 
     public User login(String email, String password) {
         User optionalUser = userRepo.findByEmail(email);
-        BCrypt.Result decryptedPassword = BCrypt.verifyer().verify(password.toCharArray(), optionalUser.getPassword());
-        if( optionalUser != null && decryptedPassword.verified){
-            optionalUser.setActive(true);
-            //userRepo.save(optionalUser);
-            return optionalUser;
+        if(optionalUser != null) {
+            BCrypt.Result decryptedPassword = BCrypt.verifyer().verify(password.toCharArray(), optionalUser.getPassword());
+
+            if(decryptedPassword.verified) {
+                optionalUser.setActive(true);
+                //userRepo.save(optionalUser);
+                return optionalUser;
+            }
         }
         throw new RuntimeException("Invalid Login Data");
     }
 
-    public User logout(String userId) {
+    public User logout(String userId) throws UserNotFoundException {
         Optional<User> optionalUser = findOne(userId);
         if(optionalUser.isPresent()) {
             User user = optionalUser.get();

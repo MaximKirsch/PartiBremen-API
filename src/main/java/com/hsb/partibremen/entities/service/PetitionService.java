@@ -1,4 +1,6 @@
 package com.hsb.partibremen.entities.service;
+import com.hsb.partibremen.entities.exceptions.PetitionNotFoundException;
+import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
 import com.hsb.partibremen.entities.model.petition.Petition;
 import com.hsb.partibremen.entities.model.petition.PetitionDto;
 import com.hsb.partibremen.entities.repo.PetitionRepo;
@@ -16,7 +18,7 @@ public class PetitionService extends BaseService {
     @Autowired
     public PoIService poiService;
 
-    public Petition create(PetitionDto petitionDto) {
+    public Petition create(PetitionDto petitionDto) throws PoINotFoundException {
         Petition petition = new Petition();
         petition.setTitel(petitionDto.getTitel());
         petition.setDescription(petitionDto.getDescription());
@@ -35,8 +37,11 @@ public class PetitionService extends BaseService {
         return this.petitionRepo.findAll();
     }
 
-    public Optional<Petition> findOne(String id) {
-        return this.petitionRepo.findById(UUID.fromString(id));
+    public Optional<Petition> findOne(String id) throws PetitionNotFoundException {
+        if(this.petitionRepo.findById(UUID.fromString(id)) != null){
+            return this.petitionRepo.findById(UUID.fromString(id));
+        }
+        throw new PetitionNotFoundException();
     }
 
     public void delete(String id) {

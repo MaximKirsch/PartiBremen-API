@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.hsb.partibremen.entities.exceptions.QuestionNotFoundException;
+import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
 import com.hsb.partibremen.entities.model.question.Question;
 import com.hsb.partibremen.entities.model.question.QuestionDto;
 import com.hsb.partibremen.entities.repo.QuestionRepo;
@@ -18,7 +20,7 @@ public class QuestionService extends BaseService {
     @Autowired
     private SurveyService surveyService;
 
-    public Question create(QuestionDto questionDto) {
+    public Question create(QuestionDto questionDto) throws SurveyNotFoundException {
         Question question = new Question();
         question.setFragestellung(questionDto.getFragestellung());
         question.setType(questionDto.getType());
@@ -33,8 +35,11 @@ public class QuestionService extends BaseService {
     public List<Question> findAll(){
         return this.questionRepo.findAll();
     }
-    public Optional<Question> findOne(String id) {
-        return questionRepo.findById(UUID.fromString(id));
+    public Optional<Question> findOne(String id) throws QuestionNotFoundException {
+        if(questionRepo.findById(UUID.fromString(id)) != null){
+            return questionRepo.findById(UUID.fromString(id));
+        }
+        throw new QuestionNotFoundException();
     }
 
     public void delete(String id) {

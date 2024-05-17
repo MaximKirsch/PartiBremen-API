@@ -1,5 +1,8 @@
 package com.hsb.partibremen.entities.service;
 
+import com.hsb.partibremen.entities.exceptions.AnswerNotFoundException;
+import com.hsb.partibremen.entities.exceptions.QuestionNotFoundException;
+import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.answer.Answer;
 import com.hsb.partibremen.entities.model.answer.AnswerDto;
 import com.hsb.partibremen.entities.repo.AnswerRepo;
@@ -20,13 +23,14 @@ public class AnswerService extends BaseService {
     @Autowired
     private QuestionService questionService;
 
-    public Answer create(AnswerDto answerDto) {
+    public Answer create(AnswerDto answerDto) throws UserNotFoundException, QuestionNotFoundException {
         Answer answer = new Answer();
         answer.setTitel(answerDto.getTitel());
         answer.setUserAnswer(answerDto.getUserAnswer());
 
         if(!(questionService.findOne(answerDto.getQuestionId())).isPresent()){
-            throw new RuntimeException();
+            throw new QuestionNotFoundException();
+            //throw new RuntimeException();
         }
         answer.setQuestion((questionService.findOne(answerDto.getQuestionId())).get());
 
@@ -42,8 +46,11 @@ public class AnswerService extends BaseService {
         return answerRepo.findAll();
     }
 
-    public Optional<Answer> findOne(String id) {
-        return answerRepo.findById(UUID.fromString(id));
+    public Optional<Answer> findOne(String id) throws AnswerNotFoundException {
+        if(answerRepo.findById(UUID.fromString(id)) != null){
+            return answerRepo.findById(UUID.fromString(id));
+        }
+        throw new AnswerNotFoundException();
     }
 
     public void delete(String id) {
