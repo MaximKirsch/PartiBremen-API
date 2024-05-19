@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class ReportController extends BaseController {
@@ -30,27 +31,55 @@ public class ReportController extends BaseController {
         System.out.println(reportDto.getTitle());
 
         return reportService.create(reportDto);
-
     }
 
     @GetMapping("/report")
-    public List<Report> findAll() {
-        return this.reportService.findAll();
+    public List<ReportDto> findAll() {
+        return this.reportService.findAll().stream().map(report -> {
+            ReportDto dto = new ReportDto();
+            dto.setKommentar(report.getKommentar());
+            dto.setTitle(report.getTitle());
+            dto.setReporterId(report.getReporter().id.toString());
+            if (report.getReportedUser() != null) {
+                dto.setReportedUserId(report.getReportedUser().id.toString());
+            }
+            if (report.getReportedPoi() != null) {
+                dto.setReportedPoiId(report.getReportedPoi().id.toString());
+            }
+            if (report.getReportedComment() != null) {
+                dto.setReportedCommentId(report.getReportedComment().id.toString());
+            }
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     @GetMapping("/report/{id}")
-    public Optional<Report> findOne(@PathVariable String id) {
-        try{
-            return this.reportService.findOne(id);
-        } catch(Exception ex){
+    public ReportDto findOne(@PathVariable String id) throws ReportNotFoundException {
+        Optional<Report> reportOpt = this.reportService.findOne(id);
+        if (reportOpt.isPresent()) {
+            Report report = reportOpt.get();
+            ReportDto dto = new ReportDto();
+            dto.setKommentar(report.getKommentar());
+            dto.setTitle(report.getTitle());
+            dto.setReporterId(report.getReporter().id.toString());
+            if (report.getReportedUser() != null) {
+                dto.setReportedUserId(report.getReportedUser().id.toString());
+            }
+            if (report.getReportedPoi() != null) {
+                dto.setReportedPoiId(report.getReportedPoi().id.toString());
+            }
+            if (report.getReportedComment() != null) {
+                dto.setReportedCommentId(report.getReportedComment().id.toString());
+            }
+            return dto;
+        } else {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Report not found", ex);
+                    HttpStatus.NOT_FOUND, "Report not found");
         }
-
     }
 
     @DeleteMapping("/report/{id}")
-    public void delete(@PathVariable String id) { this.reportService.delete(id);}
-
-
+    public void delete(@PathVariable String id) {
+        this.reportService.delete(id);
+    }
 }
