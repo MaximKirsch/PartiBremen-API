@@ -44,7 +44,7 @@ public class UserService {
         if(userRepo.findById(UUID.fromString(id)) != null){
             return userRepo.findById(UUID.fromString(id));
         }
-        throw new UserNotFoundException();
+        throw new UserNotFoundException(id);
     }
 
     public Optional<User> updateUser(UserDto userDto, String id) {
