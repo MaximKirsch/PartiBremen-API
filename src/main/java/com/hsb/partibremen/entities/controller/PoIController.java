@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 public class PoIController extends BaseController {
@@ -54,5 +55,15 @@ public class PoIController extends BaseController {
     @DeleteMapping("/poi/{id}")
     public void delete(@PathVariable String id) {
         poIService.delete(id);
+    }
+
+    @GetMapping("/poi/user/{userId}")
+    public List<PoI> findByUserId(@PathVariable String userId) {
+        try {
+            return poIService.findByUserId(userId);
+        } catch (UserNotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "User Not Found", ex);
+        }
     }
 }

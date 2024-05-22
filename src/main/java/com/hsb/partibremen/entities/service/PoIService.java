@@ -4,7 +4,9 @@ import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
 import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.poi.PoIDto;
+import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.repo.PoIRepo;
+import com.hsb.partibremen.entities.repo.UserRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,21 @@ public class PoIService extends BaseService {
     @Autowired
     public PoIRepo poiRepo;
     @Autowired
+    public UserRepo userRepo;
+    @Autowired
     private UserService userService;
+
+    public List<PoI> findByUserId(String userId) throws UserNotFoundException {
+        UUID userUUID = UUID.fromString(userId);
+        if (!userRepo.existsById(userUUID)) {
+            throw new UserNotFoundException("User not found with ID: " + userId);
+        }
+        List<PoI> pois = poiRepo.findByCreatorId(userUUID);
+        if (pois.isEmpty()) {
+            throw new UserNotFoundException("No POIs found for user ID: " + userId);
+        }
+        return pois;
+    }
 
     public PoI create(PoIDto poiDto) throws UserNotFoundException {
         PoI poi = new PoI();

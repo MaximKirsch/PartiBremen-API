@@ -3,11 +3,8 @@ package com.hsb.partibremen.entities.model.report;
 public class ReportDto{
     private String kommentar;
     private String title;
-
     private String reporterId;
-
     private String reportedUserId;
-
     private String reportedPoiId;
     private String reportedCommentId;
 

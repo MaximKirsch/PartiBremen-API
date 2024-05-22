@@ -1,5 +1,6 @@
 package com.hsb.partibremen.entities.model.report;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.user.User;
@@ -16,12 +17,16 @@ public class Report extends BaseEntity {
     @Column
     private String title;
     @ManyToOne
+    @JsonIgnore
     private User reporter;
     @ManyToOne
+    @JsonIgnore
     private User reportedUser;
     @ManyToOne
+    @JsonIgnore
     private PoI reportedPoi;
     @ManyToOne
+    @JsonIgnore
     private Comment reportedComment;
 
 
