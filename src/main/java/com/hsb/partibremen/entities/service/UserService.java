@@ -79,8 +79,7 @@ public class UserService {
 
             if(decryptedPassword.verified) {
                 optionalUser.setActive(true);
-                //userRepo.save(optionalUser);
-                return optionalUser;
+                return userRepo.save(optionalUser);
             }
         }
         throw new RuntimeException("Invalid Login Data");
