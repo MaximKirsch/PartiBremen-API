@@ -34,23 +34,9 @@ public class ReportController extends BaseController {
     }
 
     @GetMapping("/report")
-    public List<ReportDto> findAll() {
-        return this.reportService.findAll().stream().map(report -> {
-            ReportDto dto = new ReportDto();
-            dto.setKommentar(report.getKommentar());
-            dto.setTitle(report.getTitle());
-            dto.setReporterId(report.getReporter().id.toString());
-            if (report.getReportedUser() != null) {
-                dto.setReportedUserId(report.getReportedUser().id.toString());
-            }
-            if (report.getReportedPoi() != null) {
-                dto.setReportedPoiId(report.getReportedPoi().id.toString());
-            }
-            if (report.getReportedComment() != null) {
-                dto.setReportedCommentId(report.getReportedComment().id.toString());
-            }
-            return dto;
-        }).collect(Collectors.toList());
+    public List<Report> findAll() {
+        return reportService.findAll();
+
     }
 
     @GetMapping("/report/{id}")
@@ -62,6 +48,7 @@ public class ReportController extends BaseController {
             dto.setKommentar(report.getKommentar());
             dto.setTitle(report.getTitle());
             dto.setReporterId(report.getReporter().id.toString());
+            dto.setStatus(report.getStatus());
             if (report.getReportedUser() != null) {
                 dto.setReportedUserId(report.getReportedUser().id.toString());
             }
@@ -76,6 +63,10 @@ public class ReportController extends BaseController {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Report not found");
         }
+    }
+    @PutMapping("/report/update/{id}")
+    public Report updateReport(@PathVariable String id, @RequestBody ReportDto reportDto) throws UserNotFoundException, PoINotFoundException, CommentNotFoundException {
+        return reportService.updateReport(id, reportDto);
     }
 
     @DeleteMapping("/report/{id}")

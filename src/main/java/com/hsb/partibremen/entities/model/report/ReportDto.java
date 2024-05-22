@@ -1,5 +1,7 @@
 package com.hsb.partibremen.entities.model.report;
 
+import com.hsb.partibremen.entities.enums.ReportStatus;
+
 public class ReportDto{
     private String kommentar;
     private String title;
@@ -7,6 +9,8 @@ public class ReportDto{
     private String reportedUserId;
     private String reportedPoiId;
     private String reportedCommentId;
+    private ReportStatus status;
+
 
     public String getReporterId() {
         return this.reporterId;
@@ -53,4 +57,14 @@ public class ReportDto{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public ReportStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReportStatus status) {
+        this.status = status;
+    }
+
+    
 }

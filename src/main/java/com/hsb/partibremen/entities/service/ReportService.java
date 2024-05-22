@@ -1,5 +1,6 @@
 package com.hsb.partibremen.entities.service;
 
+import com.hsb.partibremen.entities.enums.ReportStatus;
 import com.hsb.partibremen.entities.exceptions.CommentNotFoundException;
 import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
 import com.hsb.partibremen.entities.exceptions.ReportNotFoundException;
@@ -29,6 +30,7 @@ public class ReportService extends BaseService {
     public Report create(ReportDto reportDto) throws UserNotFoundException, PoINotFoundException, CommentNotFoundException {
         Report report = new Report();
         report.setTitle(reportDto.getTitle());
+        report.setStatus(reportDto.getStatus() != null ? reportDto.getStatus() : ReportStatus.PENDING);
         report.setKommentar(reportDto.getKommentar());
 
         if(!this.userService.findOne(reportDto.getReporterId()).isPresent()) {
@@ -57,6 +59,42 @@ public class ReportService extends BaseService {
     public List<Report> findAll(){
         return this.reportRepo.findAll();
     }
+
+    public Report updateReport(String id, ReportDto reportDto) throws UserNotFoundException, PoINotFoundException, CommentNotFoundException {
+        UUID uuid = UUID.fromString(id);
+        Optional<Report> optionalReport = reportRepo.findById(uuid);
+        if (!optionalReport.isPresent()) {
+            throw new RuntimeException("Report not found");
+        }
+        Report report = optionalReport.get();
+        
+        // Update only fields that are not null in reportDto
+        if (reportDto.getKommentar() != null) {
+            report.setKommentar(reportDto.getKommentar());
+        }
+        if (reportDto.getTitle() != null) {
+            report.setTitle(reportDto.getTitle());
+        }
+        if (reportDto.getStatus() != null) {
+            report.setStatus(reportDto.getStatus());
+        }
+        if (reportDto.getReporterId() != null) {
+            report.setReporter(this.userService.findOne(reportDto.getReporterId()).orElse(report.getReporter()));
+        }
+        if (reportDto.getReportedUserId() != null) {
+            report.setReportedUser(this.userService.findOne(reportDto.getReportedUserId()).orElse(report.getReportedUser()));
+        }
+        if (reportDto.getReportedPoiId() != null) {
+            report.setReportedPoi(this.poIService.findOne(reportDto.getReportedPoiId()).orElse(report.getReportedPoi()));
+        }
+        if (reportDto.getReportedCommentId() != null) {
+            report.setReportedComment(this.commentService.findOne(reportDto.getReportedCommentId()).orElse(report.getReportedComment()));
+        }
+
+        return reportRepo.save(report);
+    }
+
+
 
     public Optional<Report> findOne(String id) throws ReportNotFoundException{
         if(reportRepo.findById(UUID.fromString(id)) != null){
