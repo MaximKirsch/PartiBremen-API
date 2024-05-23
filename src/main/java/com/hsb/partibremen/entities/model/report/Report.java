@@ -1,6 +1,7 @@
 package com.hsb.partibremen.entities.model.report;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hsb.partibremen.entities.enums.ReportStatus;
 import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.poi.PoI;
@@ -18,18 +19,26 @@ public class Report extends BaseEntity {
     @Column
     private String title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User reporter;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User reportedUser;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private PoI reportedPoi;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
-    private Comment reportedComment;    
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Comment reportedComment; 
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private ReportStatus status;

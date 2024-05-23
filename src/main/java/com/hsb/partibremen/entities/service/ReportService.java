@@ -107,4 +107,16 @@ public class ReportService extends BaseService {
         reportRepo.deleteById(UUID.fromString(id));
     }
 
+    public List<Report> findByReportedUserId(String reportedUserId) {
+        return reportRepo.findByReportedUserId(UUID.fromString(reportedUserId));
+    }
+
+    public List<Report> findByReportedCommentId(String reportedCommentId) {
+        return reportRepo.findByReportedCommentId(UUID.fromString(reportedCommentId));
+    }
+
+    public List<Report> findByReportedPoiId(String reportedPoiId) {
+        return reportRepo.findByReportedPoiId(UUID.fromString(reportedPoiId));
+    }
+
 }
