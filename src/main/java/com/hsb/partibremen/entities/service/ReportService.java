@@ -30,7 +30,7 @@ public class ReportService extends BaseService {
     public Report create(ReportDto reportDto) throws UserNotFoundException, PoINotFoundException, CommentNotFoundException {
         Report report = new Report();
         report.setTitle(reportDto.getTitle());
-        report.setStatus(reportDto.getStatus() != null ? reportDto.getStatus() : ReportStatus.Pending);
+        report.setStatus(reportDto.getStatus() != null ? reportDto.getStatus() : ReportStatus.pending);
         report.setKommentar(reportDto.getKommentar());
 
         if(!this.userService.findOne(reportDto.getReporterId()).isPresent()) {
