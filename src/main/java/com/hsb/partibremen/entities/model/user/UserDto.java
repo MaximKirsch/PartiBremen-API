@@ -4,7 +4,7 @@ import com.hsb.partibremen.entities.enums.BlockStatus;
 import com.hsb.partibremen.entities.enums.Role;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 public class UserDto {
 

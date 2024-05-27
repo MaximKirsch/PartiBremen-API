@@ -5,7 +5,7 @@ import com.hsb.partibremen.entities.enums.Role;
 import com.hsb.partibremen.entities.enums.Role;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.time.LocalDate;
 
 
