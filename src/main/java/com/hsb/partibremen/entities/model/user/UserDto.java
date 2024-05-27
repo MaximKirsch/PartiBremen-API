@@ -13,7 +13,7 @@ public class UserDto {
     private Date dob;
     private String email;
     private String password;
-    private boolean verified;
+    private Boolean verified;
     private Role role;
     private BlockStatus blockStatus; 
     private LocalDate blockUntilDatum;
@@ -60,10 +60,10 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isVerified() {
+    public Boolean isVerified() {
         return verified;
     }
-    public void setVerified(boolean verified) {
+    public void setVerified(Boolean verified) {
         this.verified = verified;
     }
     public BlockStatus getBlockStatus() {

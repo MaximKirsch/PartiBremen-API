@@ -24,7 +24,7 @@ public class User extends BaseEntity {
     @Column
     private String password;
     @Column
-    private boolean verified;
+    private Boolean verified;
     @Column
     private Role role;
     @Column
@@ -90,10 +90,10 @@ public class User extends BaseEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isVerified() {
+    public Boolean isVerified() {
         return verified;
     }
-    public void setVerified(boolean verified) {
+    public void setVerified(Boolean verified) {
         this.verified = verified;
     }
     

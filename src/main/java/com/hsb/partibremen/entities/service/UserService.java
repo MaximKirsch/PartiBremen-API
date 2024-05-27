@@ -56,23 +56,40 @@ public class UserService {
         Optional<User> optionalUser = userRepo.findById(UUID.fromString(id));
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            user.setName(userDto.getName());
-            user.setSurname(userDto.getSurname());
-
-            // hier erstmal änderung überprüfen
-            if (!user.getEmail().equals(userDto.getEmail())) {
-                // dann hier doppelte existenz prüfen
+    
+            // Nur Felder aktualisieren, die im UserDto vorhanden sind
+            if (userDto.getName() != null) {
+                user.setName(userDto.getName());
+            }
+            if (userDto.getSurname() != null) {
+                user.setSurname(userDto.getSurname());
+            }
+    
+            if (userDto.getEmail() != null && !user.getEmail().equals(userDto.getEmail())) {
                 if (userRepo.findByEmail(userDto.getEmail()) != null) {
                     throw new RuntimeException("E-Mail-Adresse existiert bereits.");
                 }
                 user.setEmail(userDto.getEmail());
             }
-
-            String hashedPassword = BCrypt.withDefaults().hashToString(12, userDto.getPassword().toCharArray());
-            user.setPassword(hashedPassword);
-            user.setDob(userDto.getDob());
-            user.setVerified(userDto.isVerified());
-            user.setRole(userDto.getRole());
+    
+            if (userDto.getPassword() != null) {
+                String hashedPassword = BCrypt.withDefaults().hashToString(12, userDto.getPassword().toCharArray());
+                user.setPassword(hashedPassword);
+            }
+    
+            if (userDto.getDob() != null) {
+                user.setDob(userDto.getDob());
+            }
+    
+            if (userDto.isVerified() != null) {
+                user.setVerified(userDto.isVerified());
+            }
+            
+            if (userDto.getRole() != null) {
+                user.setRole(userDto.getRole());
+            }
+            
+    
             if (userDto.getBlockStatus() != null) {
                 user.setBlockStatus(userDto.getBlockStatus());
                 if (userDto.getBlockStatus() == BlockStatus.BLOCKED_UNTIL) {
@@ -81,10 +98,12 @@ public class UserService {
                     user.setBlockUntilDatum(null);
                 }
             }
+    
             userRepo.save(user);
         }
         return optionalUser;
     }
+    
 
     public void delete(String id) {
         userRepo.deleteById(UUID.fromString(id));
