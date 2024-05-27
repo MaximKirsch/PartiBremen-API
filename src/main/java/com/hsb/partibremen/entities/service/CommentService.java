@@ -69,7 +69,9 @@ public class CommentService extends BaseService {
     }
 
     public List<Comment> findByCommenterId(String commenterId) {
-        return commentRepo.findAllByCommenter_Id(UUID.fromString(commenterId));
+        List<Comment> comments = commentRepo.findAllByCommenter_Id(UUID.fromString(commenterId));
+        comments.sort(Comparator.comparing(Comment::getCreatedAt).reversed());
+        return comments;
     }
 
 }
