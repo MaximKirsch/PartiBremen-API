@@ -2,6 +2,7 @@ package com.hsb.partibremen.entities.service;
 
 import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
 import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
+import com.hsb.partibremen.entities.model.comment.Comment;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.poi.PoIDto;
 import com.hsb.partibremen.entities.model.user.User;
@@ -11,6 +12,7 @@ import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,8 +35,15 @@ public class PoIService extends BaseService {
         if (pois.isEmpty()) {
             throw new UserNotFoundException("No POIs found for user ID: " + userId);
         }
+        // Sortiere Kommentare für jeden POI
+        for (PoI poi : pois) {
+            if (poi.getComments() != null) {
+                poi.getComments().sort(Comparator.comparing(Comment::getCreatedAt).reversed());
+            }
+        }
         return pois;
     }
+
 
     public PoI create(PoIDto poiDto) throws UserNotFoundException {
         PoI poi = new PoI();
