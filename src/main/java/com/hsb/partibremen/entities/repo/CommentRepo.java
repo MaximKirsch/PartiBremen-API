@@ -9,6 +9,8 @@ import java.util.UUID;
 public interface CommentRepo extends BaseRepo<Comment, UUID> {
     List<Comment> findAllByPoI_id(UUID poI_id);
     List<Comment> findAllByPoI_idOrderByCreatedAtDesc(UUID poiId);
+    List<Comment> findAllByCommenter_Id(UUID commenterId);
+
 }
 
 

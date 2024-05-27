@@ -67,4 +67,10 @@ public class CommentService extends BaseService {
     public void delete(String id) {
         commentRepo.deleteById(UUID.fromString(id));
     }
+
+    public List<Comment> findByCommenterId(String commenterId) {
+        return commentRepo.findAllByCommenter_Id(UUID.fromString(commenterId));
+    }
+
 }
+
