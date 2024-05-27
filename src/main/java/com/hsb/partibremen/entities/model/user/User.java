@@ -1,11 +1,12 @@
 package com.hsb.partibremen.entities.model.user;
 
+import com.hsb.partibremen.entities.enums.BlockStatus;
 import com.hsb.partibremen.entities.enums.Role;
 import com.hsb.partibremen.entities.enums.Role;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
-
-import java.sql.Date;
+import java.util.Date;
+import java.time.LocalDate;
 
 
 @Entity
@@ -28,6 +29,25 @@ public class User extends BaseEntity {
     private Role role;
     @Column
     private Boolean active;
+    @Enumerated(EnumType.STRING)
+    private BlockStatus blockStatus = BlockStatus.UNBLOCKED;
+
+    @Column
+    private LocalDate blockUntilDatum;
+
+
+    public LocalDate getBlockUntilDatum() {
+        return blockUntilDatum;
+    }
+    public void setBlockUntilDatum(LocalDate blockUntilDate) {
+        this.blockUntilDatum = blockUntilDate;
+    }
+    public BlockStatus getBlockStatus() {
+        return blockStatus;
+    }
+    public void setBlockStatus(BlockStatus blockStatus) {
+        this.blockStatus = blockStatus;
+    }
     public Boolean getActive() {
         return active;
     }
