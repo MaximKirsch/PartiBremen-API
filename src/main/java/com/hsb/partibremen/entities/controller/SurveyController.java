@@ -1,7 +1,9 @@
 package com.hsb.partibremen.entities.controller;
+
 import java.util.List;
 import java.util.Optional;
 
+import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
 import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
 import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,18 @@ import com.hsb.partibremen.entities.service.SurveyService;
 import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.web.server.ResponseStatusException;
 
-
-@RestController()
-
+@RestController
 public class SurveyController extends BaseController {
     @Autowired
     public SurveyService surveyService;
 
     @PostMapping("/survey")
-    public Survey create(@RequestBody SurveyDto serveyDto) throws UserNotFoundException {
-        return surveyService.create(serveyDto);
-
+    public Survey create(@RequestBody SurveyDto surveyDto) {
+        try {
+            return surveyService.create(surveyDto);
+        } catch (UserNotFoundException | PoINotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
+        }
     }
 
     @GetMapping("/survey")
@@ -35,9 +38,8 @@ public class SurveyController extends BaseController {
     public Optional<Survey> findOne(@PathVariable String id) {
         try {
             return surveyService.findOne(id);
-        } catch (Exception ex) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Survey not found", ex);
+        } catch (SurveyNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
         }
     }
 
@@ -45,7 +47,4 @@ public class SurveyController extends BaseController {
     public void deleteSurvey(@PathVariable String id) {
         surveyService.deleteSurvey(id);
     }
-
-    
-
 }

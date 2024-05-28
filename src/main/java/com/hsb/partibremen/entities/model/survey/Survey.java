@@ -23,6 +23,12 @@ public class Survey extends BaseEntity {
     @JsonBackReference
     private PoI poi;
 
+    public PoI getPoi() {
+        return poi;
+    }
+    public void setPoi(PoI poi) {
+        this.poi = poi;
+    }
     public User getCreator() {
         return this.creator;
     }

@@ -96,7 +96,7 @@ public class PoIService extends BaseService {
         if(poiRepo.findById(UUID.fromString(id)) != null){
             return poiRepo.findById(UUID.fromString(id));
         }
-        throw new PoINotFoundException();
+        throw new PoINotFoundException(id);
     }
 
     public void delete(String id) {

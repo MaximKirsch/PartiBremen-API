@@ -49,7 +49,7 @@ public class UserService {
         if (optionalUser.isPresent()) {
             return optionalUser;
         }
-        throw new UserNotFoundException(id);
+        throw new UserNotFoundException("User not found with ID: " + id);
     }
 
     public Optional<User> updateUser(UserDto userDto, String id) {
@@ -158,7 +158,7 @@ public class UserService {
             }
             return userRepo.save(user);
         }
-        throw new UserNotFoundException(id);
+        throw new UserNotFoundException("User not found with ID: " + id);
     }
 
     public User unblockUser(String id) throws UserNotFoundException {
@@ -169,6 +169,6 @@ public class UserService {
             user.setBlockUntilDatum(null);
             return userRepo.save(user);
         }
-        throw new UserNotFoundException(id);
+        throw new UserNotFoundException("User not found with ID: " + id);
     }
 }
