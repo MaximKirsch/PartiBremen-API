@@ -37,6 +37,7 @@ public class UserService {
         user.setActive(false);
         user.setBlockStatus(BlockStatus.UNBLOCKED);
         user.setBlockUntilDatum(null);
+        user.setImg(userDto.getImg());
         return userRepo.save(user);
     }
 
@@ -98,7 +99,9 @@ public class UserService {
                     user.setBlockUntilDatum(null);
                 }
             }
-    
+            if (userDto.getImg() != null) {
+                user.setImg(userDto.getImg());
+            }
             userRepo.save(user);
         }
         return optionalUser;

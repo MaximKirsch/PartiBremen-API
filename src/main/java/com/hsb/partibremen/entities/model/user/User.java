@@ -31,11 +31,19 @@ public class User extends BaseEntity {
     private Boolean active;
     @Enumerated(EnumType.STRING)
     private BlockStatus blockStatus = BlockStatus.UNBLOCKED;
-
     @Column
     private LocalDate blockUntilDatum;
 
+    @Column(nullable = true)
+    private String img;
 
+
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
     public LocalDate getBlockUntilDatum() {
         return blockUntilDatum;
     }

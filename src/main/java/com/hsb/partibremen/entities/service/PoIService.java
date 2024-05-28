@@ -56,6 +56,7 @@ public class PoIService extends BaseService {
             throw new RuntimeException();
         }
         poi.setCreator(userService.findOne(poiDto.getCreatorId()).get());
+        poi.setImg(poiDto.getImg());
         return poiRepo.save(poi);
     }
 
@@ -72,6 +73,9 @@ public class PoIService extends BaseService {
                 throw new RuntimeException();
             }
             poi.setCreator(userService.findOne(poiDto.getCreatorId()).get());
+            if (poiDto.getImg() != null) {
+                poi.setImg(poiDto.getImg());
+            }
             poiRepo.save(poi);
         }
         return optionalPoI;
