@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.model.survey.SurveyDto;
+import com.hsb.partibremen.entities.model.user.User;
+import com.hsb.partibremen.entities.model.user.UserDto;
 import com.hsb.partibremen.entities.service.SurveyService;
 import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.web.server.ResponseStatusException;
@@ -40,6 +42,11 @@ public class SurveyController extends BaseController {
         } catch (SurveyNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
         }
+    }
+
+    @PutMapping("/survey/{id}")
+    public Optional<Survey> update(@RequestBody SurveyDto surveyDto, @PathVariable String id) {
+        return surveyService.updateSurvey(surveyDto, id);
     }
 
     @DeleteMapping("/survey/{id}")

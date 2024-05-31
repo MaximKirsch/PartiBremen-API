@@ -56,6 +56,25 @@ public class SurveyService extends BaseService {
     public void deleteSurvey(String id) {
         surveyRepo.deleteById(UUID.fromString(id));
     }
+
+    public Optional<Survey> updateSurvey(SurveyDto survey, String id){
+        Optional<Survey> optionalSurvey = surveyRepo.findById(UUID.fromString(id));
+        if(optionalSurvey.isPresent()){
+            Survey survey2 = optionalSurvey.get();
+            if(survey.getTitel() != null){
+                survey2.setTitel(survey.getTitel());
+            }
+            if(survey.getBeschreibung() != null){
+                survey2.setBeschreibung(survey.getBeschreibung());
+        
+            }
+            if(survey.getExpiresAt() != null){
+                survey2.setExpiresAt(survey.getExpiresAt());
+            }
+            surveyRepo.save(survey2);
+        }
+        return optionalSurvey;
+    } 
     
     /*
     public List<Survey> findByPoiId(String poiId) throws SurveyNotFoundException, PoINotFoundException {
