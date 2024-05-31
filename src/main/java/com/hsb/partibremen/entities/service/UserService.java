@@ -42,7 +42,7 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return userRepo.findByIsDeleted(false);
+        return userRepo.findAll();
     }
 
     public Optional<User> findOne(String id) throws UserNotFoundException {
