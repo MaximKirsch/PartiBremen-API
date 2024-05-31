@@ -23,7 +23,6 @@ public class Survey extends BaseEntity {
     @Column
     private Date expiresAt;
     @ManyToOne
-    @JsonBackReference
     private User creator;
     @ManyToOne
     @JsonBackReference
