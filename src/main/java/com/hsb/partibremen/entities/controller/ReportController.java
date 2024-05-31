@@ -37,18 +37,22 @@ public class ReportController extends BaseController {
     public List<ReportDto> findAll() {
         return this.reportService.findAll().stream().map(report -> {
             ReportDto dto = new ReportDto();
+            dto.setId(report.getId());  // Setze die ID
             dto.setKommentar(report.getKommentar());
             dto.setTitle(report.getTitle());
-            dto.setReporterId(report.getReporter().id.toString());
+            dto.setReporterId(report.getReporter().getId().toString());
+            dto.setStatus(report.getStatus());
             if (report.getReportedUser() != null) {
-                dto.setReportedUserId(report.getReportedUser().id.toString());
+                dto.setReportedUserId(report.getReportedUser().getId().toString());
             }
             if (report.getReportedPoi() != null) {
-                dto.setReportedPoiId(report.getReportedPoi().id.toString());
+                dto.setReportedPoiId(report.getReportedPoi().getId().toString());
             }
             if (report.getReportedComment() != null) {
-                dto.setReportedCommentId(report.getReportedComment().id.toString());
+                dto.setReportedCommentId(report.getReportedComment().getId().toString());
             }
+            dto.setCreatedAt(report.getCreatedAt());
+            dto.setUpdatedAt(report.getUpdatedAt());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -59,27 +63,51 @@ public class ReportController extends BaseController {
         if (reportOpt.isPresent()) {
             Report report = reportOpt.get();
             ReportDto dto = new ReportDto();
+            dto.setId(report.getId());  // Setze die ID
             dto.setKommentar(report.getKommentar());
             dto.setTitle(report.getTitle());
-            dto.setReporterId(report.getReporter().id.toString());
+            dto.setReporterId(report.getReporter().getId().toString());
+            dto.setStatus(report.getStatus());
             if (report.getReportedUser() != null) {
-                dto.setReportedUserId(report.getReportedUser().id.toString());
+                dto.setReportedUserId(report.getReportedUser().getId().toString());
             }
             if (report.getReportedPoi() != null) {
-                dto.setReportedPoiId(report.getReportedPoi().id.toString());
+                dto.setReportedPoiId(report.getReportedPoi().getId().toString());
             }
             if (report.getReportedComment() != null) {
-                dto.setReportedCommentId(report.getReportedComment().id.toString());
+                dto.setReportedCommentId(report.getReportedComment().getId().toString());
             }
+            dto.setCreatedAt(report.getCreatedAt());
+            dto.setUpdatedAt(report.getUpdatedAt());
             return dto;
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Report not found");
         }
     }
+    @PutMapping("/report/update/{id}")
+    public Report updateReport(@PathVariable String id, @RequestBody ReportDto reportDto) throws UserNotFoundException, PoINotFoundException, CommentNotFoundException {
+        return reportService.updateReport(id, reportDto);
+    }
 
     @DeleteMapping("/report/{id}")
     public void delete(@PathVariable String id) {
         this.reportService.delete(id);
+    }
+
+    
+    @GetMapping("/reports/user/{reportedUserId}")
+    public List<Report> findByReportedUserId(@PathVariable String reportedUserId) {
+        return reportService.findByReportedUserId(reportedUserId);
+    }
+
+    @GetMapping("/reports/comment/{reportedCommentId}")
+    public List<Report> findByReportedCommentId(@PathVariable String reportedCommentId) {
+        return reportService.findByReportedCommentId(reportedCommentId);
+    }
+
+    @GetMapping("/reports/poi/{reportedPoiId}")
+    public List<Report> findByReportedPoiId(@PathVariable String reportedPoiId) {
+        return reportService.findByReportedPoiId(reportedPoiId);
     }
 }

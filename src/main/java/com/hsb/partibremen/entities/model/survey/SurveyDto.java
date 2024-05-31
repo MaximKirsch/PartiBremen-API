@@ -7,6 +7,10 @@ public class SurveyDto {
     private String beschreibung;
     private Date expiresAt;
     private String userId;
+    private String poiId; 
+
+
+
     public String getUserId() {
         return userId;
     }
@@ -30,5 +34,11 @@ public class SurveyDto {
     }
     public void setExpiresAt(Date expiresAt) {
         this.expiresAt = expiresAt;
+    }
+    public String getPoiId() {
+        return poiId;
+    }
+    public void setPoiId(String poiId) {
+        this.poiId = poiId;
     }
 }

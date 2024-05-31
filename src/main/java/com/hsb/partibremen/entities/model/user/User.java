@@ -1,11 +1,12 @@
 package com.hsb.partibremen.entities.model.user;
 
+import com.hsb.partibremen.entities.enums.BlockStatus;
 import com.hsb.partibremen.entities.enums.Role;
 import com.hsb.partibremen.entities.enums.Role;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
-
 import java.sql.Date;
+import java.time.LocalDate;
 
 
 @Entity
@@ -23,11 +24,38 @@ public class User extends BaseEntity {
     @Column
     private String password;
     @Column
-    private boolean verified;
+    private Boolean verified;
     @Column
     private Role role;
     @Column
     private Boolean active;
+    @Enumerated(EnumType.STRING)
+    private BlockStatus blockStatus = BlockStatus.UNBLOCKED;
+    @Column
+    private LocalDate blockUntilDatum;
+
+    @Column(nullable = true)
+    private String img;
+
+
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
+    public LocalDate getBlockUntilDatum() {
+        return blockUntilDatum;
+    }
+    public void setBlockUntilDatum(LocalDate blockUntilDate) {
+        this.blockUntilDatum = blockUntilDate;
+    }
+    public BlockStatus getBlockStatus() {
+        return blockStatus;
+    }
+    public void setBlockStatus(BlockStatus blockStatus) {
+        this.blockStatus = blockStatus;
+    }
     public Boolean getActive() {
         return active;
     }
@@ -70,10 +98,10 @@ public class User extends BaseEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isVerified() {
+    public Boolean isVerified() {
         return verified;
     }
-    public void setVerified(boolean verified) {
+    public void setVerified(Boolean verified) {
         this.verified = verified;
     }
     

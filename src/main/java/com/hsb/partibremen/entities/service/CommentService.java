@@ -9,6 +9,7 @@ import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,7 +48,9 @@ public class CommentService extends BaseService {
     }
 
     public List<Comment> findPoiComments(String poiId) {
-        return this.commentRepo.findAllByPoI_id(UUID.fromString(poiId));
+        List<Comment> comments = this.commentRepo.findAllByPoI_id(UUID.fromString(poiId));
+        comments.sort(Comparator.comparing(Comment::getCreatedAt).reversed());
+        return comments;
     }
 
     public List<Comment> findAll() {
@@ -64,4 +67,12 @@ public class CommentService extends BaseService {
     public void delete(String id) {
         commentRepo.deleteById(UUID.fromString(id));
     }
+
+    public List<Comment> findByCommenterId(String commenterId) {
+        List<Comment> comments = commentRepo.findAllByCommenter_Id(UUID.fromString(commenterId));
+        comments.sort(Comparator.comparing(Comment::getCreatedAt).reversed());
+        return comments;
+    }
+
 }
+

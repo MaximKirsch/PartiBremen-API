@@ -17,6 +17,26 @@ public class BaseEntity {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     public Date updatedAt = new Date();
+    public UUID getId() {
+        return id;
+    }
+    public void setId(UUID id) {
+        this.id = id;
+    }
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    
     @Column
     public boolean isDeleted = false;
     
