@@ -1,5 +1,8 @@
 package com.hsb.partibremen.entities.model.report;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hsb.partibremen.entities.enums.ReportStatus;
@@ -12,6 +15,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "report")
+@SQLDelete(sql = "UPDATE report SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=0")
 public class Report extends BaseEntity {
 
     @Column

@@ -8,9 +8,13 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 
 @Entity
 @Table(name = "user")
+@SQLDelete(sql = "UPDATE user SET is_deleted = true WHERE id=?")
 public class User extends BaseEntity {
 
     @Column

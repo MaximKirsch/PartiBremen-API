@@ -109,14 +109,7 @@ public class UserService {
     
 
     public void delete(String id) throws UserNotFoundException{
-        Optional<User> optionalUser = findOne(id);
-        if(optionalUser != null) {
-            User user = optionalUser.get();
-            user.setDeleted(true);
-            userRepo.save(user);
-        }
-        //throw new RuntimeException("User not found");
-        // userRepo.deleteById(UUID.fromString(id));
+        userRepo.deleteById(UUID.fromString(id));
     }
     
 

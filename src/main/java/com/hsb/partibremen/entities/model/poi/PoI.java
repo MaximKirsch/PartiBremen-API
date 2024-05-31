@@ -9,11 +9,14 @@ import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.context.annotation.ComponentScan.Filter;
 
 @Entity
 @Table(name = "poi")
-
+@SQLDelete(sql = "UPDATE poi SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=0")
 public class PoI extends BaseEntity {
     @Column
     private String Titel;

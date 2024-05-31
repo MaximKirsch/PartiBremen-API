@@ -2,6 +2,9 @@ package com.hsb.partibremen.entities.model.petition;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.Column;
@@ -11,6 +14,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "petition")
+@SQLDelete(sql = "UPDATE petition SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=0")
 public class Petition extends BaseEntity {
     @Column
     private String titel;

@@ -1,5 +1,9 @@
 package com.hsb.partibremen.entities.model.survey;
 import java.sql.Date;
+
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.model.user.User;
@@ -8,6 +12,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "survey")
+@SQLDelete(sql = "UPDATE survey SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=0")
 public class Survey extends BaseEntity {
     
     @Column

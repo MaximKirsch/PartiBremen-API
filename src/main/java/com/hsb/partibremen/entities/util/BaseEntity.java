@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.UUID;
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 public class BaseEntity {
     @Id
     @GeneratedValue
@@ -37,7 +38,7 @@ public class BaseEntity {
     }
 
     
-    @Column
+    @Column(name="is_deleted")
     public boolean isDeleted = false;
     
     public void setDeleted(boolean isDeleted) {

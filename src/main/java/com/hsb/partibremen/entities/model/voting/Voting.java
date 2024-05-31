@@ -1,5 +1,8 @@
 package com.hsb.partibremen.entities.model.voting;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hsb.partibremen.entities.enums.VoteType;
 import com.hsb.partibremen.entities.model.comment.Comment;
@@ -15,6 +18,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "voting")
+@SQLDelete(sql = "UPDATE voting SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=0")
 public class Voting extends BaseEntity {
     @Column
     private VoteType voteType;

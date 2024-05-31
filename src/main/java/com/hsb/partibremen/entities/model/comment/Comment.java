@@ -1,5 +1,8 @@
 package com.hsb.partibremen.entities.model.comment;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hsb.partibremen.entities.model.poi.PoI;
@@ -9,10 +12,13 @@ import com.hsb.partibremen.entities.model.voting.Voting;
 import com.hsb.partibremen.entities.util.BaseEntity;
 import jakarta.persistence.*;
 
+
 import java.util.List;
 
 @Entity
 @Table(name = "comment")
+@SQLDelete(sql = "UPDATE comment SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=0")
 public class Comment extends BaseEntity {
     @Column
     private String actualComment;
