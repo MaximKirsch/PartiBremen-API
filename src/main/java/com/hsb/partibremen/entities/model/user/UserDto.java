@@ -1,7 +1,9 @@
 package com.hsb.partibremen.entities.model.user;
 
+import com.hsb.partibremen.entities.enums.BlockStatus;
 import com.hsb.partibremen.entities.enums.Role;
 
+import java.time.LocalDate;
 import java.sql.Date;
 
 public class UserDto {
@@ -11,9 +13,27 @@ public class UserDto {
     private Date dob;
     private String email;
     private String password;
-    private boolean verified;
+    private Boolean verified;
     private Role role;
+    private BlockStatus blockStatus; 
+    private LocalDate blockUntilDatum;
 
+    private String img;
+
+    
+
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
+    public LocalDate getBlockUntilDatum() {
+        return blockUntilDatum;
+    }
+    public void setBlockUntilDatum(LocalDate blockUntilDatum) {
+        this.blockUntilDatum = blockUntilDatum;
+    }
     public Role getRole() {
         return role;
     }
@@ -50,11 +70,17 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isVerified() {
+    public Boolean isVerified() {
         return verified;
     }
-    public void setVerified(boolean verified) {
+    public void setVerified(Boolean verified) {
         this.verified = verified;
+    }
+    public BlockStatus getBlockStatus() {
+        return blockStatus;
+    }
+    public void setBlockStatus(BlockStatus blockStatus) {
+        this.blockStatus = blockStatus;
     }
 
     

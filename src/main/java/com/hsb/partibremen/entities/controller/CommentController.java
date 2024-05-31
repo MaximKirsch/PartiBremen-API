@@ -46,6 +46,11 @@ public class CommentController extends BaseController {
 
     }
 
+    @GetMapping("/comment/user/{userId}")
+    public List<Comment> findCommentsByUserId(@PathVariable String userId) {
+        return commentService.findByCommenterId(userId);
+    }
+
     @GetMapping("/comment/{poiId}/fromPoI")
     public List<Comment> findPoiComments(@PathVariable String poiId) {
         return commentService.findPoiComments(poiId);
@@ -76,4 +81,7 @@ public class CommentController extends BaseController {
     public void delete(@PathVariable String id) {
         commentService.delete(id);
     }
+
+
+    
 }

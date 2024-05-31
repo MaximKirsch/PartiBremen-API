@@ -37,6 +37,15 @@ public class PoI extends BaseEntity {
     @JsonManagedReference
     private List<Comment> comments;
 
+    @Column(nullable = true)
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
     public double getLatitude() {
         return latitude;
     }

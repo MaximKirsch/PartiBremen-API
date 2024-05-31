@@ -1,5 +1,6 @@
 package com.hsb.partibremen.entities.service;
 
+import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
 import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
 import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.survey.Survey;
@@ -19,21 +20,29 @@ public class SurveyService extends BaseService {
     private SurveyRepo surveyRepo;
     @Autowired
     private UserService userService;
-    public Survey create(SurveyDto surveyDto) throws UserNotFoundException {
+    @Autowired
+    private PoIService poiService;
+
+    public Survey create(SurveyDto surveyDto) throws UserNotFoundException, PoINotFoundException {
         Survey survey = new Survey();
         survey.setTitel(surveyDto.getTitel());
         survey.setBeschreibung(surveyDto.getBeschreibung());
         survey.setExpiresAt(surveyDto.getExpiresAt());
 
-        if(!userService.findOne(surveyDto.getUserId()).isPresent()){
-            throw new RuntimeException();
+        if (!userService.findOne(surveyDto.getUserId()).isPresent()) {
+            throw new UserNotFoundException("User not found with ID: " + surveyDto.getUserId());
         }
         survey.setCreator(userService.findOne(surveyDto.getUserId()).get());
+
+        if (!poiService.findOne(surveyDto.getPoiId()).isPresent()) {
+            throw new PoINotFoundException("PoI not found with ID: " + surveyDto.getPoiId());
+        }
+        survey.setPoi(poiService.findOne(surveyDto.getPoiId()).get());
 
         return surveyRepo.save(survey);
     }
 
-    public List<Survey> findAll(){
+    public List<Survey> findAll() {
         return surveyRepo.findAll();
     }
 

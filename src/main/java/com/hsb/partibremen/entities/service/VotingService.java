@@ -23,28 +23,50 @@ public class VotingService extends BaseService {
     @Autowired
     public CommentService commentService;
 
-    public Voting create(VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException, PoINotFoundException, CommentNotFoundException {
+    public Voting create(VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException, PoINotFoundException, CommentNotFoundException, VoteAlreadyExistsException {
+        // Überprüfen, ob der Benutzer existiert
+        if (!this.userService.findOne(votingDto.getVoterId()).isPresent()) {
+            throw new UserNotFoundException("User not found");
+        }
+
+        UUID voterId = UUID.fromString(votingDto.getVoterId());
+        UUID poiId = votingDto.getPoiId() != null ? UUID.fromString(votingDto.getPoiId()) : null;
+        UUID commentId = votingDto.getCommentId() != null ? UUID.fromString(votingDto.getCommentId()) : null;
+
+        // Überprüfen, ob bereits ein Vote existiert
+        Optional<Voting> existingVote = Optional.empty();
+        if (poiId != null) {
+            existingVote = votingRepo.findByVoter_IdAndVotedPoi_Id(voterId, poiId);
+        } else if (commentId != null) {
+            existingVote = votingRepo.findByVoter_IdAndVotedComment_Id(voterId, commentId);
+        }
+
+        if (existingVote.isPresent()) {
+            Voting vote = existingVote.get();
+            // Wenn der existierende Vote den gleichen Typ hat, werfen wir eine Ausnahme
+            if (vote.getVoteType() == votingDto.getVoteType()) {
+                throw new VoteAlreadyExistsException("Vote of the same type already exists");
+            } else {
+                // Wenn der Vote-Typ unterschiedlich ist, aktualisieren wir ihn
+                vote.setVoteType(votingDto.getVoteType());
+                return votingRepo.save(vote);
+            }
+        }
+
+        // Wenn kein existierender Vote gefunden wurde, erstellen wir einen neuen
         Voting voting = new Voting();
         voting.setVoteType(votingDto.getVoteType());
-
-        if(!this.userService.findOne(votingDto.getVoterId()).isPresent()){
-            throw new RuntimeException();
-        }
         voting.setVoter(this.userService.findOne(votingDto.getVoterId()).get());
 
-        if (votingDto.getPoiId() != null && votingDto.getCommentId() != null){
-            throw new RuntimeException();
+        if (poiId != null) {
+            voting.setVotedPoi(this.poIService.findOne(votingDto.getPoiId()).get());
+        }
+        if (commentId != null) {
+            voting.setVotedComment(this.commentService.findOne(votingDto.getCommentId()).get());
         }
 
-        if(votingDto.getPoiId() != null){
-            voting.setVotedPoi(this.poIService.findOne(votingDto.getPoiId() != null ? votingDto.getPoiId() : "").get());        
-        }
-        if(votingDto.getCommentId() != null){
-            voting.setVotedComment(this.commentService.findOne(votingDto.getCommentId() != null ? votingDto.getCommentId() : "").get());        
-        }
         return votingRepo.save(voting);
     }
-
     public List<Voting> findAll() {
         return this.votingRepo.findAll();
     }

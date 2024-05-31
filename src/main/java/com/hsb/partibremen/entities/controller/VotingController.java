@@ -23,9 +23,12 @@ public class VotingController extends BaseController {
     private VotingService votingService;
 
     @PostMapping("voting")
-    public Voting create(@RequestBody VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException, PoINotFoundException, CommentNotFoundException {
-       return votingService.create(votingDto);
-
+    public Voting create(@RequestBody VotingDto votingDto) throws UserNotFoundException, SurveyNotFoundException, PoINotFoundException, CommentNotFoundException, VoteAlreadyExistsException {
+        try {
+            return votingService.create(votingDto);
+        } catch (VoteAlreadyExistsException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
+        }
     }
 
     @GetMapping("/voting")

@@ -9,6 +9,7 @@ public class PoIDto {
     private String creatorId;
     private double latitude;
     private double longitude;
+    private String img;
 
     
     public double getLatitude() {
@@ -47,6 +48,12 @@ public class PoIDto {
     }
     public void setCreatorId(String creatorId) {
         this.creatorId = creatorId;
+    }
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
     }
     
 }
