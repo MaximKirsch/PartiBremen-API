@@ -4,6 +4,7 @@ import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
 import com.hsb.partibremen.entities.model.petition.Petition;
 import com.hsb.partibremen.entities.model.petition.PetitionDto;
 import com.hsb.partibremen.entities.repo.PetitionRepo;
+import com.hsb.partibremen.entities.repo.PoIRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import java.util.*;
 
 @Service
 public class PetitionService extends BaseService {
+    @Autowired
+    public PoIRepo poiRepo;
     @Autowired
     public PetitionRepo petitionRepo;
     @Autowired
@@ -28,7 +31,7 @@ public class PetitionService extends BaseService {
         if(!this.poiService.findOne(petitionDto.getPoiId()).isPresent()){
             throw new RuntimeException();
         }
-        petition.setPoI(this.poiService.findOne(petitionDto.getPoiId()).get());
+        petition.setPoi(this.poiService.findOne(petitionDto.getPoiId()).get());
 
         return this.petitionRepo.save(petition);
     }
@@ -41,10 +44,24 @@ public class PetitionService extends BaseService {
         if(this.petitionRepo.findById(UUID.fromString(id)) != null){
             return this.petitionRepo.findById(UUID.fromString(id));
         }
-        throw new PetitionNotFoundException();
+        throw new PetitionNotFoundException("Petiton not found with ID: " + id);
     }
 
     public void delete(String id) {
         this.petitionRepo.deleteById(UUID.fromString(id));
+    }
+
+    public List<Petition> findByPoiId(String poiId) throws PetitionNotFoundException, PoINotFoundException {
+        UUID poiUUID = UUID.fromString(poiId);
+        if(!poiRepo.existsById(poiUUID))
+        {
+            throw new PoINotFoundException("No Poi found for poi Id: " + poiId);
+        }
+        List<Petition> petitions = petitionRepo.findByPoiId(poiUUID);
+        if(petitions.isEmpty())
+        {
+            throw new PetitionNotFoundException("No Petiton found for poi Id: " + poiId);
+        }
+        return petitions;
     }
 }

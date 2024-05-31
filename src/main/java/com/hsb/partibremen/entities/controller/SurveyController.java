@@ -1,5 +1,4 @@
 package com.hsb.partibremen.entities.controller;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -47,4 +46,20 @@ public class SurveyController extends BaseController {
     public void deleteSurvey(@PathVariable String id) {
         surveyService.deleteSurvey(id);
     }
+
+    /*
+    @GetMapping("/survey/poi/{poiId}")
+    public List<Survey> findByPOIId(@PathVariable String poiId) {
+        try {
+            return surveyService.findByPoiId(poiId);
+        } catch (PoINotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "POI Not Found", ex);
+        } catch (SurveyNotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Survey Not Found", ex);
+        }
+    }
+     */
+
 }

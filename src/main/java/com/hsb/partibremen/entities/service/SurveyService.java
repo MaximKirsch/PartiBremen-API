@@ -57,16 +57,21 @@ public class SurveyService extends BaseService {
         surveyRepo.deleteById(UUID.fromString(id));
     }
     
-
-    
-
-   
-
-    
-
-    
-
-    
+    /*
+    public List<Survey> findByPoiId(String poiId) throws SurveyNotFoundException, PoINotFoundException {
+        UUID poiUUID = UUID.fromString(poiId);
+        if(!poiRepo.existsById(poiUUID))
+        {
+            throw new PoINotFoundException();
+        }
+        List<Survey> surveys = poIService.findOne(poiId).get().getSurveys();
+        if(surveys.isEmpty())
+        {
+            throw new SurveyNotFoundException();
+        }
+        return surveys;
+    }
+     */
 
 }
 
