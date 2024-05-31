@@ -21,7 +21,7 @@ public class Petition extends BaseEntity {
     @Column
     private int goal;
     @ManyToOne
-    private PoI poI;
+    private PoI poi;
 
 
     public String getTitel() {
@@ -48,11 +48,11 @@ public class Petition extends BaseEntity {
     public void setGoal(int goal) {
         this.goal = goal;
     }
-    public PoI getPoI(){
-        return this.poI;
+    public PoI getPoi(){
+        return this.poi;
     }
-    public void setPoI(PoI poI) {
-        this.poI = poI;
+    public void setPoi(PoI poI) {
+        this.poi = poI;
     }
 
 }

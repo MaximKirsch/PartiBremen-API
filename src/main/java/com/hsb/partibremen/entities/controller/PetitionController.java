@@ -9,7 +9,6 @@ import com.hsb.partibremen.entities.service.PoIService;
 import com.hsb.partibremen.entities.util.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -55,7 +54,7 @@ public class PetitionController extends BaseController {
             if(!this.poiService.findOne(petitionDto.getPoiId()).isPresent()){
                 throw new RuntimeException();
             }
-            petition.setPoI(this.poiService.findOne(petitionDto.getPoiId()).get());
+            petition.setPoi(this.poiService.findOne(petitionDto.getPoiId()).get());
             return petitionService.petitionRepo.save(petition);
         }
         return new Petition();
@@ -64,5 +63,18 @@ public class PetitionController extends BaseController {
     @DeleteMapping("/petition/{id}")
     public void delete(@PathVariable String id) {
         petitionService.delete(id);
+    }
+
+    @GetMapping("/petition/poi/{poiId}")
+    public List<Petition> findByPOIId(@PathVariable String poiId) {
+        try {
+            return petitionService.findByPoiId(poiId);
+        } catch (PoINotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "POI Not Found", ex);
+        } catch (PetitionNotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Petition Not Found", ex);
+        }
     }
 }

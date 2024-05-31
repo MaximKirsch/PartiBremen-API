@@ -46,6 +46,19 @@ public class SurveyController extends BaseController {
         surveyService.deleteSurvey(id);
     }
 
-    
+    /*
+    @GetMapping("/survey/poi/{poiId}")
+    public List<Survey> findByPOIId(@PathVariable String poiId) {
+        try {
+            return surveyService.findByPoiId(poiId);
+        } catch (PoINotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "POI Not Found", ex);
+        } catch (SurveyNotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Survey Not Found", ex);
+        }
+    }
+     */
 
 }
