@@ -23,7 +23,7 @@ public class SurveyController extends BaseController {
     public Survey create(@RequestBody SurveyDto surveyDto) {
         try {
             return surveyService.create(surveyDto);
-        } catch (UserNotFoundException ex) {
+        } catch (UserNotFoundException | PoINotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
         }
     }

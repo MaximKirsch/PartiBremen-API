@@ -55,7 +55,7 @@ public class PetitionService extends BaseService {
         UUID poiUUID = UUID.fromString(poiId);
         if(!poiRepo.existsById(poiUUID))
         {
-            throw new PoINotFoundException();
+            throw new PoINotFoundException("No Poi found for poi Id: " + poiId);
         }
         List<Petition> petitions = petitionRepo.findByPoiId(poiUUID);
         if(petitions.isEmpty())
