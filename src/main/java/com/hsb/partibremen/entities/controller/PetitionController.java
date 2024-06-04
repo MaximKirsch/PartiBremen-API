@@ -67,14 +67,6 @@ public class PetitionController extends BaseController {
 
     @GetMapping("/petition/poi/{poiId}")
     public List<Petition> findByPOIId(@PathVariable String poiId) {
-        try {
-            return petitionService.findByPoiId(poiId);
-        } catch (PoINotFoundException ex) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "POI Not Found", ex);
-        } catch (PetitionNotFoundException ex) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Petition Not Found", ex);
-        }
+        return petitionService.findByPoiId(poiId);
     }
 }

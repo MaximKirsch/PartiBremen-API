@@ -51,17 +51,9 @@ public class PetitionService extends BaseService {
         this.petitionRepo.deleteById(UUID.fromString(id));
     }
 
-    public List<Petition> findByPoiId(String poiId) throws PetitionNotFoundException, PoINotFoundException {
+    public List<Petition> findByPoiId(String poiId) {
         UUID poiUUID = UUID.fromString(poiId);
-        if(!poiRepo.existsById(poiUUID))
-        {
-            throw new PoINotFoundException("No Poi found for poi Id: " + poiId);
-        }
         List<Petition> petitions = petitionRepo.findByPoiId(poiUUID);
-        if(petitions.isEmpty())
-        {
-            throw new PetitionNotFoundException("No Petiton found for poi Id: " + poiId);
-        }
         return petitions;
     }
 }
