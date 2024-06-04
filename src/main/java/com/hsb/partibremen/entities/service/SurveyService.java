@@ -5,6 +5,7 @@ import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
 import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.model.survey.SurveyDto;
+import com.hsb.partibremen.entities.repo.PoIRepo;
 import com.hsb.partibremen.entities.repo.SurveyRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import java.util.UUID;
 
 @Service
 public class SurveyService extends BaseService {
+    @Autowired
+    public PoIRepo poiRepo;
     @Autowired
     private SurveyRepo surveyRepo;
     @Autowired
@@ -50,7 +53,7 @@ public class SurveyService extends BaseService {
         if(surveyRepo.findById(UUID.fromString(id)) != null){
             return surveyRepo.findById(UUID.fromString(id));
         }
-        throw new SurveyNotFoundException();
+        throw new SurveyNotFoundException("Survey not found");
     }
 
     public void deleteSurvey(String id) {
@@ -77,9 +80,18 @@ public class SurveyService extends BaseService {
     } 
     
     
-    public List<Survey> findByPoiId(String id) throws PoINotFoundException  {
-        return this.surveyRepo.findByPoi(this.poiService.findOne(id));
-
+    public List<Survey> findByPoiId(String id) throws PoINotFoundException, SurveyNotFoundException  {
+        UUID poiUUID = UUID.fromString(id);
+        if(!poiRepo.existsById(poiUUID))
+        {
+            throw new PoINotFoundException("No Poi found for poi Id: " + id);
+        }
+        List<Survey> surveys = surveyRepo.findByPoiId(poiUUID);
+        if(surveys.isEmpty())
+        {
+            throw new SurveyNotFoundException("No Survey found for poi Id: " + id);
+        }
+        return surveys;
     }
      
 

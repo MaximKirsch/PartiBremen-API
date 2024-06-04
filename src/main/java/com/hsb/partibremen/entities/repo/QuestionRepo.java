@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public interface QuestionRepo extends BaseRepo<Question, UUID> {
     
-    List<Question> findBySurvey(Optional<Survey> survey);
+    List<Question> findBySurveyId(UUID id);
 }
 
 

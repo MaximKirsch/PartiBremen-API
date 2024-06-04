@@ -29,7 +29,7 @@ public class AnswerService extends BaseService {
         answer.setUserAnswer(answerDto.getUserAnswer());
 
         if(!(questionService.findOne(answerDto.getQuestionId())).isPresent()){
-            throw new QuestionNotFoundException();
+            throw new QuestionNotFoundException("No Question found");
             //throw new RuntimeException();
         }
         answer.setQuestion((questionService.findOne(answerDto.getQuestionId())).get());

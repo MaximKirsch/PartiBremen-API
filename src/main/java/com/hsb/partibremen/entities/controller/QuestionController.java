@@ -64,6 +64,9 @@ public class QuestionController extends BaseController {
       } catch (SurveyNotFoundException ex) {
         throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Survey not found", ex);
+      } catch (QuestionNotFoundException ex) {
+        throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Question not found", ex);
       }
     }
 

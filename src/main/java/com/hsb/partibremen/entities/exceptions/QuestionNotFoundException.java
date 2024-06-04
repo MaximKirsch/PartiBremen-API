@@ -5,4 +5,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Question not found")
 public class QuestionNotFoundException extends Exception{
+    public QuestionNotFoundException(String message)
+    {
+        super(message);
+    }
 }
