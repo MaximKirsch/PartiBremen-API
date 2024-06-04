@@ -46,4 +46,9 @@ public class QuestionService extends BaseService {
         questionRepo.deleteById(UUID.fromString(id));
     }
 
+    public List<Question> getQuestionsFromSurvey(String id) throws SurveyNotFoundException{
+        
+        return this.questionRepo.findBySurvey(this.surveyService.findOne(id));
+    }
+
 }

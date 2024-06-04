@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.hsb.partibremen.entities.exceptions.QuestionNotFoundException;
+import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
 import com.hsb.partibremen.entities.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,16 @@ public class QuestionController extends BaseController {
       } catch (Exception ex) {
         throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Question not found", ex);
+      }
+    }
+
+    @GetMapping("/question/surveyid/{id}")
+    public List<Question> getQuestionsFromSurvey(@PathVariable String id){
+      try {
+        return questionService.getQuestionsFromSurvey(id);
+      } catch (SurveyNotFoundException ex) {
+        throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Survey not found", ex);
       }
     }
 
