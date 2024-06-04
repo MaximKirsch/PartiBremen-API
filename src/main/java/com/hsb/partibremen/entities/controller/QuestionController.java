@@ -59,15 +59,9 @@ public class QuestionController extends BaseController {
 
     @GetMapping("/question/surveyid/{id}")
     public List<Question> getQuestionsFromSurvey(@PathVariable String id){
-      try {
-        return questionService.getQuestionsFromSurvey(id);
-      } catch (SurveyNotFoundException ex) {
-        throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Survey not found", ex);
-      } catch (QuestionNotFoundException ex) {
-        throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Question not found", ex);
-      }
+      
+      return questionService.getQuestionsFromSurvey(id);
+      
     }
 
     @DeleteMapping("/question/{id}")

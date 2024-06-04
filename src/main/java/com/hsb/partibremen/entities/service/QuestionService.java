@@ -51,18 +51,11 @@ public class QuestionService extends BaseService {
         questionRepo.deleteById(UUID.fromString(id));
     }
 
-    public List<Question> getQuestionsFromSurvey(String id) throws SurveyNotFoundException, QuestionNotFoundException{
+    public List<Question> getQuestionsFromSurvey(String id){
         
         UUID surveyUUID = UUID.fromString(id);
-        if(!surveyRepo.existsById(surveyUUID))
-        {
-            throw new SurveyNotFoundException("No Survey found for poi Id: " + id);
-        }
         List<Question> questions = questionRepo.findBySurveyId(surveyUUID);
-        if(questions.isEmpty())
-        {
-            throw new QuestionNotFoundException("No Questions found for poi Id: " + id);
-        }
+        
         return questions;
     }
 
