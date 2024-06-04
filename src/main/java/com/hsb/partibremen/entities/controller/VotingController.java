@@ -44,7 +44,22 @@ public class VotingController extends BaseController {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Vote not found", ex);
         }
+    }
 
+    @GetMapping("/voting/{userId}/{poiID}")
+    public Optional<Voting> findVotingWithUserAndPoi(@PathVariable String userId, @PathVariable String poiID){
+        try {
+            return votingService.findVotingWithUserAndPoi(userId, poiID);
+        } catch (VotingNotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Vote not found", ex);
+        } catch (UserNotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "User not found", ex);
+        } catch (PoINotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Poi not found", ex);
+        }
     }
 
     @GetMapping("/voting/{poiId}/fromPoI")

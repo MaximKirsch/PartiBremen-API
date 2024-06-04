@@ -78,6 +78,19 @@ public class VotingService extends BaseService {
         throw new VotingNotFoundException();
     }
 
+    public Optional<Voting> findVotingWithUserAndPoi(String userId, String poiID) throws VotingNotFoundException, UserNotFoundException, PoINotFoundException{
+        if (!this.userService.findOne(userId).isPresent()) {
+            throw new UserNotFoundException("User not found");
+        }
+        if (!this.poIService.findOne(poiID).isPresent()) {
+            throw new PoINotFoundException("POI not found");
+        }
+        if(this.votingRepo.findByVoter_IdAndVotedPoi_Id(UUID.fromString(userId), UUID.fromString(poiID)) != null){
+            return this.votingRepo.findByVoter_IdAndVotedPoi_Id(UUID.fromString(userId), UUID.fromString(poiID));
+        }
+        throw new VotingNotFoundException();
+    }
+
     public void delete(String id){
         this.votingRepo.deleteById(UUID.fromString(id));
     }
