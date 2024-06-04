@@ -80,17 +80,11 @@ public class SurveyService extends BaseService {
     } 
     
     
-    public List<Survey> findByPoiId(String id) throws PoINotFoundException, SurveyNotFoundException  {
+    public List<Survey> findByPoiId(String id) {
         UUID poiUUID = UUID.fromString(id);
-        if(!poiRepo.existsById(poiUUID))
-        {
-            throw new PoINotFoundException("No Poi found for poi Id: " + id);
-        }
+        
         List<Survey> surveys = surveyRepo.findByPoiId(poiUUID);
-        if(surveys.isEmpty())
-        {
-            throw new SurveyNotFoundException("No Survey found for poi Id: " + id);
-        }
+        
         return surveys;
     }
      
