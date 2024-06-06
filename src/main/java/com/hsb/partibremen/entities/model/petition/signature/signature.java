@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 @Where(clause = "is_deleted=0")
 public class signature extends BaseEntity{
     @ManyToOne
+    @JsonBackReference
     private Petition petition;
     @ManyToOne
     @JsonBackReference

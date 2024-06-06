@@ -1,16 +1,17 @@
 package com.hsb.partibremen.entities.model.petition;
 
 import java.sql.Date;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hsb.partibremen.entities.model.petition.signature.signature;
+import jakarta.persistence.*;
+import org.aspectj.lang.Signature;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import com.hsb.partibremen.entities.model.poi.PoI;
 import com.hsb.partibremen.entities.util.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "petition")
@@ -27,8 +28,16 @@ public class Petition extends BaseEntity {
     private int goal;
     @ManyToOne
     private PoI poi;
+    @OneToMany(mappedBy = "petition")
+    @JsonManagedReference
+    private List<signature> signatures;
 
-
+    public List<signature> getSignatures() {
+        return signatures;
+    }
+    public void setSignatures(List<signature> signatures) {
+        this.signatures = signatures;
+    }
     public String getTitel() {
         return titel;
     }
