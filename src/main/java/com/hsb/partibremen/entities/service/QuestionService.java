@@ -4,22 +4,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.hsb.partibremen.entities.exceptions.PoINotFoundException;
 import com.hsb.partibremen.entities.exceptions.QuestionNotFoundException;
 import com.hsb.partibremen.entities.exceptions.SurveyNotFoundException;
 import com.hsb.partibremen.entities.model.question.Question;
 import com.hsb.partibremen.entities.model.question.QuestionDto;
-import com.hsb.partibremen.entities.model.survey.Survey;
 import com.hsb.partibremen.entities.repo.QuestionRepo;
-import com.hsb.partibremen.entities.repo.SurveyRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionService extends BaseService {
-    @Autowired
-    private SurveyRepo surveyRepo;
     @Autowired
     public QuestionRepo questionRepo;
     @Autowired

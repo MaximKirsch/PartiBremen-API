@@ -41,7 +41,7 @@ public class PetitionService extends BaseService {
     }
 
     public Optional<Petition> findOne(String id) throws PetitionNotFoundException {
-        if(this.petitionRepo.findById(UUID.fromString(id)) != null){
+        if(this.petitionRepo.findById(UUID.fromString(id)).isPresent()){
             return this.petitionRepo.findById(UUID.fromString(id));
         }
         throw new PetitionNotFoundException("Petiton not found with ID: " + id);
