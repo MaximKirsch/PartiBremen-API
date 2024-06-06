@@ -36,7 +36,7 @@ public class QuestionService extends BaseService {
         return this.questionRepo.findAll();
     }
     public Optional<Question> findOne(String id) throws QuestionNotFoundException {
-        if(questionRepo.findById(UUID.fromString(id)) != null){
+        if(questionRepo.findById(UUID.fromString(id)).isPresent()){
             return questionRepo.findById(UUID.fromString(id));
         }
         throw new QuestionNotFoundException("No Question found");
