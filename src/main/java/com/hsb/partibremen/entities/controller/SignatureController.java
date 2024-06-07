@@ -83,6 +83,16 @@ public class SignatureController extends BaseController {
                 HttpStatus.NOT_FOUND, "Signature not found", ex);
         }
     }
+
+    @GetMapping("/signature/count/petition/{petitionId}")
+    public int countByPetitionId(@PathVariable String petitionId){
+        try {
+            return signatureService.countByPetitionId(petitionId);
+        } catch (PetitionNotFoundException ex) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Petition not found", ex);
+        }
+    }
     
     @DeleteMapping("/siganture/{id}")
     public void deleteSignature(@PathVariable String id){

@@ -77,5 +77,13 @@ public class SignatureService extends BaseService {
     public void delete(String id) {
         signatureRepo.deleteById(UUID.fromString(id));
     }
+
+    public int countByPetitionId(String petitionId) throws PetitionNotFoundException{
+        if(!(petitionService.findOne(petitionId)).isPresent()){
+            throw new RuntimeException();
+        }
+        List<signature> signatures = findByPetitionId(petitionId);
+        return signatures.size();
+    }
     
 }
