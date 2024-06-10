@@ -46,11 +46,20 @@ public class AnswerController extends BaseController {
         if(optionalAnswer.isPresent()){
             Answer answer = optionalAnswer.get();
             answer.setTitel(answerDto.getTitel());
-            answer.setUserAnswer(answerDto.getUserAnswer());
+
+            // Update answer fields based on the type
+            if (answerDto.getMultipleChoiceAnswer() != null) {
+                answer.setMultipleChoiceAnswer(answerDto.getMultipleChoiceAnswer());
+            }
+            if (answerDto.getSkalarAnswer() != 0) {
+                answer.setSkalarAnswer(answerDto.getSkalarAnswer());
+            }
+            if (answerDto.getTextAnswer() != null) {
+                answer.setTextAnswer(answerDto.getTextAnswer());
+            }
         }
         return optionalAnswer;
     }
-
     @DeleteMapping("/answer/{id}")
     public void delete(@PathVariable String id) {
         answerService.delete(id);

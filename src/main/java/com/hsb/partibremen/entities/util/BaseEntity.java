@@ -39,9 +39,9 @@ public class BaseEntity {
 
     
     @Column(name="is_deleted")
-    public boolean isDeleted = false;
+    public Boolean isDeleted = false;
     
-    public void setDeleted(boolean isDeleted) {
+    public void setDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 }

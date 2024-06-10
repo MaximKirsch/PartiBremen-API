@@ -3,6 +3,7 @@ package com.hsb.partibremen.entities.model.answer;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.hsb.partibremen.entities.enums.MultipleChoice;
 import com.hsb.partibremen.entities.model.question.Question;
 import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.util.BaseEntity;
@@ -19,24 +20,42 @@ public class Answer  extends BaseEntity {
     @Column
     private String Titel;
     @Column
-    private String UserAnswer;
+    private MultipleChoice multipleChoiceAnswer;
+    @Column
+    private int skalarAnswer;
+    @Column
+    private String textAnswer;
     @ManyToOne
     private Question question;
     @ManyToOne
     private User answerer;
 
+
     
+    
+    public MultipleChoice getMultipleChoiceAnswer() {
+        return multipleChoiceAnswer;
+    }
+    public void setMultipleChoiceAnswer(MultipleChoice multipleChoiceAnswer) {
+        this.multipleChoiceAnswer = multipleChoiceAnswer;
+    }
+    public int getSkalarAnswer() {
+        return skalarAnswer;
+    }
+    public void setSkalarAnswer(int skalarAnswer) {
+        this.skalarAnswer = skalarAnswer;
+    }
+    public String getTextAnswer() {
+        return textAnswer;
+    }
+    public void setTextAnswer(String textAnswer) {
+        this.textAnswer = textAnswer;
+    }
     public String getTitel() {
         return Titel;
     }
     public void setTitel(String titel) {
         Titel = titel;
-    }
-    public String getUserAnswer() {
-        return UserAnswer;
-    }
-    public void setUserAnswer(String userAnswer) {
-        UserAnswer = userAnswer;
     }
 
     public User getAnswerer(){

@@ -5,7 +5,11 @@ import com.hsb.partibremen.entities.exceptions.QuestionNotFoundException;
 import com.hsb.partibremen.entities.exceptions.UserNotFoundException;
 import com.hsb.partibremen.entities.model.answer.Answer;
 import com.hsb.partibremen.entities.model.answer.AnswerDto;
+import com.hsb.partibremen.entities.model.question.Question;
+import com.hsb.partibremen.entities.model.user.User;
 import com.hsb.partibremen.entities.repo.AnswerRepo;
+import com.hsb.partibremen.entities.repo.QuestionRepo;
+import com.hsb.partibremen.entities.repo.UserRepo;
 import com.hsb.partibremen.entities.util.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,10 @@ import java.util.*;
 public class AnswerService extends BaseService {
     @Autowired
     private AnswerRepo answerRepo;
+    @Autowired
+    private QuestionRepo questionRepo;
+    @Autowired
+    private UserRepo userRepo;
 
     @Autowired
     private UserService userService;
@@ -26,21 +34,27 @@ public class AnswerService extends BaseService {
     public Answer create(AnswerDto answerDto) throws UserNotFoundException, QuestionNotFoundException {
         Answer answer = new Answer();
         answer.setTitel(answerDto.getTitel());
-        answer.setUserAnswer(answerDto.getUserAnswer());
+        answer.setMultipleChoiceAnswer(answerDto.getMultipleChoiceAnswer());
+        answer.setSkalarAnswer(answerDto.getSkalarAnswer());
+        answer.setTextAnswer(answerDto.getTextAnswer());
 
-        if(!(questionService.findOne(answerDto.getQuestionId())).isPresent()){
-            throw new QuestionNotFoundException("No Question found");
-            //throw new RuntimeException();
+        Optional<Question> question = questionRepo.findById(answerDto.getQuestionId());
+        if(question.isPresent()) {
+            answer.setQuestion(question.get());
+        } else {
+            throw new QuestionNotFoundException("Question not found");
         }
-        answer.setQuestion((questionService.findOne(answerDto.getQuestionId())).get());
 
-        if(!(userService.findOne(answerDto.getUserId())).isPresent()){
-            throw new RuntimeException();
+        Optional<User> user = userRepo.findById(answerDto.getUserId());
+        if(user.isPresent()) {
+            answer.setAnswerer(user.get());
+        } else {
+            throw new UserNotFoundException("User not found");
         }
-        answer.setAnswerer((userService.findOne(answerDto.getUserId())).get());
 
         return answerRepo.save(answer);
     }
+
 
     public List<Answer> findAll() {
         return answerRepo.findAll();

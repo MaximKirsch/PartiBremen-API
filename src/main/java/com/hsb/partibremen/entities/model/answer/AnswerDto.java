@@ -1,14 +1,20 @@
 package com.hsb.partibremen.entities.model.answer;
 
+import java.util.UUID;
+
+import com.hsb.partibremen.entities.enums.MultipleChoice;
+
+
+
 public class AnswerDto {
 
 
     private String titel;
-    private String userAnswer;
-
-    private String questionId;
-
-    private String userId;
+    private MultipleChoice multipleChoiceAnswer;
+    private int skalarAnswer;
+    private String textAnswer;
+    private UUID questionId;
+    private UUID userId;
 
     
     public String getTitel() {
@@ -17,24 +23,35 @@ public class AnswerDto {
     public void setTitel(String titel) {
         this.titel = titel;
     }
-    public String getUserAnswer() {
-        return this.userAnswer;
-    }
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer;
-    }
-
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
-    public void setUserId(String userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
-    public String getQuestionId() {
+    public UUID getQuestionId() {
         return this.questionId;
     }
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(UUID questionId) {
         this.questionId = questionId;
+    }
+    public MultipleChoice getMultipleChoiceAnswer() {
+        return multipleChoiceAnswer;
+    }
+    public void setMultipleChoiceAnswer(MultipleChoice multipleChoiceAnswer) {
+        this.multipleChoiceAnswer = multipleChoiceAnswer;
+    }
+    public int getSkalarAnswer() {
+        return skalarAnswer;
+    }
+    public void setSkalarAnswer(int skalarAnswer) {
+        this.skalarAnswer = skalarAnswer;
+    }
+    public String getTextAnswer() {
+        return textAnswer;
+    }
+    public void setTextAnswer(String textAnswer) {
+        this.textAnswer = textAnswer;
     }
     
 }

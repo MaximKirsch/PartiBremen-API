@@ -2,9 +2,9 @@ package com.hsb.partibremen.entities.enums;
 
 public enum QuestionType {
     SKALA("Skala", 0),
-    BOOLEAN("Ja/Nein", 1),
-    SATZ("Satz", 2),
-    M_CHOICE("Multiply Choice", 3);
+    //BOOLEAN("Ja/Nein", 1),
+    SATZ("Satz", 1),
+    M_CHOICE("Multiply Choice", 2);
 
     private String bezeichnung;
     private int id;

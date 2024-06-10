@@ -22,6 +22,7 @@ public class Question extends BaseEntity{
     private String fragestellung;
     @Column
     private QuestionType type;
+    
     public Survey getSurvey() {
         return survey;
     }
