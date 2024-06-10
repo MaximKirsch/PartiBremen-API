@@ -49,9 +49,12 @@ public class PoIController extends BaseController {
 
     @PutMapping("/poi/{id}")
     public Optional<PoI> update(@PathVariable String id, @RequestBody PoIDto poiDto) throws UserNotFoundException {
-        return poIService.update(id, poiDto);
+        try {
+            return poIService.update(id, poiDto);
+        } catch (UserNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found", ex);
+        }
     }
-
     @DeleteMapping("/poi/{id}")
     public void delete(@PathVariable String id) {
         poIService.delete(id);
