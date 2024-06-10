@@ -3,6 +3,7 @@ package com.hsb.partibremen.entities.model.answer;
 import java.util.UUID;
 
 import com.hsb.partibremen.entities.enums.MultipleChoice;
+import com.hsb.partibremen.entities.model.user.User;
 
 
 
@@ -15,8 +16,16 @@ public class AnswerDto {
     private String textAnswer;
     private UUID questionId;
     private UUID userId;
+    private User answerer;
+
 
     
+    public User getAnswerer() {
+        return answerer;
+    }
+    public void setAnswerer(User answerer) {
+        this.answerer = answerer;
+    }
     public String getTitel() {
         return this.titel;
     }

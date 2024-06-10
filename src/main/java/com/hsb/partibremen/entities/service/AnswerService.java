@@ -70,4 +70,13 @@ public class AnswerService extends BaseService {
     public void delete(String id) {
         answerRepo.deleteById(UUID.fromString(id));
     }
+
+    public List<Answer> findAllByQuestionId(UUID questionId) throws QuestionNotFoundException {
+        if(questionRepo.findById(questionId).isPresent()) {
+            return answerRepo.findByQuestionId(questionId);
+        } else {
+            throw new QuestionNotFoundException("Question not found");
+        }
+    }
+
 }

@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 public class AnswerController extends BaseController {
@@ -63,5 +64,15 @@ public class AnswerController extends BaseController {
     @DeleteMapping("/answer/{id}")
     public void delete(@PathVariable String id) {
         answerService.delete(id);
+    }
+
+
+     @GetMapping("/answer/question/{questionId}")
+    public List<Answer> getAllAnswersByQuestionId(@PathVariable UUID questionId) {
+        try {
+            return answerService.findAllByQuestionId(questionId);
+        } catch (QuestionNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Question not found", ex);
+        }
     }
 }
