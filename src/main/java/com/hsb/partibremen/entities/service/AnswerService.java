@@ -34,19 +34,34 @@ public class AnswerService extends BaseService {
     public Answer create(AnswerDto answerDto) throws UserNotFoundException, QuestionNotFoundException {
         Answer answer = new Answer();
         answer.setTitel(answerDto.getTitel());
-        answer.setMultipleChoiceAnswer(answerDto.getMultipleChoiceAnswer());
-        answer.setSkalarAnswer(answerDto.getSkalarAnswer());
-        answer.setTextAnswer(answerDto.getTextAnswer());
+
+        // Validate that exactly one of the answer fields is set
+        boolean isMultipleChoiceSet = answerDto.getMultipleChoiceAnswer() != null;
+        boolean isSkalarSet = answerDto.getSkalarAnswer() != 0;
+        boolean isTextSet = answerDto.getTextAnswer() != null;
+
+        int countSetAnswers = (isMultipleChoiceSet ? 1 : 0) + (isSkalarSet ? 1 : 0) + (isTextSet ? 1 : 0);
+        if (countSetAnswers != 1) {
+            throw new IllegalArgumentException("Exactly one type of answer must be provided");
+        }
+
+        if (isMultipleChoiceSet) {
+            answer.setMultipleChoiceAnswer(answerDto.getMultipleChoiceAnswer());
+        } else if (isSkalarSet) {
+            answer.setSkalarAnswer(answerDto.getSkalarAnswer());
+        } else if (isTextSet) {
+            answer.setTextAnswer(answerDto.getTextAnswer());
+        }
 
         Optional<Question> question = questionRepo.findById(answerDto.getQuestionId());
-        if(question.isPresent()) {
+        if (question.isPresent()) {
             answer.setQuestion(question.get());
         } else {
             throw new QuestionNotFoundException("Question not found");
         }
 
-        Optional<User> user = userRepo.findById(answerDto.getUserId());
-        if(user.isPresent()) {
+        Optional<User> user = userRepo.findById(answerDto.getAnswererId());
+        if (user.isPresent()) {
             answer.setAnswerer(user.get());
         } else {
             throw new UserNotFoundException("User not found");
@@ -55,13 +70,12 @@ public class AnswerService extends BaseService {
         return answerRepo.save(answer);
     }
 
-
     public List<Answer> findAll() {
         return answerRepo.findAll();
     }
 
     public Optional<Answer> findOne(String id) throws AnswerNotFoundException {
-        if(answerRepo.findById(UUID.fromString(id)) != null){
+        if (answerRepo.findById(UUID.fromString(id)) != null) {
             return answerRepo.findById(UUID.fromString(id));
         }
         throw new AnswerNotFoundException();
@@ -72,7 +86,7 @@ public class AnswerService extends BaseService {
     }
 
     public List<Answer> findAllByQuestionId(UUID questionId) throws QuestionNotFoundException {
-        if(questionRepo.findById(questionId).isPresent()) {
+        if (questionRepo.findById(questionId).isPresent()) {
             return answerRepo.findByQuestionId(questionId);
         } else {
             throw new QuestionNotFoundException("Question not found");
