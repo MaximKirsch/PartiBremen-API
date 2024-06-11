@@ -11,7 +11,5 @@ public interface AnswerRepo extends BaseRepo<Answer, UUID> {
 
     List<Answer> findByQuestionId(UUID questionId);
 
-
+    List<Answer> findByAnswererIdAndQuestionId(UUID answererId, UUID questionId);
 }
-
-

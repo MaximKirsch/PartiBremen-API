@@ -33,18 +33,19 @@ public class AnswerController extends BaseController {
 
     @GetMapping("/answer/{id}")
     public Optional<Answer> findOne(@PathVariable String id) {
-        try{
+        try {
             return answerService.findOne(id);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Answer not found", ex);
         }
 
     }
 
     @PutMapping("/answer/{id}")
-    public Optional<Answer> update(@PathVariable String id, @RequestBody AnswerDto answerDto) throws AnswerNotFoundException {
+    public Optional<Answer> update(@PathVariable String id, @RequestBody AnswerDto answerDto)
+            throws AnswerNotFoundException {
         Optional<Answer> optionalAnswer = answerService.findOne(id);
-        if(optionalAnswer.isPresent()){
+        if (optionalAnswer.isPresent()) {
             Answer answer = optionalAnswer.get();
             answer.setTitel(answerDto.getTitel());
 
@@ -61,18 +62,27 @@ public class AnswerController extends BaseController {
         }
         return optionalAnswer;
     }
+
     @DeleteMapping("/answer/{id}")
     public void delete(@PathVariable String id) {
         answerService.delete(id);
     }
 
-
-     @GetMapping("/answer/question/{questionId}")
+    @GetMapping("/answer/question/{questionId}")
     public List<Answer> getAllAnswersByQuestionId(@PathVariable UUID questionId) {
         try {
             return answerService.findAllByQuestionId(questionId);
         } catch (QuestionNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Question not found", ex);
+        }
+    }
+
+    @GetMapping("/answer/user/{userId}/question/{questionId}")
+    public List<Answer> getAllAnswersByUserIdAndQuestionId(@PathVariable UUID userId, @PathVariable UUID questionId) {
+        try {
+            return answerService.findAllByUserIdAndQuestionId(userId, questionId);
+        } catch (UserNotFoundException | QuestionNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
         }
     }
 }

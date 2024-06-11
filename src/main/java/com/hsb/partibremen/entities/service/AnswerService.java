@@ -93,4 +93,16 @@ public class AnswerService extends BaseService {
         }
     }
 
+    public List<Answer> findAllByUserIdAndQuestionId(UUID userId, UUID questionId)
+            throws UserNotFoundException, QuestionNotFoundException {
+        if (userRepo.findById(userId).isEmpty()) {
+            throw new UserNotFoundException("User not found");
+        }
+
+        if (questionRepo.findById(questionId).isEmpty()) {
+            throw new QuestionNotFoundException("Question not found");
+        }
+
+        return answerRepo.findByAnswererIdAndQuestionId(userId, questionId);
+    }
 }
